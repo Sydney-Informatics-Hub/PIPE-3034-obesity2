@@ -1,7 +1,5 @@
 ---
-title: "quarto_test"
+title: "Obesity phase 2 project"
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+This is the landing page for phase 2 of the obesity project. 

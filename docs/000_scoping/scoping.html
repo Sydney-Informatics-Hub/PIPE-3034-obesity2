@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-0.9.345">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="author" content="Authors">
-<title>New SIH project - PIPE-XXX: PROJECT TITLE</title>
+
+<meta name="author" content="Monika Bednarek, Carly Bray, Joel Nothman, Darya Vanichkina">
+<meta name="dcterms.date" content="2022-01-03">
+
+<title>Obesity phase 2 - PIPE-3034: Obesity stigma analysis with pattern frequency over time and publication</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -14,11 +18,23 @@ div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 </style>
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script><script src="../site_libs/quarto-nav/headroom.min.js"></script><script src="../site_libs/clipboard/clipboard.min.js"></script><meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script><script src="../site_libs/quarto-search/fuse.min.js"></script><script src="../site_libs/quarto-search/quarto-search.js"></script><script src="../site_libs/quarto-html/quarto.js"></script><script src="../site_libs/quarto-html/popper.min.js"></script><script src="../site_libs/quarto-html/tippy.umd.min.js"></script><script src="../site_libs/quarto-html/anchor.min.js"></script><link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link class="quarto-color-scheme" id="quarto-text-highlighting-styles" href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
 <link class="quarto-color-scheme quarto-color-alternate" rel="prefetch" id="quarto-text-highlighting-styles" href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script><link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link class="quarto-color-scheme" href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
 <link class="quarto-color-scheme quarto-color-alternate" rel="prefetch" href="../site_libs/bootstrap/bootstrap-dark.min.css">
 <script id="quarto-search-options" type="application/json">{
@@ -40,64 +56,72 @@ ul.task-list{list-style: none;}
     "search-submit-button-title": "Submit"
   }
 }</script>
+
+
 </head>
+
 <body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
       <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">New SIH project</span>
+    <span class="navbar-title">Obesity phase 2</span>
   </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-<li class="nav-item">
+  <li class="nav-item">
     <a class="nav-link" href="../index.html">Home</a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data-cleaning--eda" role="button" data-bs-toggle="dropdown" aria-expanded="false">Data Cleaning &amp; EDA</a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-data-cleaning--eda">
-<li>
-    <a class="dropdown-item" href="../100_data_cleaning_scripts_EDA/step1.html">
- <span class="dropdown-text">Step 1</span></a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-data-cleaning--eda">    
+        <li>
+    <a class="dropdown-item" href="../100_data_cleaning_scripts_EDA/01_ExploreCQPwebData.html">
+ <span class="dropdown-text">Exploring the CQPWeb data</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../100_data_cleaning_scripts_EDA/step2.html">
- <span class="dropdown-text">Step 2</span></a>
+    <a class="dropdown-item" href="../100_data_cleaning_scripts_EDA/02_ExploreSpacyData.html">
+ <span class="dropdown-text">Exploring Spacy-generated annotations</span></a>
   </li>  
     </ul>
-</li>
+  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-analysis" role="button" data-bs-toggle="dropdown" aria-expanded="false">Analysis</a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-analysis">
-<li>
-    <a class="dropdown-item" href="../400_analysis/step1.html">
- <span class="dropdown-text">Step 1</span></a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-analysis">    
+        <li>
+    <a class="dropdown-item" href="../400_analysis/01_condition_person_first.html">
+ <span class="dropdown-text">Condition vs Person-first language</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../400_analysis/step2.html">
- <span class="dropdown-text">Step 2</span></a>
+    <a class="dropdown-item" href="../400_analysis/02_obese.html">
+ <span class="dropdown-text">Use of ‘obese’</span></a>
   </li>  
     </ul>
-</li>
+  </li>
 </ul>
-<ul class="navbar-nav navbar-nav-scroll ms-auto">
-<li class="nav-item">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
     <a class="nav-link active" href="../000_scoping/scoping.html" aria-current="page">Scope</a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../about.html">Sydney Informatics Hub</a>
   </li>  
 </ul>
-<div class="quarto-toggle-container">
+              <div class="quarto-toggle-container">
                   <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
               </div>
               <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
@@ -105,215 +129,150 @@ ul.task-list{list-style: none;}
 <div class="quarto-about-solana column-body">
   <div class="about-entity">
     <div class="entity-contents">
-      <header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title">PIPE-XXX: PROJECT TITLE</h1>
+      <header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">PIPE-3034: Obesity stigma analysis with pattern frequency over time and publication</h1>
 </div>
 <div class="quarto-title-meta">
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Authors </p>
+             <p>Monika Bednarek, Carly Bray, Joel Nothman, Darya Vanichkina </p>
           </div>
   </div>
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
+      <p class="date">January 3, 2022</p>
     </div>
   </div>
   </div>
 </header> 
-      <div class="about-contents"><main class="content" id="quarto-document-content"><section id="project-details" class="level2"><h2 class="anchored" data-anchor-id="project-details">1. Project details</h2>
+      <div class="about-contents"><main class="content" id="quarto-document-content">
+<p><a href="https://unisyd.sharepoint.com/:w:/t/SydneyInformaticsHub2/Eb2HaGckqAdMtD80k27xdhwBGpKDLwrTfxZuqYGIs0IYSQ?e=cFiVOs">Scope link, Sharepoint Usyd</a></p>
+<section id="project-details" class="level2">
+<h2 class="anchored" data-anchor-id="project-details">1. Project details</h2>
 <ul>
-<li>Clients: X, Y, Z</li>
-<li>Faculty: X</li>
-<li>School: ?</li>
-<li>Research centre: ?</li>
-<li>Collaborators and their affilications: ?</li>
-</ul></section><section id="project-scoping-details" class="level2"><h2 class="anchored" data-anchor-id="project-scoping-details">Project scoping details</h2>
-<ul>
-<li>Scope prepared by X</li>
-<li>Scope prepared on</li>
-<li>Project manager</li>
+<li>Clients: Monika Bednarek</li>
+<li>Faculty: FASS</li>
+<li>Collaborators and their affiliations: Carly Bray (USyd PhD Student), Tara (Lancaster),</li>
 </ul>
-<section id="researcher-availability" class="level3"><h3 class="anchored" data-anchor-id="researcher-availability">Researcher Availability</h3>
+</section>
+<section id="project-scoping-details" class="level2">
+<h2 class="anchored" data-anchor-id="project-scoping-details">Project scoping details</h2>
 <ul>
-<li>Who is the active person helping?</li>
-<li>How available are they to participate in this study?</li>
-</ul></section></section><section id="project-summary" class="level2"><h2 class="anchored" data-anchor-id="project-summary">2. Project summary</h2>
-<section id="research-context" class="level3"><h3 class="anchored" data-anchor-id="research-context">Research context</h3>
-<p>This research aims to:</p>
-<ol type="1">
-<li>X</li>
-<li>B</li>
-</ol></section><section id="client-needs" class="level3"><h3 class="anchored" data-anchor-id="client-needs">Client needs</h3>
-<ul>
-<li>A</li>
-<li>B</li>
-<li>C</li>
-</ul></section><section id="current-data" class="level3"><h3 class="anchored" data-anchor-id="current-data">Current data</h3>
-<ul>
-<li>X</li>
-</ul></section></section><section id="project-implementation" class="level2"><h2 class="anchored" data-anchor-id="project-implementation">3. Project Implementation</h2>
-<section id="project-plan" class="level3"><h3 class="anchored" data-anchor-id="project-plan">Project plan</h3>
-<ol type="1">
-<li>What needs to be done?</li>
-<li>What’s the timeline for each step?</li>
-</ol></section><section id="scheduling" class="level3"><h3 class="anchored" data-anchor-id="scheduling">Scheduling</h3>
-<ul>
-<li>Any notes?</li>
-</ul></section><section id="deliverables" class="level3"><h3 class="anchored" data-anchor-id="deliverables">Deliverables</h3>
-<ol type="1">
-<li>A</li>
-<li>B</li>
-<li>C</li>
-</ol></section><section id="sih-skills-required" class="level3"><h3 class="anchored" data-anchor-id="sih-skills-required">SIH skills required</h3>
-<ul>
-<li>Python/R/SQL?</li>
-<li>XXX</li>
-<li>yyyy</li>
-</ul></section><section id="in-scope" class="level3"><h3 class="anchored" data-anchor-id="in-scope">In scope</h3>
-</section><section id="out-of-scope" class="level3"><h3 class="anchored" data-anchor-id="out-of-scope">Out of scope</h3>
-<ul>
-<li>More than X weeks FTE work</li>
-</ul></section><section id="acceptance-criteria" class="level3"><h3 class="anchored" data-anchor-id="acceptance-criteria">Acceptance Criteria</h3>
-<ul>
-<li>x</li>
-</ul></section><section id="handover-plan" class="level3"><h3 class="anchored" data-anchor-id="handover-plan">Handover plan</h3>
-<ul>
-<li>X</li>
-</ul></section></section><section id="project-evaluation" class="level2"><h2 class="anchored" data-anchor-id="project-evaluation">4. Project Evaluation</h2>
-<section id="sih-benefits-summary" class="level3"><h3 class="anchored" data-anchor-id="sih-benefits-summary">SIH Benefits (Summary)</h3>
-<ul>
-<li>X/</li>
-</ul></section><section id="cost-fte-weeks" class="level3"><h3 class="anchored" data-anchor-id="cost-fte-weeks">Cost (FTE weeks)</h3>
-<ul>
-<li>X weeks FTE</li>
+<li>Scope prepared by Joel Nothman, Feb 2022</li>
+<li>Project manager - Marius Mather</li>
 </ul>
-<hr>
-<p>SIH staff will fill out the below</p>
-<hr></section></section><section id="essential-criteria" class="level2"><h2 class="anchored" data-anchor-id="essential-criteria">5. Essential criteria</h2>
-<table class="table"><tbody>
-<tr class="odd">
-<td style="text-align: left;">Sydney Researcher</td>
-<td style="text-align: left;">Y:</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Clear project statement</td>
-<td style="text-align: left;">Y</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Data quality</td>
-<td style="text-align: left;">Y</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Solvable</td>
-<td style="text-align: left;">Y</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Domain Expert</td>
-<td style="text-align: left;">Y</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Planned</td>
-<td style="text-align: left;">Y</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Strategic Plan</td>
-<td style="text-align: left;">Y</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Data Science</td>
-<td style="text-align: left;">Y</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Priority</td>
-<td style="text-align: left;">Y: Health</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Deliverables</td>
-<td style="text-align: left;">Y</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Infrastructure</td>
-<td style="text-align: left;">Y</td>
-</tr>
-</tbody></table></section><section id="value-and-impact" class="level2"><h2 class="anchored" data-anchor-id="value-and-impact">6. Value and Impact</h2>
-<section id="drives-the-success-of-larger-groups-larger-collaborations-or-high-profile-projects." class="level3"><h3 class="anchored" data-anchor-id="drives-the-success-of-larger-groups-larger-collaborations-or-high-profile-projects.">Drives the success of larger groups, larger collaborations or high-profile projects.</h3>
+</section>
+<section id="project-summary" class="level2">
+<h2 class="anchored" data-anchor-id="project-summary">2. Project summary</h2>
+<section id="research-context" class="level3">
+<h3 class="anchored" data-anchor-id="research-context">Research context</h3>
 <ul>
-<li>Score: X/10</li>
-<li>Details:
-<ul>
-<li>Name of Research Group/Centre:</li>
-<li>Name of Collaboration:</li>
+<li>In PIPE-1951, SIH supported Monika to prepare a corpus for studying mentions of obesity in Australian media. As a collaboration with the Obesity Collective, the project hopes to understand the changing nature of reference to obesity over time and publication, with a focus on stigma.</li>
 </ul>
-</li>
-</ul></section><section id="publications-that-are-high-impact---foundational-highly-cited-with-potential-for-wider-adoption-of-methods-and-knock-on-outcomes." class="level3"><h3 class="anchored" data-anchor-id="publications-that-are-high-impact---foundational-highly-cited-with-potential-for-wider-adoption-of-methods-and-knock-on-outcomes.">Publications that are high-impact - foundational, highly cited, with potential for wider adoption of methods and knock-on outcomes.</h3>
+</section>
+<section id="client-needs" class="level3">
+<h3 class="anchored" data-anchor-id="client-needs">Client needs</h3>
 <ul>
-<li>Score: X/10</li>
+<li><p>This project will create one or more notebooks for inclusion in the Australian Text Analytics Platform (ATAP) library. The notebooks will support the analysis of language trends for this specific project, with components that are reusable for other research, and guidance in the notebook on how the components might be reapplied.</p></li>
+<li><p>The raw language data will not be available in full to the notebooks. Rather, Monika and her RAs will investigate patterns of interest and construct cross-tabulations of their frequency by publication year and source publication. This project will implement visualisation of comparisons across publications and trends over time, and tools for estimating trends and other significant variation.</p></li>
+<li><p>Analysis may also take into account typical political and organisation affiliation of news sources.</p></li>
+<li><p>While this project will primarily deal with already quantified phenomena, the linguistic context will have bearing in relation to:</p>
+<ul>
+<li>The choice of statistic, e.g.&nbsp;absolute or relative frequencies; term frequencies vs document frequencies.</li>
+<li>The comparison of statistics when linguistic features are considered as “alternatives” or part of “confusion sets” (e.g.&nbsp;comparing the frequency of stigmatising and non-stigmatising variants).</li>
+<li>These statistics will represent the number of mentions of a phenomenon across the entire corpus. For example, counts of “lazy” mentioned in the context of “obes*” will be provided for each (source, year). Outside of the notebook, close analysis will have been applied to estimate, on a sample, the proportion of “lazy” references that are stigmatising of obesity. Applying the assumption that this proportion is invariant with respect to source and year, we will want to estimate the overall quantity of stigmatizing uses.</li>
+<li>The interpretation of the results and their impact on further analysis.</li>
+</ul></li>
 </ul>
-<ol type="1">
-<li>Target Journal: Nature (Impact Factor 40000)</li>
-</ol>
+</section>
+<section id="current-data" class="level3">
+<h3 class="anchored" data-anchor-id="current-data">Current data</h3>
 <ul>
-<li>Name of Authors: Amazing researcher, (name of SIH data analyst?)</li>
-<li>Proposed Paper Title: How to write a Science paper in 5 days.</li>
-</ul></section><section id="potential-for-patents-start-ups-open-source-code-policy-influence." class="level3"><h3 class="anchored" data-anchor-id="potential-for-patents-start-ups-open-source-code-policy-influence.">Potential for patents, start-ups, open-source code, policy influence.</h3>
+<li>26,163 articles (16M tokens) in text format with metadata in spreadsheet, acquired from LexisNexis. Covers 2008 to 2019 in 10 publications and 2014 to 2019 in 2 publications</li>
+</ul>
+</section>
+</section>
+<section id="project-implementation" class="level2">
+<h2 class="anchored" data-anchor-id="project-implementation">3. Project Implementation</h2>
+<section id="project-plan" class="level3">
+<h3 class="anchored" data-anchor-id="project-plan">Project plan</h3>
 <ul>
-<li>Policy influence X/10</li>
-</ul></section><section id="develop-funding-opportunities-for-the-university-andor-sih-such-as-large-coe-scale-grants-and-further-involvement-with-successful-and-well-funded-groups." class="level3"><h3 class="anchored" data-anchor-id="develop-funding-opportunities-for-the-university-andor-sih-such-as-large-coe-scale-grants-and-further-involvement-with-successful-and-well-funded-groups.">Develop funding opportunities for the university and/or SIH, such as large CoE-scale grants and further involvement with successful and well funded groups.</h3>
+<li><p>[negligible time] Create or use a repository configured with continuous notebook compilation (cf.&nbsp;ATAP notebook repo,, currently private)&nbsp;</p></li>
+<li><p>[1 weeks] Implement initial code to visualise and summarise key features of a cross-tabulation&nbsp;</p></li>
+<li><p>[1.5 weeks] Research and implement variant analyses for&nbsp;</p>
 <ul>
-<li>Score: X/10</li>
-<li>Name of Grant Application:</li>
-<li>Date of Proposed Submission:</li>
-</ul></section><section id="total-score" class="level3"><h3 class="anchored" data-anchor-id="total-score">Total score</h3>
-<p>X/40 (refer to Rubric for scoring guide)</p>
-</section></section><section id="kpi" class="level2"><h2 class="anchored" data-anchor-id="kpi">7. KPI</h2>
-<table class="table"><tbody>
-<tr class="odd">
-<td style="text-align: left;">Papers SIH Coauthors (*measure only, not KPI)</td>
-<td style="text-align: left;">N</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Number of Papers: Papers SIH Acknowledged</td>
-<td style="text-align: left;">Y - Number of Papers: 1000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Collaborators who publish</td>
-<td style="text-align: left;">Name: Amazing Researcher</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Collaborators who have grants</td>
-<td style="text-align: left;">Name: Amazing Researcher</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Grant applications created</td>
-<td style="text-align: left;">Y:</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Grants project supporting</td>
-<td style="text-align: left;">Name of Grant:</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Software released for public use</td>
-<td style="text-align: left;">Y/N: TBA</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">New Clients</td>
-<td style="text-align: left;">Y</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">KPI Score</td>
-<td style="text-align: left;">?/6</td>
-</tr>
-</tbody></table>
+<li><p>term and document frequency&nbsp;</p></li>
+<li><p>relative and absolute frequency&nbsp;</p></li>
+<li><p>comparative frequency within confusion sets&nbsp;</p></li>
+</ul></li>
+<li><p>[1.5 week] Iterative improvement to the above; Support the researcher to interpret results&nbsp;</p></li>
+<li><p>[1 weeks] Prepare notebook for publication and reuse&nbsp;</p>
+<ul>
+<li><p>Report on key findings.&nbsp;</p></li>
+<li><p>Describe usage in other contexts, within the notebook.&nbsp;</p></li>
+<li><p>Include demonstration of computing a contingency table from a DataFrame of texts and metadata.&nbsp;</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="resources-required" class="level3">
+<h3 class="anchored" data-anchor-id="resources-required">Resources required</h3>
+<ul>
+<li>Statistics, analytics, visualisation</li>
+<li>Familiarity with text analytics</li>
+</ul>
+</section>
+<section id="scheduling" class="level3">
+<h3 class="anchored" data-anchor-id="scheduling">Scheduling</h3>
+<ul>
+<li>Client and RA will be available for fortnightly meetings.</li>
+</ul>
+</section>
+<section id="deliverables" class="level3">
+<h3 class="anchored" data-anchor-id="deliverables">Deliverables</h3>
+<ul>
+<li>Analysis</li>
+<li>Reusable notebooks</li>
+</ul>
+</section>
+<section id="exit-conditions" class="level3">
+<h3 class="anchored" data-anchor-id="exit-conditions">Exit conditions</h3>
+<ul>
+<li>Work will be completed to budget.</li>
+</ul>
+</section>
+<section id="out-of-scope" class="level3">
+<h3 class="anchored" data-anchor-id="out-of-scope">Out of scope</h3>
+<ul>
+<li><p>Work beyond time scoped without rebudgeting.</p></li>
+<li><p>Writing to paper.</p></li>
+</ul>
+</section>
+<section id="communication-plan" class="level3">
+<h3 class="anchored" data-anchor-id="communication-plan">Communication plan</h3>
+<ul>
+<li><p>Fortnightly meetings, ad-hoc communication by email.</p></li>
+<li><p>Data is on RDS.</p></li>
+</ul>
+</section>
+<section id="maintenance-plan" class="level3">
+<h3 class="anchored" data-anchor-id="maintenance-plan">Maintenance plan</h3>
+<ul>
+<li>Notebooks delivered on GitHub.com with dependencies specified, lodged with ATAP.</li>
+</ul>
+<p>Total budget: 4 weeks FTE effort towards LDaCA RDC&nbsp;</p>
 
 
-</section></main></div>
+</section>
+</section>
+</main></div>
     </div>
   </div>
 </div>
-<!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+ <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const disableStylesheet = (stylesheets) => {
     for (let i=0; i < stylesheets.length; i++) {
@@ -490,10 +449,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
-      <div class="nav-footer-center">Copyright 2022, AnalystNameTODO, Sydney Informatics Hub</div>
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Copyright 2022, Darya Vanichkina, Sydney Informatics Hub</div>
   </div>
 </footer>
+
 
 
 </body></html>
