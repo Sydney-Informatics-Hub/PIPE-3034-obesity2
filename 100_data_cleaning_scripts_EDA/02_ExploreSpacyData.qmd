@@ -1,0 +1,90 @@
+---
+title: "Loading and exploring Spacy-annotated tags."
+---
+
+In this file, we start by loading and exploring the data as provided by CQPweb.
+
+```{r loadLibs}
+library(here)
+library(janitor)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+theme_set(theme_minimal())
+```
+
+```{r getData}
+read_spacy <- function(filename){
+  read_csv(
+    here("../pipe-1951-obesity/300_data_processed", filename)) %>%
+    # drop the row number column
+    select(-`...1`)
+}
+
+
+spacy_output_body <- read_spacy("pos_bodies_annotated_with_spacy.csv") %>% mutate(source = "body") %>% distinct()
+spacy_output_title <- read_spacy("pos_titles_annotated_with_spacy.csv") %>% mutate(source = "title") %>% distinct()
+spacy_output <- rbind(spacy_output_body, spacy_output_title) %>% arrange(article_id)
+
+
+#
+read_cqpweb <- function(filename){
+  read.csv(
+    here("100_data_raw", filename), 
+    skip = 3, sep = "\t") %>% 
+    janitor::clean_names()
+}
+condition_first <- read_cqpweb("aoc_all_condition_first.txt")
+person_first <- read_cqpweb("aoc_all_person_first.txt")
+
+adj_obese <- read_cqpweb("aoc_all_obese_tagadjlemma.txt")
+adj_overweight <- read_cqpweb("aoc_all_overweight_tagadjlemma.txt")
+  
+metadata <- read_csv(here("100_data_raw", "corpus_cqpweb_metadata.csv"))
+
+condition_first_annotated <- inner_join(
+  metadata, condition_first, by = c("article_id" = "text" ))
+person_first_annotated <- inner_join(
+  metadata, person_first, by = c("article_id" = "text" ))
+
+monika_condition_first <- c("adolescent", "adolescents", "adult", "adults", "American", "Americans", "amputee", "amputees", "asthmatic", "asthmatics", "aussie", "aussies", "australian", "Australians", "banker", "bankers", "boss", "bosses", "boy", "boys", "Brit", "Brits", "Canberran", "Canberrans", "child", "children", "citizen", "citizens", "client", "clients", "contestant", "contestants", "customer", "customers", "dad", "dads", "daughter", "daughters", "diabetic", "diabetics", "dieter", "dieters", "driver", "drivers", "employee", "employees", "fan", "fans", "father", "fathers", "Frenchman", "Frenchmen", "Frenchwomen", "friend", "friends", "girl", "girls", "guy", "guys", "individual", "individuals", "kid", "kids", "ladies", "lady", "man", "men", "model", "models", "mother", "mothers", "motorist", "motorists", "mum", "mums", "pal", "pals", "parent", "parents", "participant", "participants", "passenger", "passengers", "patient", "patients", "people", "person", "persons", "preschooler", "preschoolers", "Queenslander", "Queenslanders", "resident", "residents", "smoker", "smokers", "socialite", "socialites", "soldier", "soldiers", "son", "sons", "student", "students", "subject", "subjects", "Tasmanian", "Tasmanians", "teen", "teenager", "teenagers", "teens", "traveller", "travellers", "Victorian", "Victorians", "volunteer", "volunteers", "woman", "women", "worker", "workers", "youngster", "youngsters")
+```
+
+Monika defined condition-first language in the following way:
+
+“obese (adolescent|adolescents|adult|adults|American|Americans|amputee|amputees|asthmatic|asthmatics|aussie|aussies|australian|Australians|banker|bankers|boss|bosses|boy|boys|Brit|Brits|Canberran|Canberrans|child|children|citizen|citizens|client|clients|contestant|contestants|customer|customers|dad|dads|daughter|daughters|diabetic|diabetics|dieter|dieters|driver|drivers|employee|employees|fan|fans|father|fathers|Frenchman|Frenchmen|Frenchwomen|friend|friends|girl|girls|guy|guys|individual|individuals|kid|kids|ladies|lady|man|men|model|models|mother|mothers|motorist|motorists|mum|mums|pal|pals|parent|parents|participant|participants|passenger|passengers|patient|patients|people|person|persons|preschooler|preschoolers|Queenslander|Queenslanders|resident|residents|smoker|smokers|socialite|socialites|soldier|soldiers|son|sons|student|students|subject|subjects|Tasmanian|Tasmanians|teen|teenager|teenagers|teens|traveller|travellers|Victorian|Victorians|volunteer|volunteers|woman|women|worker|workers|youngster|youngsters)".
+
+And person-first in the following way:
+
+adolescent|adolescents|adult|adults|American|Americans|amputee|amputees|asthmatic|asthmatics|aussie|aussies|australian|Australians|banker|bankers|boss|bosses|boy|boys|Brit|Brits|Canberran|Canberrans|child|children|citizen|citizens|client|clients|contestant|contestants|customer|customers|dad|dads|daughter|daughters|diabetic|diabetics|dieter|dieters|driver|drivers|employee|employees|fan|fans|father|fathers|Frenchman|Frenchmen|Frenchwomen|friend|friends|girl|girls|guy|guys|individual|individuals|kid|kids|ladies|lady|man|men|model|models|mother|mothers|motorist|motorists|mum|mums|pal|pals|parent|parents|participant|participants|passenger|passengers|patient|patients|people|person|persons|preschooler|preschoolers|Queenslander|Queenslanders|resident|residents|smoker|smokers|socialite|socialites|soldier|soldiers|son|sons|student|students|subject|subjects|Tasmanian|Tasmanians|teen|teenager|teenagers|teens|traveller|travellers|Victorian|Victorians|volunteer|volunteers|woman|women|worker|workers|youngster|youngsters|those|many) with * obesity
+
+```{r}
+condition_first_spacy_monika_defined <- 
+  spacy_output %>%
+  filter(text == "obese") %>%
+  filter(dep != "conj" & dep != "attr") %>%
+  filter(head %in% monika_condition_first)
+
+
+condition_first_spacy_monika_filtered_out <- 
+  spacy_output %>%
+  filter(text == "obese") %>%
+  filter(dep != "conj" & dep != "attr") %>%
+  filter(!(article_id %in% condition_first_spacy_monika_defined$article_id))
+```
+
+Let's join and compare the CQP web output for condition-first language with the Spacy output, if we use Monika's predefined list:
+
+```{r}
+
+condition_first_full <- full_join(
+  condition_first_annotated,
+  {condition_first_spacy_monika_defined %>% group_by(article_id) %>% count()}
+)
+```
+
+
+
+
+
