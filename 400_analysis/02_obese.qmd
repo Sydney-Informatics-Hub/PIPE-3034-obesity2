@@ -274,7 +274,26 @@ obese_annotated_filtered %>%
 
 ```
 
-Based on the visualisation it seems not.
+Based on the visualisation it seems not. If we separate out by source there also doesn't seem to be much difference. If we use a jitter plot to visualise the data, then fit a smoothing line and compare with the line of "no change" (dashed red line), we can see that there really isn't much of a difference by source and year: 
+
+```{r yearSourceBoxplot}
+obese_annotated_filtered %>%
+  ggplot(aes(x = as.factor(year), 
+             y = log(frequency), 
+             fill = year)) + 
+  geom_jitter(alpha = 0.2) +
+  geom_smooth(aes(group = source), col = "blue", method = "loess") +
+  geom_hline(yintercept = 1, col = "red", lty = 3, size = 3) + 
+  facet_wrap(~source) + 
+  theme(axis.text.x = 
+          element_text(angle = 90, vjust = 0.5, hjust=1),
+        legend.position = "NA") + 
+  labs(
+    x = "Year",
+    y = "log(frequency per 1000 words)"
+  )
+```
+
 
 The distributions each year also look quite similar:
 
@@ -375,7 +394,7 @@ Including a random intercept for source does not improve the fit of the model (A
 
 In summary, the model which included source only provided the best fit. Let's summarise this model:
 
-```{r warnings="false"}
+```{r warnings="false", results="asis"}
 report::report(m_0_source)
 ```
 
