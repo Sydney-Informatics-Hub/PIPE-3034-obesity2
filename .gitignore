@@ -16,7 +16,6 @@ renv/
 _freeze
 
 200_data_clean/
-*files*
 *cache*
 
 VennDiagram.2022-05-12_15-21-07.log
