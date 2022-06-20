@@ -1,0 +1,261 @@
+---
+title: "Loading and exploring the data"
+---
+
+### Executive summary
+
+In the below document, we show that we should use the Python-generated total word count for calculating normalised frequencies (or the counts provided in the metadata, the two are nearly identical and well correlated across all text lengths.
+
+
+***
+
+In this file, we start by loading and exploring the data for the obesity corpus.
+
+```{r getData}
+library(here)
+library(janitor)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+theme_set(theme_minimal())
+
+
+
+
+read_cqpweb <- function(filename){
+  read.csv(
+    here("100_data_raw", filename), 
+    skip = 3, sep = "\t") %>% 
+    janitor::clean_names()
+}
+
+clean_fatneglabel <- function(dirname){
+  purrr::map_dfr(
+    list.files(
+      here("100_data_raw", dirname )
+      ),
+    ~{read.csv(
+      here(
+        paste0("100_data_raw/", dirname), .x), 
+      skip = 3, sep = "\t") %>% 
+        janitor::clean_names()
+      })
+}
+
+
+condition_first <- read_cqpweb("aoc_all_condition_first.txt")
+person_first <- read_cqpweb("aoc_all_person_first.txt")
+
+adj_obese <- read_cqpweb("aoc_all_obese_tagadjlemma.txt")
+adj_overweight <- read_cqpweb("aoc_all_overweight_tagadjlemma.txt")
+fat_labelled <- clean_fatneglabel("fat_neg_label_yes_textFreqs")
+
+metadata <- read_csv(here("100_data_raw", "corpus_cqpweb_metadata.csv"))
+additional_source_metadata <- read_csv(here("100_data_raw", "addition_source_metadata.csv"))
+
+metadata_full <- inner_join(metadata, additional_source_metadata)
+
+condition_first_annotated <- inner_join(
+  condition_first, metadata_full, by = c("text" = "article_id"))
+person_first_annotated <- inner_join(
+  person_first, metadata_full, by = c("text" = "article_id"))
+fat_annotated  <- inner_join(
+  fat_labelled, metadata_full, by = c("text" = "article_id")
+)
+saveRDS(fat_annotated, file = here::here("200_data_clean", "fat_annotated"))
+
+```
+
+Check that all `text` in the CQP web export file are found in the `article_id` of the metadata file. 
+
+
+```{r checkArticleID, echo=TRUE}
+janitor::tabyl(condition_first$text %in% metadata$article_id) %>% kable()
+janitor::tabyl(person_first$text %in% metadata$article_id) %>% kable()
+janitor::tabyl(adj_obese$text %in% metadata$article_id) %>% kable()
+janitor::tabyl(adj_overweight$text %in% metadata$article_id) %>% kable()
+```
+
+Yes, this is true for all of them.
+
+## Articles by month, year and publication (based on metadata)
+
+Have we sampled the articles consistently by month, year and publication?
+
+```{r}
+assess_year_source <- function(df, var){
+  var <- enquo(var)
+  df %>% 
+  select(source, !!var) %>%
+  group_by(source, !!var) %>% 
+  count(!!var) %>%
+  rename(count = n) %>%
+  pivot_wider(id_cols = c(source), names_from = !!var, values_from = c(count), values_fill = 0) %>%
+  janitor::adorn_totals(c("row", "col")) %>%
+  kable()
+} 
+
+assess_year_source(metadata_full, year)
+```
+
+We can see that we are:
+- missing articles from the Brisbane Times and Daily Telegraph in 2008-2012.
+- There are fewer articles in 2019 than in previous years. Let's explore if we have data for all of the months for that year:
+
+```{r byMonth}
+metadata_full %>%
+  filter(year == 2019) %>%
+  assess_year_source(., month_metadata)
+```
+
+We can see that we do have data for each month from 2019, although there are many fewer articles that year from the Western Australian and to a lesser extent the Canberra Times.
+
+Let's also visualise this trend by publication
+```{r byNoArticlesBySource}
+metadata_full %>%
+  group_by(source, year) %>%
+  count() %>%
+  ggplot(aes(col = source, y = n, x = year)) + 
+  geom_line() +
+  scale_x_continuous(breaks = unique(metadata_full$year)) + 
+  labs(x = "", y = "Number of articles")
+```
+
+We can also look at this using facets:
+
+```{r byNoArticlesBySourceFacet}
+metadata_full %>%
+  group_by(source, year) %>%
+  count() %>%
+  ggplot(aes(col = source, y = n, x = year)) + 
+  geom_line() +
+  scale_x_continuous(breaks = unique(metadata_full$year)) + 
+  labs(x = "", y = "Number of articles") + 
+  facet_wrap(~source, scales = "free_y") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+        legend.position = "NA")
+
+```
+
+This most clearly shows that the number of articles mentioning obes* declines with time in Australian media. 
+
+This could be due to:
+
+- Fewer articles in general being published
+- Proportionally fewer articles about obesity being written
+- More duplicate articles not having been cleaned in the earlier years
+
+It is important for us to acknowledge this trend, as it will influence our inferences around using the raw number of articles in temporal comparisons.
+
+```{r declineBoxplot}
+metadata_full %>%
+  # don't have all years of data for these
+  filter(!(source %in% c("BrisTimes", "Telegraph"))) %>%
+  group_by(source, year) %>%
+  count() %>%
+  ggplot(aes(x = year, y = n, group = year)) + 
+  geom_boxplot() +
+  scale_x_continuous(breaks = unique(metadata_full$year)) + 
+  labs(x = "", y = "Number of articles") 
+```
+
+***
+
+## CQP-web vs metadata-annotated and Python-quantitated word counts
+
+When carrying out modelling, it is often important to use data normalised to article word counts. This is dependent upon getting a correct word count for each article. Below, we compare article word counts from CQPWeb to those generated by Python and reported in the metadata in Lexis, for the condition-first language dataset as an example. The effects seen here will be consisten across other datasets as well.
+
+
+First, compare the counts from Python and the metadata:
+
+```{r WC_python_metadata}
+p <- condition_first_annotated %>%
+  ggplot(aes(x = wordcount_total,
+             y = wordcount_from_metatata)) + 
+  geom_point() + 
+  geom_smooth(method = "loess", formula = y ~ x, col = "red") + 
+  geom_abline(slope = 1, intercept = 0, col = "blue", lty = 2) +
+  xlab("Word count, Python") + 
+  ylab("Word count, metadata") 
+plotly::ggplotly(p) 
+```
+
+The word counts are well correlated across all text lengths.
+
+Next, we compare the word counts from CQP-web and the metadata:
+
+```{r WC_cqp_metadata}
+p <- condition_first_annotated %>%
+  ggplot(aes(x = no_words_in_text,
+             y = wordcount_from_metatata)) + 
+  geom_point() + 
+  geom_abline(slope = 1, intercept = 0, col = "blue", lty = 2) +
+  xlab("Word count, CQPWeb") + 
+  ylab("Word count, metadata") 
+plotly::ggplotly(p) 
+```
+
+We can see that the longer the text, the more the counts do not match what is in the metadata (or counted via Python). This is most likely to CQP-Web counting punctuation as tokens, thereby with longer text more punctuation is added to each text.
+
+We can add a smoothed conditional means line (in red) to show the deviation between the identity line (y = x, shown dashed in blue) and the line of best fit:
+
+```{r WC_cqp_metadatasmooth}
+condition_first_annotated %>%
+  ggplot(aes(x = no_words_in_text,
+             y = wordcount_from_metatata)) + 
+  geom_point() + 
+  geom_smooth(method = "loess", formula = y ~ x, se = TRUE, col = "red") + 
+  geom_abline(slope = 1, intercept = 0, col = "blue", lty = 2) +
+  xlab("Word count, CQPWeb") + 
+  ylab("Word count, metadata") 
+
+```
+
+
+To make this more apparent, we plot the difference between the metadata-provided and Python and CQP-web counts:
+
+
+```{r}
+condition_first_annotated %>%
+  mutate(
+    `Python - metadata` = (abs(wordcount_total - wordcount_from_metatata)),
+    `CQPweb - metadata` = (abs(no_words_in_text - wordcount_from_metatata)),
+    word_count_quartile = ntile(wordcount_from_metatata, 10)) %>%
+  select(`Python - metadata`, `CQPweb - metadata`, word_count_quartile) %>%
+  pivot_longer(cols = c(`Python - metadata`, `CQPweb - metadata`)) %>%
+  ggplot(aes(x = as.factor(word_count_quartile), 
+             y = value,
+             fill = name)) + geom_boxplot() +
+  labs(
+    x = "Text length, decile, based on metadata supplied word count",
+    y = "Absolute difference in word count between X and metadata-provided counts",
+   caption = "The longer the text, the more the CQP-Web count diverges from that of the metadata (and Python)") + guides(fill=guide_legend(title="Difference"))
+  
+```
+
+This also affects the normalised counts. To show this, we have broken the dataset into 6 groups based on text length, with 1 being the shortest and 6 being the longest texts. We can see that for the ~500 longest texts (panel 6), the line of best fit between frequencies is curved, showcasing how the normalised frequency is under-estimated for longer texts (due to the denominator for normalisation being bigger, as punctuation is included in the calculation).
+
+```{r normFreqDiff}
+condition_first_annotated %>%
+  mutate(frequency = 10^6*no_hits_in_text/wordcount_total,
+         length_quantile = ntile(desc(condition_first_annotated$wordcount_total),6)) %>%
+  ggplot(aes(x = frequency, y = freq_per_million_words)) + 
+  geom_point() + 
+  geom_smooth(method = "loess", formula = y ~ x, se = TRUE, col = "red") + 
+  geom_abline(slope = 1, intercept = 0, col = "blue", lty = 2) +
+  facet_wrap(~length_quantile, scales = "free_y") +
+  labs(x = "Python-counted frequency per million words",
+       y = "CQP-calculated frequency per million words")
+
+```
+
+
+**CONCLUSION: Use the Python-generated total word count for calculating normalised frequencies (or the counts provided in the metadata, the two are nearly identical and well correlated across all text lengths. This also means we cannot use the provided normalised frequencies from CQPweb.**
+
+***
+
+## Combining fat negative label files
+
+

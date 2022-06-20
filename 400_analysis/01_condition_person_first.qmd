@@ -1,0 +1,995 @@
+# Condition-first vs person-first language
+
+In this notebook, we explore whether there is a difference in the use of condition- vs person-first language in the Australian obesity corpus.
+
+## Executive summary
+
+1. Condition-first language is used in 9-14% of articles from all sources, while person-first language is used in less than 1% of articles.
+
+2. Condition-first language is used in 7-14% of articles per year across the study time period, while person-first language is used in 0.17-1.14% of articles across per year.
+
+3. Person-first language is present in approximately the same number of articles in broadsheet and tabloid newspapers, whereas articles with only condition-first language are higher in number in tabloid publications.
+  
+  - The Pearson's Chi-squared test with Yates' continuity correction contrasting articles from tabloids and broadsheets that use only condition-first vs only person-first language indicate a significant link (X-squared = 4.8274, p-value = 0.02801) between type of publication and number of articles using a specific language type. The effect size is quite small (\<0.2), indicating that while the result is statistically significant, the fields are  weakly associated.
+  
+  
+4. Person-first language is present in approximately the same number of articles in left- and right-leaning newspapers, whereas articles with only condition-first language are higher in number in right-leaning publications.
+  
+  - The Pearson's Chi-squared test with Yates' continuity correction contrasting articles from left- and right-leaning publications that use only condition-first vs only person-first language indicate a significant link (X-squared = 4.6405, p-value = 0.03123) between type of publication and number of articles using a specific language type. The effect size is, however, also negligible, indicating that while the result is statistically significant, the fields are  weakly associated.
+  
+5. Resampling the corpus 10000 times to select 1000 articles at a time without replacement results in a mean of 4 articles per 1000 using person-first language, and 122 per 1000 using condition-first language.
+
+- The Welch Two Sample t-test testing the difference between person_first and condition_first bootstrapping (mean of person_first = 4.11, mean of condition_first = 122.57) suggests that the effect is negative, statistically significant, and large (difference = -118.46, 95% CI [-118.67, -118.26], t(10751.55) = -1138.14, p < .001; Cohen's d = -16.10, 95% CI [-16.31, -15.88]).
+
+6. In texts that use either condition-first, person-first languages or both, the frequency of condition-first language is higher (mean 4 words per 1000) than person-first (mean 2.7 words per 1000).
+
+- The Welch Two Sample t-test testing the difference between condition_first_frequencies and person_first_frequencies (mean of x = 4.34, mean of y = 2.67) suggests that the effect is positive, statistically significant, and small (difference = 1.66, 95% CI [1.16, 2.17], t(131.59) = 6.49, p < .001; Cohen's d = 0.44, 95% CI [0.30, 0.58])
+
+7. Relative to the Advertiser, the Age, Australian, Canberra Times, Courier Mail and Sydney Morning Herald had lower frequency of condition-first language. 
+
+
+```{r setup}
+#| warning: false
+#| message: false
+library(here)
+library(dplyr)
+library(ggplot2)
+library(ggvenn)
+library(readr)
+library(tidyr)
+library(knitr)
+library(ggrepel)
+library(report)
+library(lme4)
+library(optimx)
+# set ggplot2 to use the minimal theme for all figures in the document
+# unless explicitly specified otherwise
+theme_set(theme_minimal())
+
+read_cqpweb <- function(filename){
+  read.csv(
+    here("100_data_raw", filename), 
+    skip = 3, sep = "\t") %>% 
+    janitor::clean_names()
+}
+
+
+condition_first <- read_cqpweb("aoc_all_condition_first.txt")
+person_first <- read_cqpweb("aoc_all_person_first.txt")
+metadata <- read_csv(here("100_data_raw", "corpus_cqpweb_metadata.csv"))
+
+additional_source_metadata <- read_csv(here("100_data_raw", "addition_source_metadata.csv"))
+
+metadata_full <- inner_join(metadata, additional_source_metadata)
+
+condition_first_annotated <- inner_join(
+  metadata_full, condition_first, by = c("article_id" = "text")) %>% 
+  mutate(frequency = 10^3*no_hits_in_text/wordcount_total) 
+person_first_annotated <- inner_join(
+  metadata_full, person_first, by = c("article_id" = "text"))%>% 
+  mutate(frequency = 10^3*no_hits_in_text/wordcount_total) 
+corpus_articlecounts <- read_csv(here("100_data_raw", "articlecounts_full.csv"), col_names = TRUE, skip = 1) %>% filter(year != "source") %>% rename(source = year)
+
+```
+
+As discussed in the EDA, we use the Python-generated word counts to count the frequency of occurrences per thousand words, as these do not include counts for punctuation symbols and hence do not distort counts for longer texts.
+
+## Total number of articles with each of the language usages
+
+First, we explore how many articles (absolute numbers and relative to the total number of articles in each source) use condition-first vs person-first language?
+
+This table shows how the number and percentage (out of 100%) of articles in which person-first and condition-first language is used in the corpus, by publication:
+
+```{r HowManyPerJournal}
+
+condition_person_rbound <-
+  person_first_annotated %>%
+  select(article_id, year, source) %>%
+  mutate(type = "Person-first") %>%
+  rbind({
+  condition_first_annotated %>%
+  select(article_id, year, source) %>%
+  mutate(type = "Condition-first")  
+  })
+
+# generate how many articles per source are in the corpus
+corpus_total_articles_bysource <-
+  corpus_articlecounts %>% 
+  rowwise() %>% 
+  mutate(total = sum(c_across(where(is.numeric)))) %>% 
+  select(source, total)
+
+
+condition_person_rbound %>% 
+  select(-year) %>% 
+  group_by(type) %>% 
+  count(source) %>%
+  inner_join(corpus_total_articles_bysource) %>%
+  mutate(percent = round(100*n/total, 2)) %>%
+  rename(count = n) %>%
+  pivot_wider(id_cols = source, names_from = type, values_from = c(count, total, percent), names_glue = "{type} {.value}") %>%
+  rename(Total_articles = `Person-first total`) %>%
+  select(-`Condition-first total`) %>%
+  kable()
+```
+
+We can see that condition-first language is used in 9-14% of articles, while person-first language is used in less than 1% of articles accross all sources.
+
+This table shows how the number and percentage (out of 100%) of articles in which person-first and condition-first language is used in the corpus, by year:
+
+```{r HowManyPerYear}
+# generate how many articles per year are in the corpus
+corpus_total_articles_byyear <-
+  corpus_articlecounts %>%
+  pivot_longer(cols = -source, names_to = "year", values_to = "number_of_articles" ) %>%
+  select(-source) %>%
+  group_by(year) %>%
+  summarise(total = sum(number_of_articles)) %>%
+  mutate(year = as.numeric(year))
+
+# count the number of articles per source that use person first language
+condition_person_rbound %>% 
+  select(-source) %>% 
+  group_by(type) %>% 
+  count(year) %>%
+  inner_join(corpus_total_articles_byyear) %>%
+  mutate(percent = round(100*n/total, 2)) %>%
+  rename(count = n) %>%
+  pivot_wider(id_cols = year, names_from = type, values_from = c(count, total, percent), names_glue = "{type} {.value}") %>%
+  rename(Total_articles = `Person-first total`) %>%
+  select(-`Condition-first total`) %>%
+  kable()
+```
+
+We can see that condition-first language is used in 7-14% of articles per year across the study time period, while person-first language is used in 0.17-1.14% of articles across per year.
+
+
+Furthermore, the numbers of articles that use person-first language within the corpus are quite small, so we cannot simultaneously explore whether this type of language changes across both publication and year:
+
+```{r BothYearAndSource}
+assess_year_source <- function(df){
+  df %>% 
+  select(source, year) %>%
+  group_by(year, source) %>% 
+  count(year) %>%
+  rename(count = n) %>%
+  pivot_wider(id_cols = c(source), names_from = year, values_from = c(count), values_fill = 0) %>%
+  janitor::adorn_totals(c("row", "col")) %>%
+  kable()
+} 
+
+assess_year_source(person_first_annotated) 
+```
+
+There is also not a lot of articles that use such language from each publication (2-23 articles, mean 9.9 +/- 7.14), so modelling the trend by publication is unlikely to result in meaningful data.
+
+
+We do have a reasonable number of articles that use condition-first language, so we can model this if desired (except for the Brisbane Times and Daily Telegraph, where we are missing data prior to 2014):
+
+```{r}
+assess_year_source(condition_first_annotated) 
+```
+
+Also, among articles that use person-first language, nearly half will also use condition-first language in the same article:
+
+```{r vennDiag}
+ggvenn(list(
+  `Condition first` = condition_first_annotated$article_id, 
+  `Person first` = person_first_annotated$article_id),
+  fill_color = c("white", "white")) #+
+  #labs(title = "Number of articles that use condition-first, person-first or both language types")
+
+ggsave(device = "png",
+       here::here("400_analysis","venn_diagram_condition_person_first.png"),
+       bg = "white", 
+       width = 4,
+       height = 4)
+
+ggvenn(list(
+  `Condition first` = condition_first_annotated$article_id, 
+  `Person first` = person_first_annotated$article_id),
+  fill_color = c("#0073C2FF", "#CD534CFF")) +
+  labs(title = "Number of articles that use condition-first, person-first or both language types")
+```
+
+This means that comparing the use of person-first and condition-first language using a Chi-square test will not be appropriate, as the same article will be counted towards both condition-first and person-first language.
+
+We can, however, compare the number of articles that use either language type (i.e. ONLY condition-first and only person-first) by type of publication:
+
+```{r LangSourcetype}
+language_sourcetype_table <-
+  condition_first_annotated %>%
+  filter(!(article_id %in% person_first_annotated$article_id)) %>%
+  mutate(type = "condition-first") %>%
+  rbind({
+    person_first_annotated %>%
+    filter(!(article_id %in% condition_first_annotated$article_id)) %>%
+    mutate(type = "person-first")
+  }) %>%
+  group_by(source_type, type) %>%
+  count() %>%
+  pivot_wider(names_from = type, values_from = n) 
+
+language_sourcetype_table %>% 
+  kable()
+```
+
+We can see that person-first language is present in approximately the same number of articles in broadsheet and tabloid newspapers, whereas articles with only condition-first language are higher in number in tabloid publications.
+
+```{r chisq_LangSourcetype}
+chisq_source_res <- chisq.test(language_sourcetype_table[,c("condition-first", "person-first")])
+
+chisq_source_res
+```
+
+The Chi-square test results in a p-value that is less than 0.05, indicating a significant link between type of publication and type of language used.
+
+What is the effect size of this link?
+
+```{r chisq_LangSourcetype_effsize}
+cramers_v <- function(df, chisq_result){
+  df_interest <- df[,c("condition-first", "person-first")]
+  deg_f <- min(dim(df_interest)) - 1
+  sqrt(chisq_result$statistic / (sum(df_interest) * deg_f))
+}
+
+
+cramers_v(language_sourcetype_table, chisq_source_res)
+
+```
+
+The effect size is quite small (\<0.2), indicating that while the result is statistically significant, the fields are only weakly associated.
+
+Let's next use a similar approach to identify whether left- or right- leaning publications are different in their use of condition- vs person-first language. What is the total number of articles that use EITHER condition-first or person-first language by orientation of publication?
+
+```{r}
+
+language_orientation_table <- condition_first_annotated %>%
+  filter(!(article_id %in% person_first_annotated$article_id)) %>%
+  mutate(type = "condition-first") %>%
+  rbind({
+    person_first_annotated %>%
+    filter(!(article_id %in% condition_first_annotated$article_id)) %>%
+    mutate(type = "person-first")
+  }) %>%
+  group_by(orientation, type) %>%
+  count() %>%
+  pivot_wider(names_from = type, values_from = n) 
+
+language_orientation_table %>% kable()
+```
+
+Next, let's run a Chi-square test on this contingency table:
+
+```{r}
+chisq_language_orientation <- chisq.test(language_orientation_table[,c("condition-first", "person-first")])
+chisq_language_orientation
+```
+
+The Chi-square test of independence is significant.
+
+```{r}
+cramers_v(language_orientation_table, chisq_language_orientation)
+```
+
+However, the effect size is negligible (\<= 0.2), indicating that once again the fields are only weakly associated.
+
+### Comparing article counts that use condition-first, person-first and no language type
+
+As discussed above, the corpus contains articles that use condition-first, person-first and neither of these two language types. We can use repeated sampling of 1000 articles from the corpus 10000 times to explore how frequently we would observe articles from each of the three groups.
+
+```{r resampleInsanity, cache=TRUE}
+single_row <- function(x) {
+  cbind(data.frame(
+    condition_first = sum(x %in% condition_first_annotated$article_id),
+        person_first = sum(x %in% person_first_annotated$article_id)))
+}
+
+
+diff_boot <- purrr::map_dfr(
+  1:10000,
+  ~single_row(sample(metadata_full$article_id, 1000, replace = FALSE))
+  )
+```
+
+We can visualise the observed counts per 1000 articles from the 10000 resamples:
+
+```{r compareMeanResamples}
+diff_boot %>%
+  pivot_longer(cols = everything(),
+               names_to = "language_type", 
+               values_to = "count_per_10000_articles") %>%
+  ggplot(aes(x = count_per_10000_articles,
+             fill = language_type)) +
+  geom_histogram(bins = 150) + theme(legend.position = "bottom") + 
+  labs(
+    x = "Count per 1000 articles sampled",
+    y = "Resamples with observed count",
+    caption = "Total 10 000 resamples of corpus with 1000 articles each"
+  )
+```
+
+We can compare the mean of these two observed resamples:
+
+```{r results="asis"}
+report(t.test(diff_boot$person_first, diff_boot$condition_first))
+```
+
+This shows that on average of every 1000 articles sampled from the corpus, 4 will use person-first and 122 will use condition-first language.
+
+## Comparing the number of phrases that use condition-first vs person-first language
+
+We can also take a different approach, comparing the number of phrases that use each language type. Here each phrase will contribute only to one group. We do, however, need to confirm that most articles have a small number of phrases, vs a small number of articles with a large number of phrases fully underpinning our counts. Let's look at how many articles have how many counts of each language usage:
+
+```{r countPhrases}
+count_language_types <- condition_first_annotated %>%
+  dplyr::select(article_id, no_hits_in_text) %>%
+  mutate(type="condition-first") %>%
+  rbind({
+    person_first_annotated %>%
+      select(article_id, no_hits_in_text) %>%
+      mutate(type="person-first")
+  })
+
+count_language_types %>% 
+  group_by(no_hits_in_text, type) %>%
+  count() %>%
+  pivot_wider(names_from=type, values_from = n, values_fill = 0) %>%
+  kable()
+  
+
+count_language_types %>%
+  ggplot(aes(x = no_hits_in_text)) + geom_bar() + facet_grid(type~., scales = "free_y")
+
+```
+
+Most articles have 1-2 uses of person-first/condition-first language, but some have up to 13 uses. How many total instances are there?
+
+```{r chisq_table}
+count_language_types %>% 
+  group_by(type) %>% 
+  summarise( instances = sum(no_hits_in_text),
+             articles = n()) %>%
+  kable()
+  
+```
+
+## Relative frequency of condition- vs person-first language
+
+Let's explore what the relative frequency of condition-first vs person-first language looks like.
+
+```{r plot}
+freq_1 <- condition_first_annotated %>%
+  select(frequency) %>%
+  mutate(condition = "Condition-first language") %>%
+  rbind({
+  person_first_annotated %>%
+  select(frequency) %>%
+  mutate(condition = "Person-first language")
+  }) 
+
+freq_1_gt100words <- condition_first_annotated %>%
+  filter(wordcount_from_metatata >= 100) %>%
+  select(frequency) %>%
+  mutate(condition = "Condition-first language") %>%
+  rbind({
+  person_first_annotated %>%
+  filter(wordcount_from_metatata >= 100) %>%
+  select(frequency) %>%
+  mutate(condition = "Person-first language")
+  }) 
+
+freq_1 %>%
+  ggplot(aes(x = frequency, fill = condition)) +
+  facet_grid(condition~., scales = "free_y") +
+  geom_histogram(bins = 100) + 
+  xlab("Frequency per thousand words") + 
+  ylab("Number of articles") + theme(legend.position = "none") +
+  geom_vline(xintercept = 20, lty=2)
+
+```
+
+Let's create a boxplot to compare the frequency per thousand words:
+
+```{r freq_boxplot}
+freq_1 %>%
+  ggplot(aes( y =  frequency, x = condition)) + 
+  geom_boxplot(outlier.shape = NA) +
+  scale_y_continuous(limits = quantile(freq_1$frequency, c(0.05, 0.95))) +
+  labs(
+    x = "",
+    y = "Frequency per thousand words",
+    title = "Frequency of condition-first and person-first language in each article"
+  )
+
+```
+
+We can then use a two-sample t-test to compare the mean frequency of condition-first vs person-first language in the corpus:
+
+```{r ttest, results="asis"}
+condition_first_frequencies <- freq_1 %>% 
+  filter(condition == "Condition-first language") %>% 
+  pull(frequency)
+
+person_first_frequencies <- freq_1 %>%
+  filter(condition == "Person-first language") %>% 
+  pull(frequency)
+
+
+
+report(t.test(condition_first_frequencies,
+       person_first_frequencies
+       ))
+```
+
+In texts that use either condition-first, person-first languages or both, the frequency of condition-first language is higher (mean 4 words per 1000) than person-first (mean 2.7 words per 1000).
+
+The below plot shows the article ids of articles with a word count less than 100 for person-first language, and article ids with word counts less than 100 where the frequency is greater than 20 for condition-first language
+
+```{r lowWCtextsPlot}
+condition_first_annotated %>%
+  # select only texts less than 100 words
+  filter(wordcount_total <= 100) %>%
+  select(article_id, frequency) %>%
+  mutate(condition = "Condition-first language") %>%
+  # note that for condition-first only looking at those that are very high frequency here
+  filter(frequency >= 20) %>%
+  rbind({
+  person_first_annotated %>%
+  # select only texts less than 100 words
+  filter(wordcount_total <= 100) %>%
+  select(article_id, frequency) %>%
+  mutate(condition = "Person-first language")
+  }) %>% 
+  group_by(frequency) %>%
+  mutate(cnt = n()) %>%
+  ggplot(aes(x = frequency, y = cnt, fill = condition, label = article_id)) +
+  facet_grid(condition~., scales = "free_y") +
+  geom_text_repel(check_overlap = TRUE, angle = 90) +
+  xlab("Frequency per thousand words") + 
+  ylab("Article ID & count") + theme(legend.position = "none") +
+  geom_vline(xintercept = 20, lty=2)
+```
+
+There are a few texts with very high frequencies. These mostly occur in cases where the text length itself is quite short. We can consider whether we want to filter out texts with a word count of less than 100 words.
+
+If we run a t-test on the dataset filtered to only contain texts greater than 100 words, we can see that while the results are still significant, the mean difference is less.
+
+```{r ttest2, results="asis"}
+condition_first_frequencies_gt100 <- freq_1_gt100words %>% 
+  filter(condition == "Condition-first language") %>% 
+  pull(frequency)
+
+person_first_frequencies_gt100 <- freq_1_gt100words %>%
+  filter(condition == "Person-first language") %>% 
+  pull(frequency)
+
+report(t.test(
+  condition_first_frequencies_gt100,
+  person_first_frequencies_gt100
+       ))
+```
+
+## Person-first language frequency
+
+Let's visualise the frequency of person-first language by publication:
+
+```{r vizPersonPub}
+person_first_annotated %>%
+  select(source, frequency, year, source_type) %>%
+  ggplot(aes(x = reorder(source, frequency), 
+             y = frequency, 
+             fill = source_type)) +
+  geom_boxplot(outlier.shape = NA) + 
+  theme(axis.text.x=element_text(angle = 45, hjust =1),
+        legend.position = "bottom") +
+  labs(x = NULL, 
+       y = "Frequency per thousand words") +
+  geom_jitter(width = 0.25, alpha = 0.5) 
+
+```
+
+And per year:
+
+```{r}
+person_first_annotated %>%
+  select(source, frequency, year, source_type) %>%
+  ggplot(aes(x = as.factor(year), y = frequency, 
+             fill = source_type,  shape = source_type)) +
+  facet_wrap(~source_type) +
+  geom_boxplot(outlier.shape = NA) + theme_bw() +
+  theme(axis.text.x=element_text(angle = 45, hjust =1),
+        legend.position = "bottom") +
+  labs(x = NULL, y = "Frequency per thousand words") +
+  geom_jitter(width = 0.1, alpha = 0.5) 
+```
+
+## Condition- and person-first language normalised by total article length
+
+We can also look at the frequency of person-first and condition-first language by dividing the number of observations of each language type by the total word count of articles in which they are found (i.e. frequency per 1000 words not on a per-article basis, but on a per total word count of articles in the group).
+
+We can look at the frequency of person first language 
+```{r freqPerSubcorpus}
+freq_per_subcorpus <- function(df, group_vars){
+  df %>%
+  group_by(!!!group_vars) %>%
+  summarise(
+    total_instances = sum(no_hits_in_text),
+    total_wc = sum(wordcount_total),
+    instances_per_1000 = 1000 * total_instances/total_wc
+  )
+}
+
+inner_join(
+  {freq_per_subcorpus(person_first_annotated, 
+                      group_vars=vars(year)) %>%
+      rename("instances_person_first" = "total_instances",
+             "wc_personfirst" = "total_wc",
+             "person first instances per 1000 words" = "instances_per_1000")
+  },
+  {freq_per_subcorpus(
+    condition_first_annotated, 
+    group_vars=vars(year)) %>%
+      rename("instances_cond_first" = "total_instances",
+             "wc_condfirst" = "total_wc",
+             "condition first instances per 1000 words" = "instances_per_1000")
+  }) %>% kable(digits = 2)
+
+rbind({freq_per_subcorpus(person_first_annotated, 
+                   group_vars=vars(year)) %>%
+    mutate(language = "Person-first")},
+      {freq_per_subcorpus(condition_first_annotated, 
+                   group_vars=vars(year)) %>%
+    mutate(language = "Condition-first")}
+        ) %>%
+  ggplot(aes(x = as.factor(year),
+             y = instances_per_1000,
+             col = language)) +
+  geom_point() +
+  labs(x = "Year",
+       y = "Frequency per 1000 words",
+       title = "Person and condition-first language by year",
+       caption = "Instances per 1000 words across all articles that use language type")
+```
+
+We can also look at this across sources:
+
+```{r}
+inner_join(
+  {freq_per_subcorpus(person_first_annotated, 
+                      group_vars=vars(source)) %>%
+      rename("instances_person_first" = "total_instances",
+             "wc_personfirst" = "total_wc",
+             "person first instances per 1000 words" = "instances_per_1000")
+  },
+  {freq_per_subcorpus(
+    condition_first_annotated, 
+    group_vars=vars(source)) %>%
+      rename("instances_cond_first" = "total_instances",
+             "wc_condfirst" = "total_wc",
+             "condition first instances per 1000 words" = "instances_per_1000")
+  }) %>% kable(digits = 2)
+
+
+rbind({freq_per_subcorpus(person_first_annotated, 
+                   group_vars=vars(source)) %>%
+    mutate(language = "Person-first")},
+      {freq_per_subcorpus(condition_first_annotated, 
+                   group_vars=vars(source)) %>%
+    mutate(language = "Condition-first")}
+        ) %>%
+  ggplot(aes(x = source,
+             y = instances_per_1000,
+             col = language)) +
+  geom_point() +
+  labs(x = "Source",
+       y = "Frequency per 1000 words",
+       title = "Person and condition-first language by source",
+       caption = "Instances per 1000 words across all sources that use language type") +
+  theme(axis.text.x = element_text(angle=90))
+```
+
+We can also do this across source and year:
+
+```{r}
+inner_join(
+  {freq_per_subcorpus(person_first_annotated, 
+                      group_vars=vars(source, year)) %>%
+      rename("instances_person_first" = "total_instances",
+             "wc_personfirst" = "total_wc",
+             "person first instances per 1000 words" = "instances_per_1000")
+  },
+  {freq_per_subcorpus(
+    condition_first_annotated, 
+    group_vars=vars(source, year)) %>%
+      rename("instances_cond_first" = "total_instances",
+             "wc_condfirst" = "total_wc",
+             "condition first instances per 1000 words" = "instances_per_1000")
+  }) %>% kable(digits = 2)
+
+
+rbind({freq_per_subcorpus(person_first_annotated, 
+                   group_vars=vars(source, year)) %>%
+    mutate(language = "Person-first")},
+      {freq_per_subcorpus(condition_first_annotated, 
+                   group_vars=vars(source, year)) %>%
+    mutate(language = "Condition-first")}
+        ) %>%
+  ggplot(aes(x = as.factor(year),
+             y = instances_per_1000,
+             col = language)) +
+  geom_jitter() +
+  facet_wrap(~source) +
+  labs(x = "Year",
+       y = "Frequency per 1000 words",
+       title = "Person and condition-first language by source and year",
+       caption = "Instances per 1000 words across all sources & years that use language type") +
+  theme(axis.text.x = element_text(angle=90))
+```
+
+
+Note that above we considered the word count ONLY in articles that featured that particular language type in the denominator Next, we conduct the same analysis, but including all articles from that particular source, year or both (irrespective of whether they feature the language type).
+
+```{r}
+
+freq_entire_corpus <- function(df, group_vars){
+  df %>%
+  group_by(!!!group_vars) %>%
+  summarise(
+    person_first_instances = sum(person_first),
+    condition_first_instances = sum(condition_first),
+    total_wc = sum(wordcount_total),
+    person_first_per_1000 = 1000 * person_first_instances/total_wc,
+    cond_first_per_1000 = 1000 * condition_first_instances/total_wc
+  )
+}
+
+condition_person_comparison_together <- 
+  full_join(
+    full_join(
+      {person_first_annotated %>%
+          select(article_id, no_hits_in_text) %>%
+          rename(person_first = no_hits_in_text)},
+      {condition_first_annotated %>%
+          select(article_id, no_hits_in_text) %>%
+          rename(condition_first = no_hits_in_text)}
+    ),
+    {metadata_full %>%
+        select(article_id, source, year, wordcount_total)}) %>%
+  # fill NAs with 0
+  mutate_if(is.numeric,coalesce,0) 
+  # now generate the instances
+  
+freq_entire_corpus(condition_person_comparison_together, vars(year)) %>% 
+  kable()
+
+freq_entire_corpus(condition_person_comparison_together, vars(year)) %>%
+  select(year, ends_with("per_1000")) %>%
+  pivot_longer(cols = ends_with("1000"), names_to = "type", values_to = "value") %>%
+  mutate(type = stringr::str_replace_all(type, "_per_1000", ""),
+         type = case_when(type == "cond_first" ~ "Condition-first", TRUE ~ "Person-first")) %>%
+  ggplot(aes(x = as.factor(year), y= value, col = type)) +
+  geom_point() + 
+  labs(x = "Year",
+       y = "Instances per 1000 words in corpus by year",
+       col = "")
+```
+
+We can see that if we consider the entire corpus, instances of condition-first language seem to be somewhat lower by year in 2017 onwards. Let's look at the numbers by source:
+
+```{r}
+freq_entire_corpus({condition_person_comparison_together %>% filter(!(source %in% c("Telegraph", "BrisTimes")))}, vars(source)) %>% 
+  kable()
+
+freq_entire_corpus({
+  condition_person_comparison_together %>% filter(!(source %in% c("Telegraph", "BrisTimes")))
+}, vars(source)) %>%
+  select(source, ends_with("per_1000")) %>%
+  pivot_longer(cols = ends_with("1000"), names_to = "type", values_to = "value") %>%
+  mutate(type = stringr::str_replace_all(type, "_per_1000", ""),
+         type = case_when(type == "cond_first" ~ "Condition-first", TRUE ~ "Person-first")) %>%
+  ggplot(aes(x = source, y= value, col = type)) +
+  geom_point() + 
+  labs(x = "Source",
+       y = "Instances per 1000 words in corpus by source",
+       col = "") +
+  theme(axis.text.x = element_text(angle=90))
+```
+
+We can see that usage of condition-first language is quite varied by source.
+
+Let's look at source and year simultaneously:
+
+```{r}
+freq_entire_corpus({condition_person_comparison_together %>% filter(!(source %in% c("Telegraph", "BrisTimes")))}, vars(source, year)) %>% 
+  kable()
+
+freq_entire_corpus({
+  condition_person_comparison_together %>% filter(!(source %in% c("Telegraph", "BrisTimes")))
+}, vars(source, year)) %>%
+  select(source, year, ends_with("per_1000")) %>%
+  pivot_longer(cols = ends_with("1000"), names_to = "type", values_to = "value") %>%
+  mutate(type = stringr::str_replace_all(type, "_per_1000", ""),
+         type = case_when(type == "cond_first" ~ "Condition-first", TRUE ~ "Person-first")) %>%
+  ggplot(aes(x = as.factor(year), y= value, col = type)) +
+  geom_point() + 
+  facet_wrap(~source) +
+  labs(x = "Year",
+       y = "Instances per 1000 words in corpus by source & year",
+       col = "") +
+  theme(axis.text.x = element_text(angle=90))
+```
+
+
+
+## Condition-first language across time
+
+As we discussed, we have sufficient data to explore the use of condition-first language across time and by type of publication, except for the Brisbane Times and Daily Telegraph, for which we are missing data from 2008-2013:
+
+```{r condition-firstSummary}
+assess_year_source(condition_first_annotated)
+
+condition_first_annotated_for_modelling <- condition_first_annotated %>%
+  filter( !(source %in% c("BrisTimes", "Telegraph")))
+```
+
+Let's look at the number of articles by publication and year. We can see that this number is declining; however, this is likely to be attributable to the overall decline in the number of articles featuring obes\*, as discussed in the EDA.
+
+```{r condFirstyearPub}
+condition_first_annotated %>%
+  select(year, source, source_type) %>%
+  group_by(year, source) %>%
+  count() %>%
+  ggplot(aes(x = year, y = n, col = source)) + 
+  geom_line() +
+  labs(x = "", y = "Number of articles") +
+  theme(axis.text.x = element_text(angle = 90),
+        legend.position = "NA") +
+  scale_x_continuous(breaks = unique(condition_first_annotated$year)) + 
+  facet_wrap(~source)
+```
+
+#### Normalised frequency
+
+The normalised frequency is distributed log-normally across all texts:
+
+```{r normDist}
+condition_first_annotated %>%
+  select(frequency) %>%
+  ggplot(aes(x = log(frequency))) + 
+  geom_histogram(bins = 75)
+```
+
+Let's look at the difference in frequency across time (only the variability of which should be sensitive to the number of articles per year, not the absolute values):
+
+We can start by using a jitter plot:
+
+
+```{r yearSourceBoxplot}
+condition_first_annotated %>%
+  ggplot(aes(x = as.factor(year), 
+             y = log(frequency), 
+             fill = year)) + 
+  geom_jitter(alpha = 0.2) +
+  geom_smooth(aes(group = source), col = "blue", method = "loess") +
+  geom_hline(yintercept = 1, col = "red", lty = 3) + 
+  facet_wrap(~source) + 
+  theme(axis.text.x = 
+          element_text(angle = 90, vjust = 0.5, hjust=1),
+        legend.position = "NA") + 
+  labs(
+    x = "Year",
+    y = "log(frequency per 1000 words)"
+  )
+```
+
+Note that the dashed red line is always at the same position (with a value of `exp(1) = 2.72`). Comparing it with the blue line of best fit for each source for which we have complete data suggests that visually we cannot discern strong trends in the use of condition-first language across the study time period, so using variability-based neighbor clustering (VNC) is unlikely to provide meaningful results for this research question.
+
+We can see that the Advertiser seems to have higher median frequencies than others, as does the Northern Territorian. Let's look at it grouped as tabloid vs broadsheet (with outliers not shown):
+
+```{r condFirstYearPubNormTabBroadNoOut}
+condition_first_annotated %>%
+  select(year, source, source_type, frequency) %>%
+  mutate(year = as.factor(year)) %>%
+  group_by(year, source_type) %>%
+  ggplot(aes(x = year, y = frequency, fill = source_type)) +
+  geom_boxplot(outlier.shape = NA) +
+  coord_cartesian(ylim = quantile(condition_first_annotated$frequency, c(0.05, 0.95))) +
+  labs(
+    x = "",
+    y = "Frequency per thousand words",
+    fill = "Source type"
+  )
+```
+
+It appears that median frequency in tabloids is somewhat higher, although the intervals do overlap across all years. 
+
+```{r condFirstYearPubNormTabBroadNoOut2}
+condition_first_annotated %>%
+  ggplot(aes(x = as.factor(year), 
+             y = log(frequency), 
+             fill = year)) + 
+  geom_jitter(alpha = 0.2) +
+  geom_smooth(aes(group = source_type), col = "blue", method = "lm") +
+  geom_hline(yintercept = 1, col = "red", lty = 3) + 
+  facet_wrap(~source_type) + 
+  theme(axis.text.x = 
+          element_text(angle = 90, vjust = 0.5, hjust=1),
+        legend.position = "NA") + 
+  labs(
+    x = "Year",
+    y = "log(frequency per 1000 words)"
+  )
+```
+
+We can see that the frequency seems to decrease in broadsheets but not in tabloids across years.
+
+
+
+Let's quickly look at differences by month:
+
+```{r monthCondFirst}
+condition_first_annotated_for_modelling %>% 
+  select(month_metadata, source, frequency) %>%
+  ggplot(aes(y = frequency, x = month_metadata)) + 
+  geom_violin()
+```
+
+The frequency doesn't seem to be different month to month, when visualised using a violin or box plots.
+
+```{r noArtCondFirst}
+condition_first_annotated_for_modelling %>% 
+  select(month_metadata, source) %>%
+  group_by(month_metadata, source) %>%
+  mutate(count_source = n()) %>%
+  distinct() %>%
+  ungroup() %>%
+  ggplot(aes(y = count_source, x = month_metadata)) +
+  geom_boxplot()
+```
+
+## Condition-first language - modelling frequency
+
+We will use a linear mixed effects model to consider whether there are differences in the frequency of condition-first language use in broadsheets and tabloids across years, including whether there are differences in specific publications. We will also use simple linear models to explroe
+
+When constructing the model we will:
+
+-   Use `log(frequency)` as the dependent variable, as this is normally distributed
+-   Centre and scale the date
+
+```{r scale&setupbase}
+condition_first_annotated_for_modelling$scaled_year <- scale(condition_first_annotated_for_modelling$year, scale = F)
+
+library(broom.mixed)
+# base model
+m_0_base <- glm(log(frequency) ~ 1, family = gaussian, 
+                data = condition_first_annotated_for_modelling)
+# with year
+m_0_year <- glm(log(frequency) ~ scaled_year, family = gaussian, 
+                data = condition_first_annotated_for_modelling)
+
+# with year and source type
+m_0_yearsourcetype <- glm(log(frequency) ~ scaled_year + source_type, family = gaussian, 
+                data = condition_first_annotated_for_modelling)
+
+# with year and source type
+m_0_yearsource <- glm(log(frequency) ~ scaled_year + source, family = gaussian, 
+                data = condition_first_annotated_for_modelling)
+
+# with source
+m_0_source = lmer(log(frequency) ~ 1 + (1|source), REML = T, 
+                  data = condition_first_annotated_for_modelling)
+
+```
+
+Does including the source (as a random effect, as we haven't sampled all of them) improve our model?
+
+```{r compareModels1}
+rbind(
+  {glance(m_0_base) %>% mutate(model = "Base") %>% dplyr::select(-df.null, -null.deviance, -deviance)},
+  {glance(m_0_year) %>% mutate(model = "With year") %>% dplyr::select(-df.null, -null.deviance, -deviance)},
+  {glance(m_0_yearsourcetype) %>% mutate(model = "With year & source type") %>% dplyr::select(-df.null, -null.deviance, -deviance)},
+  {glance(m_0_yearsource) %>% mutate(model = "With year & source") %>% dplyr::select(-df.null, -null.deviance, -deviance)},
+  {glance(m_0_source) %>% mutate(model = "With source") %>% dplyr::select(-sigma, -REMLcrit)}
+) %>% 
+  arrange(AIC)
+```
+
+Yes, it seems that the AIC and BIC are reduced while the logLik is higher for the model that includes source and year. So, yes, it seems using a random effects model for source may be an option.
+
+Now let's build several different random effects models:
+
+-   Including year as a fixed effect
+-   Including each specific source (random effect) individually and year
+
+```{r lmeModelsGenerate}
+#library(afex)
+
+
+m_1_base <- lmer(log(frequency) ~ 1 + (1|source), 
+                 data = condition_first_annotated_for_modelling,
+                 REML = FALSE, 
+                 control = lmerControl(optimizer ='optimx', optCtrl=list(method='nlminb')))
+# random intercept for each source
+m_1_year <- lmer(log(frequency) ~ scaled_year + (1|source), 
+                 data = condition_first_annotated_for_modelling,
+                 REML = FALSE, 
+                 control = lmerControl(optimizer ='optimx', optCtrl=list(method='nlminb')))
+# random intercept for each source
+m_1_year_sourcetype <- lmer(log(frequency) ~ scaled_year + source_type +(1|source), 
+                 data = condition_first_annotated_for_modelling,
+                 REML = FALSE, 
+                 control = lmerControl(optimizer ='optimx', optCtrl=list(method='nlminb')))
+# random slope and intercept for each source
+m_1_yearsource <- lmer(log(frequency) ~ scaled_year + (scaled_year|source), 
+                 data = condition_first_annotated_for_modelling,
+                 REML = FALSE, 
+                 control = lmerControl(optimizer ='optimx', optCtrl=list(method='nlminb')))
+
+# random slope and intercept for each source
+m_1_full <- lmer(log(frequency) ~ scaled_year + source_type + (scaled_year|source), 
+                 data = condition_first_annotated_for_modelling,
+                 REML = FALSE, 
+                 control = lmerControl(optimizer ='optimx', optCtrl=list(method='nlminb')))
+
+# random intercept for each sourcetype
+m_1_year_sourcetype_nosource <- 
+  lmer(log(frequency) ~ scaled_year +(1|source_type), 
+                 data = condition_first_annotated_for_modelling,
+                 REML = FALSE, 
+                 control = lmerControl(optimizer ='optimx', optCtrl=list(method='nlminb')))
+
+
+# use the all_fit function to assess which optimisers work
+#all_fit(m_1_yearsource)
+
+# m_1_yearsource_apex <- 
+#   mixed(log(frequency) ~ scaled_year + (scaled_year|source), 
+#       data = condition_first_annotated_for_modelling,
+#       method = "PB",
+#       REML=FALSE,
+#       control = lmerControl(optimizer ='optimx', optCtrl=list(method='nlminb')))
+# m_1_yearsource_apex
+```
+
+We end up needing to use the `nlminb` optimiser from the `optimx` library (originally used by lme4), as the default REML fails to converge for the most complex model.
+
+```{r modelEval}
+purrr::map_dfr(list(
+  m_1_base,
+  m_1_year,
+  m_1_year_sourcetype,
+  m_1_yearsource,
+  m_1_year_sourcetype_nosource,
+  m_1_full),
+        ~(glance(.x))) %>%
+  mutate(model = c(
+    "1 + (1|source)",
+    "scaled_year + (1|source)",
+    "scaled_year + source_type +(1|source)",
+    "scaled_year + (scaled_year|source)",
+    "scaled_year + (1|sourcetype)",
+    "scaled_year + source_type + (scaled_year|source)"
+  )) %>%
+  arrange(AIC)
+```
+
+The full model has the lowest AIC and highest log-Likelihood among the mixed effects models. However, it's AIC is not that different (7524 vs 7525) to the simpler model `scaled_year + source`, while the simpler model has a lower BIC and higher logLik.
+
+Let's compare the two models: the full mixed effects model and the simple `scaled_year + source`
+
+```{r compModels}
+anova(m_1_full, m_0_yearsource)
+```
+
+It seems that the more complex model does not offer a substantial improvement in fit over the simpler one. Let's summarise that model.
+
+```{r modSum,  results="asis"}
+report::report(m_0_yearsource)
+```
+
+To summarise:
+
+- The effect of year was not found to be significant.
+- Relative to the Advertiser, the Age, Australian, Canberra Times, Courier Mail and Sydney Morning Herald had less frequency of condition-first language.
+

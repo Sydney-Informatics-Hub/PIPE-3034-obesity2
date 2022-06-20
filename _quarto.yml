@@ -5,9 +5,11 @@ project:
 
 execute:
   freeze: auto  # re-render only when source changes
+  warning: false
+  message: false
 
 website:
-  title: "New SIH project"
+  title: "Obesity phase 2"
   navbar:
     background: primary
     left:
@@ -15,27 +17,27 @@ website:
         text: Home
       - text: "Data Cleaning & EDA"
         menu:
-          - text: "Step 1"
-            href: 100_data_cleaning_scripts_EDA/step1.qmd
-          - text: "Step 2"
-            href: 100_data_cleaning_scripts_EDA/step2.qmd
+          - text: "Exploring the CQPWeb data"
+            href: "100_data_cleaning_scripts_EDA/01_ExploreCQPwebData.qmd"
+          - text: "Exploring Spacy-generated annotations"
+            href: "100_data_cleaning_scripts_EDA/02_ExploreSpacyData.qmd"
       - text: Analysis
         menu:
-          - text: "Step 1"
-            href: 400_analysis/step1.qmd
-          - text: "Step 2"
-            href: 400_analysis/step2.qmd
+          - text: "Condition vs Person-first language"
+            href: 400_analysis/01_condition_person_first.qmd
+          - text: "Use of 'obese'"
+            href: 400_analysis/02_obese.qmd
     right:
       - text: "Scope"
         href: 000_scoping/scoping.qmd
       - about.qmd
-  repo-url: https://github.com/Sydney-Informatics-Hub/
+  repo-url: https://github.sydney.edu.au/informatics/PIPE-3034-obesity2/
   repo-actions: [edit, issue]
   search:
     location: navbar
     type: textbox
   page-footer:
-    center: "Copyright 2022, AnalystNameTODO, Sydney Informatics Hub"
+    center: "Copyright 2022, Darya Vanichkina, Sydney Informatics Hub"
 
 about:
   template: solana
@@ -49,5 +51,6 @@ format:
     toc-depth: 2
     code-link: true
     code-fold: true
+    highlight-style: github
 
 

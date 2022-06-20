@@ -1,0 +1,454 @@
+## Exploring usage of the word "obese"
+
+There is interest in exploring statistics around the use of the word "obese" around the following research questions:
+
+- Do tabloids use "obese" more than broadsheets? 
+- Or do broadsheets use "obese" more than tabloids? 
+- Or is there no discernible pattern of use?  
+- Is there any newspaper that uses obese more than others? 
+- Any year where obese is the most frequent/least frequent? 
+
+Additional question:
+
+- Is there a difference of use by primary topic?
+
+### Executive summary
+
+1. Tabloids use the word "obese" more frequently than broadsheets.
+
+- More specifically, a Welch Two Sample t-test testing the difference between the frequency in broadsheets per 1000 words and frequency in tabloids (mean of broadsheets = 3.16, mean of tabloids = 5.59) suggests that the effect is negative, statistically significant, and small (difference = -2.43, 95% CI [-2.63, -2.23], t(10062.88) = -24.01, p < .001; Cohen's d = -0.46, 95% CI [-0.50, -0.42]).
+
+2. Tabloids have shorter article lengths than broadsheets.
+
+- More specifically, using a Welch Two Sample t-test comparing the mean word count of articles from broadsheets and tabloids (mean of broadsheet = 778.84, mean of tabloid = 485.42) suggests that the effect is positive, statistically significant, and medium (difference = 293.42, 95% CI [273.82, 313.02], t(7348.69) = 29.34, p < .001; Cohen's d = 0.60, 95% CI [0.56, 0.65])
+
+3. Investigating data by year did not result in significant differences between years being observed.
+
+4. Investigating the data by source revealed that article source explained a small amount of variance in the data, with the word obese being used less frequently in the Age, Australian, Canberra Times and Sydney Morning Herald relative to the Advertiser, while in the Hobart Mercury and Northern Territorian it was used somewhat more frequently than in the Advertiser.
+
+5. Significant differences in the use of "obese" were observed in articles on different topics, with articles annotated as "Awards" and "Biomedical Research" using more instances per 1000 words than articles discussing politics, schooling, transport and commuting. 
+
+6. Significant differences in article topics were also observed between tabloids and broadsheets, with the topics "ChildrenParents", "NutritionStudy", "WomenPregnancy" and "FitnessExercise" approximately 3x more frequently reported on in tabloids than broadsheets, in contrast to topics like "Politics" and "SportsDoping", which were approximately evenly represented between the two media types.
+
+### Data source
+
+CQPweb data was provided. To calculate normalised frequency, we divide the number of observations from CQPweb by the word count as calculated in Python, and multiple by 1000.
+
+```{r loadLibs}
+library(here)
+library(janitor)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+library(report)
+theme_set(theme_minimal())
+```
+
+```{r DefineKeyFunctions}
+assess_year_source <- function(df){
+  df %>% 
+  dplyr::select(source, year) %>%
+  group_by(year, source) %>% 
+  count(year) %>%
+  rename(count = n) %>%
+  pivot_wider(id_cols = c(source), names_from = year, values_from = c(count), values_fill = 0) %>%
+  janitor::adorn_totals(c("row", "col")) %>%
+  kable()
+} 
+read_cqpweb <- function(filename){
+  read.csv(
+    here("100_data_raw", filename), 
+    skip = 3, sep = "\t") %>% 
+    janitor::clean_names()
+}
+```
+
+```{r loadData}
+adj_obese <- read_cqpweb("aoc_all_obese_tagadjlemma.txt") 
+metadata <- read_csv(here("100_data_raw", "corpus_cqpweb_metadata.csv"))
+additional_source_metadata <- read_csv(here("100_data_raw", "addition_source_metadata.csv"))
+topic_labels <- read_csv(here("100_data_raw", "topic_labels.csv"))
+
+metadata_full <- inner_join(inner_join(metadata,
+                                       topic_labels,
+                                       by = c("dominant_topic" = "topic_number")),
+                            additional_source_metadata)
+
+
+obese_annotated <- inner_join(
+  adj_obese, metadata_full, by = c("text" = "article_id")) %>% 
+  mutate(frequency = 10^3*no_hits_in_text/wordcount_total) 
+```
+
+## Tabloid vs broadsheet
+
+What is the distribution of obese in articles?
+
+```{r obeseDistr}
+obese_annotated %>%
+  ggplot(aes(x = no_hits_in_text, fill = source_type)) +
+  geom_bar(position = "dodge2") +
+  labs(
+    x = "Number of hits in article, CQPWeb",
+    y = "Number of articles in corpus",
+    fill = "Source type"
+  )
+```
+
+How is this usage distributed by year (number of articles in corpus)?
+
+```{r yearNarticles}
+obese_annotated_filtered <- obese_annotated %>%
+  filter(!(source %in% c("BrisTimes", "Telegraph")))
+
+assess_year_source(obese_annotated)
+```
+
+We can see that apart from the Brisbane times and Daily Telegraph, there are articles using "obese" every year and in every publication. We will filter out these two sources.
+
+How is the frequency (per thousand words) of the usage of obese distributed by tabloids/broadsheets?
+
+```{r tabloidBroadsheet}
+obese_annotated_filtered %>%
+  ggplot(aes(x = source_type, y = log(frequency))) + 
+  geom_boxplot() + 
+  labs(
+    x = "Source type",
+    y = "log(frequency per 1000 words)"
+  )
+```
+
+And let's also use a histogram to look at the distribution:
+
+```{r tabloidBroadsheetHist}
+obese_annotated_filtered %>%
+  ggplot(aes(fill = source_type,x = log(frequency))) + 
+  geom_histogram() + 
+  labs(
+    fill = "Source type",
+    x = "log(frequency per 1000 words)",
+    y = "Number of articles"
+  )
+```
+
+
+Note that broadsheets have somewhat longer texts than tabloids:
+
+```{r tabBroadWC}
+obese_annotated_filtered %>%
+  ggplot(aes(x = source_type, y = log(wordcount_total))) + 
+  geom_boxplot() + 
+  labs(
+    x = "Source type",
+    y = "log(Python word count)"
+  )
+```
+
+Let's use a histogram to look at the distribution in more detail: 
+
+```{r tabBroadWC2}
+obese_annotated_filtered %>%
+  ggplot(aes(fill = source_type, x = log(wordcount_total))) + 
+  geom_histogram(binwidth = 0.1)+ 
+  labs(
+    y = "Number of articles",
+    x = "log(Python word count)"
+  )
+```
+
+The log-transformed word count data is approximately normally distributed.
+
+Let's see if the difference in length of articles using the word "obese" in tabloids and broadsheets is significant? 
+
+```{r WCdiff, results="asis"}
+wordcount_broadsheet <- obese_annotated_filtered[obese_annotated_filtered$source_type == "broadsheet","wordcount_total"]
+wordcount_tabloid <- obese_annotated_filtered[obese_annotated_filtered$source_type == "tabloid","wordcount_total"]
+
+report::report(t.test(wordcount_broadsheet,wordcount_tabloid))
+```
+
+Yes, overall articles in tabloids are significantly shorter than in broadsheets.
+
+If we then test the difference between the frequency of the word "obese" in tabloids and broadsheets, we can see that a higher frequency per 1000 words is detected for usage of the word "obese" in tabloids than broadsheets. 
+
+```{r DiffFreq, results="asis"}
+frequency_broadsheet <- obese_annotated_filtered[obese_annotated_filtered$source_type == "broadsheet","frequency"]
+frequency_tabloid <- obese_annotated_filtered[obese_annotated_filtered$source_type == "tabloid","frequency"]
+
+report::report(t.test(frequency_broadsheet, frequency_tabloid))
+```
+
+So, yes, the frequency of use of the word "obese" is lower in broadsheets than in tabloids.
+
+Let's use bootstrapping to see if the raw frequencies of usage of the word obese are different?
+
+```{r bootstrap, cache=TRUE}
+broadsheet_counts <- NULL
+tabloid_counts <- NULL
+
+for (i in 1:10000) {
+  x <- mean(sample({obese_annotated_filtered %>% 
+        filter(source_type == "broadsheet") %>%
+        pull(no_hits_in_text)}, 1000, replace = FALSE))
+  y <- mean(sample({obese_annotated_filtered %>% 
+        filter(source_type == "tabloid") %>%
+        pull(no_hits_in_text)}, 1000, replace = FALSE))
+  broadsheet_counts <- c(broadsheet_counts, x)
+  tabloid_counts <- c(tabloid_counts, y)
+}
+
+counts_comparison <- data.frame(
+  mean_sample = c(broadsheet_counts, tabloid_counts),
+  source_type = c(
+    rep("broadsheet", length(broadsheet_counts)),
+    rep("tabloid", length(tabloid_counts))))
+
+counts_comparison %>%
+  ggplot(aes(x = mean_sample, fill = source_type)) + 
+  geom_histogram()
+```
+
+It is interesting that the distribution of usage of "obese" is ~1.6 uses per article in tabloid publications, while the distribution for broadsheets was bimodal.
+
+```{r ttest, results="asis"}
+report::report(
+  t.test(
+    broadsheet_counts,
+    tabloid_counts
+  )
+)
+```
+
+
+## Differences in usage by source
+
+Is there a difference in the usage of obese by source?
+
+```{r sourceBoxplot}
+obese_annotated_filtered %>%
+  ggplot(aes(x = reorder(source,frequency), 
+             y = log(frequency), 
+             fill = source_type)) + 
+  geom_boxplot() +
+  theme(axis.text.x = 
+          element_text(angle = 90, vjust = 0.5, hjust=1),
+        legend.position = "NA")
+
+```
+
+The visualisation suggests there are not - only the differences observed above for tabloids vs broadsheets. 
+
+What are the means and standard deviations of the frequency by source?
+
+```{r summariseBySource}
+obese_annotated_filtered %>% 
+  group_by(source) %>%
+  summarise(
+    mean = mean(frequency),
+    median = median(frequency),
+    sd = sd(frequency),
+    type = (source_type)
+  ) %>%
+  distinct() %>%
+  arrange(mean) %>%
+  kable()
+```
+
+It seems that within the different sources among broadsheets and tabloids there is not much difference among the frequency of use of the word "obese".
+
+## Differences in usage by year
+
+Is there any year when "obese" is used more frequently than others? 
+
+```{r yearBoxplot}
+obese_annotated_filtered %>%
+  ggplot(aes(x = reorder(year,frequency), 
+             y = log(frequency), 
+             fill = year)) + 
+  geom_boxplot() +
+  theme(axis.text.x = 
+          element_text(angle = 90, vjust = 0.5, hjust=1),
+        legend.position = "NA")
+
+```
+
+Based on the visualisation it seems not. If we separate out by source there also doesn't seem to be much difference. If we use a jitter plot to visualise the data, then fit a smoothing line and compare with the line of "no change" (dashed red line), we can see that there really isn't much of a difference by source and year: 
+
+```{r yearSourceBoxplot}
+obese_annotated_filtered %>%
+  ggplot(aes(x = as.factor(year), 
+             y = log(frequency), 
+             fill = year)) + 
+  geom_jitter(alpha = 0.2) +
+  geom_smooth(aes(group = source), col = "blue", method = "loess") +
+  geom_hline(yintercept = 1, col = "red", lty = 3, size = 3) + 
+  facet_wrap(~source) + 
+  theme(axis.text.x = 
+          element_text(angle = 90, vjust = 0.5, hjust=1),
+        legend.position = "NA") + 
+  labs(
+    x = "Year",
+    y = "log(frequency per 1000 words)"
+  )
+```
+
+
+The distributions each year also look quite similar:
+
+```{r distrib}
+obese_annotated_filtered %>%
+  ggplot(aes(x = reorder(year,frequency), 
+             y = log(frequency), 
+             fill = year)) + 
+  geom_violin() +
+  theme(axis.text.x = 
+          element_text(angle = 90, vjust = 0.5, hjust=1),
+        legend.position = "NA")
+```
+
+
+```{r yearMeanSD}
+obese_annotated_filtered %>% 
+  group_by(year) %>%
+  summarise(
+    mean = mean(frequency),
+    median = median(frequency),
+    sd = sd(frequency),
+    year = (year)
+  ) %>%
+  distinct() %>%
+  arrange(mean) %>%
+  kable()
+```
+
+## Differences in usage by source type, source and year
+
+We can also try to simultaneously model differences by source type, source and year.
+
+As expected, a model that includes the source type (tabloid vs broadsheet) gives a better fit than one that does not:
+
+```{r}
+obese_annotated_filtered$scaled_year <- scale(
+  obese_annotated_filtered$year, scale = F)
+
+library(lme4)
+# base model
+m_0_base <- lm(log(frequency) ~ 1, 
+                data = obese_annotated_filtered)
+
+# with source type
+m_0_sourcetype <- lm(log(frequency) ~ source_type,  
+                data = obese_annotated_filtered)
+
+# with year
+m_0_year <- lm(log(frequency) ~ scaled_year,  
+                data = obese_annotated_filtered)
+
+# with source 
+m_0_source <- lm(log(frequency) ~ source,  
+                data = obese_annotated_filtered)
+
+# compare
+rbind({broom::glance(m_0_base) %>% 
+    dplyr::select(-df.residual,- deviance, -nobs) %>%
+    mutate(model = "1")},
+    {broom::glance(m_0_sourcetype)%>% 
+          dplyr::select(-df.residual,- deviance, -nobs) %>%
+        mutate(model = "source_type")},
+    {broom::glance(m_0_year) %>% 
+    dplyr::select(-df.residual,- deviance, -nobs) %>%
+    mutate(model = "scaled_year")},
+    {broom::glance(m_0_source) %>% 
+    dplyr::select(-df.residual,- deviance, -nobs) %>%
+    mutate(model = "source")}
+) %>% 
+  dplyr::select(model, everything()) %>%
+  arrange(AIC) %>%
+  kable()
+```
+
+We can see that the model incorporating source provides the best fit for the data, explaining somewhat more variability than that which includes only source type.
+
+```{r compareModels}
+anova(m_0_sourcetype, m_0_source)
+```
+
+Next, let's compare if adding the source in as an random variable improves the fit of the model.
+
+```{r}
+m_1_source <- lmer(log(frequency) ~  1 + (1|source), 
+                data = obese_annotated_filtered, REML = F)
+
+rbind(
+    {broom::glance(m_0_source)%>% 
+          dplyr::select(AIC, BIC, logLik) %>%
+        mutate(model = "1 + source")},
+    {broom.mixed::glance(m_1_source) %>% 
+    dplyr::select(AIC, BIC, logLik) %>%
+    mutate(model = "1 + (1|source)")}
+) 
+```
+Including a random intercept for source does not improve the fit of the model (AIC increases, logLik decreases).
+
+In summary, the model which included source only provided the best fit. Let's summarise this model:
+
+```{r warnings="false", results="asis"}
+report::report(m_0_source)
+```
+
+To summarise, a model was fit by source, which explained a small amount of variance in the data. It showed that the Age, Australian, Canberra Times and Sydney Morning Herald had a lower frequency of use of the word "obese" relative to the Advertiser, while in the Hobart Mercury, Northern Territorian the word "obese" was used somewhat more frequently than in the Advertiser.
+
+## Differences in usage by topic
+
+
+```{r}
+metadata_full %>%
+  group_by(source_type) %>%
+  count(topic_label) %>%
+  pivot_wider(names_from = source_type, values_from = n) %>%
+  mutate(
+    total_topic = broadsheet + tabloid,
+    prop_broadsheet = round(100*broadsheet/total_topic, 2)
+  ) %>% 
+  arrange(prop_broadsheet) %>%
+  kable()
+```
+
+We can see that articles labelled with the topics "ChildrenParents", "NutritionStudy", "WomenPregnancy" and "FitnessExercise" are approximately 3x more frequently reported on in tabloids than broadsheets, in contrast to topics like "Politics" and "SportsDoping" which are approximately evenly represented between the two media types.
+
+
+```{r topic_use}
+obese_annotated_filtered %>%
+  ggplot(aes(x = as.factor(
+    reorder(topic_label,frequency)), 
+             y = log(frequency), 
+             fill = topic_label)) + 
+  geom_boxplot() +
+  theme(axis.text.x = 
+          element_text(angle = 90, vjust = 0.5, hjust=1),
+        legend.position = "NA") +
+  labs(x = "Topic label",
+       y = "log(frequency per 1000 words)")
+```
+
+It seems there are some topics that use obese more than others. 
+
+We use a simple linear model with post-hoc comparisons and Bonferroni multiple testing correction:
+
+```{r topicDiffs}
+obese_by_topic <- lm(
+  frequency ~ as.factor(topic_label), 
+  data = obese_annotated_filtered)
+library(emmeans)
+obese_by_topic_comp <- emmeans(obese_by_topic, pairwise ~ as.factor(topic_label), adjust = "bonferroni")
+
+obese_by_topic_comp$contrasts %>%
+    summary(infer = TRUE) %>%
+  filter(p.value < 0.01) %>% 
+  kable()
+```
+
+We can see that there are differences in the  frequency of use of the word "obese" by topic, with articles annotated as "Awards" and "Biomedical Research" using more instances per 1000 words than articles discussing politics, schooling, transport and commuting.
+
