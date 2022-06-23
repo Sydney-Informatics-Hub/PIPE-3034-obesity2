@@ -882,7 +882,7 @@ m_0_source = lmer(log(frequency) ~ 1 + (1|source), REML = T,
 
 ```
 
-Does including the source (as a random effect, as we haven't sampled all of them) improve our model?
+Does including a random intercept for each source improve our model?
 
 ```{r compareModels1}
 rbind(

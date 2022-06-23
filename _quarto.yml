@@ -27,6 +27,11 @@ website:
             href: 400_analysis/01_condition_person_first.qmd
           - text: "Use of 'obese'"
             href: 400_analysis/02_obese.qmd
+          - text: "Use of 'overweight'"
+            href: 400_analysis/03_overweight.qmd
+          - text: "Use of 'fat' in a negative context"
+            href: 400_analysis/04_fat.qmd
+
     right:
       - text: "Scope"
         href: 000_scoping/scoping.qmd
