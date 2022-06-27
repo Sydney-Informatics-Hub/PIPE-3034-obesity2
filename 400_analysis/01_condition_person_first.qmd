@@ -17,7 +17,7 @@ In this notebook, we explore whether there is a difference in the use of conditi
   
   - The Pearson's Chi-squared test with Yates' continuity correction contrasting articles from left- and right-leaning publications that use only condition-first vs only person-first language indicate a significant link (X-squared = 4.6405, p-value = 0.03123) between type of publication and number of articles using a specific language type. The effect size is, however, also negligible, indicating that while the result is statistically significant, the fields are  weakly associated.
   
-5. Resampling the corpus 10000 times to select 1000 articles at a time without replacement results in a mean of 4 articles per 1000 using person-first language, and 122 per 1000 using condition-first language.
+5. Re-sampling the corpus 10000 times to select 1000 articles at a time without replacement results in a mean of 4 articles per 1000 using person-first language, and 122 per 1000 using condition-first language.
 
 - The Welch Two Sample t-test testing the difference between person_first and condition_first bootstrapping (mean of person_first = 4.11, mean of condition_first = 122.57) suggests that the effect is negative, statistically significant, and large (difference = -118.46, 95% CI [-118.67, -118.26], t(10751.55) = -1138.14, p < .001; Cohen's d = -16.10, 95% CI [-16.31, -15.88]).
 
@@ -113,7 +113,7 @@ condition_person_rbound %>%
   kable()
 ```
 
-We can see that condition-first language is used in 9-14% of articles, while person-first language is used in less than 1% of articles accross all sources.
+We can see that condition-first language is used in 9-14% of articles, while person-first language is used in less than 1% of articles across all sources.
 
 This table shows how the number and percentage (out of 100%) of articles in which person-first and condition-first language is used in the corpus, by year:
 
@@ -389,7 +389,7 @@ freq_1 %>%
 
 ```
 
-Let's create a boxplot to compare the frequency per thousand words:
+Let's create a box plot to compare the frequency per thousand words:
 
 ```{r freq_boxplot}
 freq_1 %>%
@@ -675,7 +675,7 @@ freq_entire_corpus(condition_person_comparison_together, vars(year)) %>%
        col = "")
 ```
 
-We can see that if we consider the entire corpus, instances of condition-first language seem to be somewhat lower by year in 2017 onwards. Let's look at the numbers by source:
+We can see that if we consider the entire corpus, instances of condition-first language seem to be somewhat lower by year in 2017 onward. Let's look at the numbers by source:
 
 ```{r}
 freq_entire_corpus({condition_person_comparison_together %>% filter(!(source %in% c("Telegraph", "BrisTimes")))}, vars(source)) %>% 
@@ -850,12 +850,12 @@ condition_first_annotated_for_modelling %>%
 
 ## Condition-first language - modelling frequency
 
-We will use a linear mixed effects model to consider whether there are differences in the frequency of condition-first language use in broadsheets and tabloids across years, including whether there are differences in specific publications. We will also use simple linear models to explroe
+We will use a linear mixed effects model to consider whether there are differences in the frequency of condition-first language use in broadsheets and tabloids across years, including whether there are differences in specific publications. We will also use simple linear models to explore
 
 When constructing the model we will:
 
 -   Use `log(frequency)` as the dependent variable, as this is normally distributed
--   Centre and scale the date
+-   Center and scale the date
 
 ```{r scale&setupbase}
 condition_first_annotated_for_modelling$scaled_year <- scale(condition_first_annotated_for_modelling$year, scale = F)
@@ -932,7 +932,7 @@ m_1_full <- lmer(log(frequency) ~ scaled_year + source_type + (scaled_year|sourc
                  REML = FALSE, 
                  control = lmerControl(optimizer ='optimx', optCtrl=list(method='nlminb')))
 
-# random intercept for each sourcetype
+# random intercept for each source type
 m_1_year_sourcetype_nosource <- 
   lmer(log(frequency) ~ scaled_year +(1|source_type), 
                  data = condition_first_annotated_for_modelling,

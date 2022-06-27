@@ -24,7 +24,7 @@ Additional question:
 
 3. Investigating the data by source and year revealed that these variables explained a small amount of variance in the data, with the word obese being used less frequently in the Age, Australian, Canberra Times and Sydney Morning Herald relative to the Advertiser, while in the Hobart Mercury and Northern Territorian it was used somewhat more frequently than in the Advertiser. Use of the word "obese" decreased with time in the corpus.
 
-4. Significant differences in the use of "obese" were observed in articles on different topics, with articles annotated as "Awards" and "Biomedical Research" using more instances per 1000 words than articles discussing politics, schooling, transport and commuting. 
+4. Significant differences in the use of "obese" were observed in articles on different topics, with articles annotated as "Awards" and "Bio-medical Research" using more instances per 1000 words than articles discussing politics, schooling, transport and commuting. 
 
 5. Significant differences in article topics were also observed between tabloids and broadsheets, with the topics "ChildrenParents", "NutritionStudy", "WomenPregnancy" and "FitnessExercise" approximately 3x more frequently reported on in tabloids than broadsheets, in contrast to topics like "Politics" and "SportsDoping", which were approximately evenly represented between the two media types.
 
@@ -552,5 +552,5 @@ obese_by_topic_comp$contrasts %>%
   kable()
 ```
 
-We can see that there are differences in the  frequency of use of the word "obese" by topic, with articles annotated as "Awards" and "Biomedical Research" using more instances per 1000 words than articles discussing politics, schooling, transport and commuting.
+We can see that there are differences in the  frequency of use of the word "obese" by topic, with articles annotated as "Awards" and "Bio-medical Research" using more instances per 1000 words than articles discussing politics, schooling, transport and commuting.
 

@@ -20,12 +20,12 @@ More specifically, a Welch Two Sample t-test testing the difference between the 
 
 2. Tabloids have shorter article lengths than broadsheets, as demonstrated in the [analysis of obese]("./03_obese.html").
 
-3. In this case (but not that of obese or overweight), bootstrap-resampling of the counts of use of the word "fat" in a negative connotation revealed that raw counts were *higher* in broadsheets than in tabloids (so the opposite of the above result), in part due to more articles in broadsheets having 7+ uses vs only tabloids (23 vs 10 articles, respectively). So the result described above is in part attributable to the longer length of articles in broadsheets vs tabloids.
+3. In this case (but not that of obese or overweight), bootstrap re-sampling of the counts of use of the word "fat" in a negative connotation revealed that raw counts were *higher* in broadsheets than in tabloids (so the opposite of the above result), in part due to more articles in broadsheets having 7+ uses vs only tabloids (23 vs 10 articles, respectively). So the result described above is in part attributable to the longer length of articles in broadsheets vs tabloids.
 
 
 4. Investigating the data by source and year revealed that these variables explained a small amount of variance in the data, with the word fat being used less frequently in the      Age, Australian, Canberra Times and Sydney Morning Herald had a lower frequency of use of the word "fat" relative to the Advertiser, while in the Northern Territorian the word "fat" was used somewhat more frequently than in the Advertiser. The word "fat" was not used differently in the corpus across the time period.
 
-4. Significant differences in the use of "fat" were observed in articles on different topics, with articles annotated as "Awards", "Women and Pregnancy" and "Biomedical Research" using more instances per 1000 words than articles discussing "Students and teachers", "Politics" and "Food".
+4. Significant differences in the use of "fat" were observed in articles on different topics, with articles annotated as "Awards", "Women and Pregnancy" and "Bio-medical Research" using more instances per 1000 words than articles discussing "Students and teachers", "Politics" and "Food".
 
 5. Significant differences in article topics were also observed between tabloids and broadsheets, as discussed in the [analysis of obese]("./03_obese.html").
 
@@ -571,5 +571,5 @@ fat_by_topic_comp$contrasts %>%
   kable()
 ```
 
-We can see that there are differences in the  frequency of use of the word "fat" by topic, with articles annotated as "Awards", "Women and Pregnancy" and "Biomedical Research" using more instances per 1000 words than articles discussing "Students and teachers", "Politics" and "Food".
+We can see that there are differences in the  frequency of use of the word "fat" by topic, with articles annotated as "Awards", "Women and Pregnancy" and "Bio-medical Research" using more instances per 1000 words than articles discussing "Students and teachers", "Politics" and "Food".
 
