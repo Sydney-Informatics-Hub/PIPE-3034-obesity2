@@ -1,0 +1,575 @@
+## Exploring usage of the word "fat"
+
+There is interest in exploring statistics around the use of the word "fat" with a negative connotation around the following research questions:
+
+- Do tabloids use "fat" with a negative connotation more than broadsheets? 
+- Or do broadsheets use "fat" with a negative connotation more than tabloids? 
+- Or is there no discernible pattern of use?  
+- Is there any newspaper that uses fat with a negative connotation more than others? 
+- Any year where fat with a negative connotation is the most frequent/least frequent? 
+
+Additional question:
+
+- Is there a difference of use by primary topic?
+
+### Executive summary
+
+1. Tabloids use the word "fat"  in a negative context more frequently than broadsheets.
+
+More specifically, a Welch Two Sample t-test testing the difference between the frequency in broadsheets per 1000 words and frequency in tabloids (mean of broadsheets = 2.62, mean of tabloids = 4.49) suggests that the effect is negative, statistically significant, and small (difference = -1.87, 95% CI [-2.18, -1.56], t(2251.24) = -11.73, p < .001; Cohen's d = -0.47, 95% CI [-0.55, -0.39])
+
+2. Tabloids have shorter article lengths than broadsheets, as demonstrated in the [analysis of obese]("./03_obese.html").
+
+3. In this case (but not that of obese or overweight), bootstrap re-sampling of the counts of use of the word "fat" in a negative connotation revealed that raw counts were *higher* in broadsheets than in tabloids (so the opposite of the above result), in part due to more articles in broadsheets having 7+ uses vs only tabloids (23 vs 10 articles, respectively). So the result described above is in part attributable to the longer length of articles in broadsheets vs tabloids.
+
+
+4. Investigating the data by source and year revealed that these variables explained a small amount of variance in the data, with the word fat being used less frequently in the      Age, Australian, Canberra Times and Sydney Morning Herald had a lower frequency of use of the word "fat" relative to the Advertiser, while in the Northern Territorian the word "fat" was used somewhat more frequently than in the Advertiser. The word "fat" was not used differently in the corpus across the time period.
+
+4. Significant differences in the use of "fat" were observed in articles on different topics, with articles annotated as "Awards", "Women and Pregnancy" and "Bio-medical Research" using more instances per 1000 words than articles discussing "Students and teachers", "Politics" and "Food".
+
+5. Significant differences in article topics were also observed between tabloids and broadsheets, as discussed in the [analysis of obese]("./03_obese.html").
+
+### Data source
+
+CQPweb data was provided. To calculate normalised frequency, we divide the number of observations from CQPweb by the word count as calculated in Python, and multiple by 1000.
+
+```{r loadLibs}
+library(here)
+library(janitor)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+library(report)
+theme_set(theme_minimal())
+library(patchwork)
+library(ggfortify)
+```
+
+```{r DefineKeyFunctions}
+assess_year_source <- function(df){
+  df %>% 
+  dplyr::select(source, year) %>%
+  group_by(year, source) %>% 
+  count(year) %>%
+  rename(count = n) %>%
+  pivot_wider(id_cols = c(source), names_from = year, values_from = c(count), values_fill = 0) %>%
+  janitor::adorn_totals(c("row", "col")) %>%
+  kable()
+} 
+```
+
+```{r loadData}
+adj_fat <- read_csv(here("200_data_clean", "fat_annotated.csv"))
+topic_labels <- read_csv(here("100_data_raw", "topic_labels.csv"))
+
+fat_annotated <- inner_join(
+  adj_fat, topic_labels, by = c("dominant_topic" = "topic_number")) %>% 
+  mutate(frequency = 10^3*no_hits_in_text/wordcount_total) 
+
+metadata <- read_csv(here("100_data_raw", "corpus_cqpweb_metadata.csv"))
+additional_source_metadata <- read_csv(here("100_data_raw", "addition_source_metadata.csv"))
+topic_labels <- read_csv(here("100_data_raw", "topic_labels.csv"))
+
+metadata_full <- inner_join(inner_join(metadata,
+                                       topic_labels,
+                                       by = c("dominant_topic" = "topic_number")),
+                            additional_source_metadata)
+```
+
+## Tabloid vs broadsheet
+
+What is the distribution of "fat" used with a negative connotation in articles?
+
+```{r fatDistr}
+fat_annotated %>%
+  ggplot(aes(x = no_hits_in_text, fill = source_type)) +
+  geom_bar(position = "dodge2") +
+  labs(
+    x = "Number of hits in article, CQPWeb",
+    y = "Number of articles in corpus",
+    fill = "Source type"
+  )
+
+no_articles_broadsheet <- metadata_full %>% 
+  filter(source_type == "broadsheet") %>% nrow()
+
+no_articles_tabloid <- metadata_full %>% 
+  filter(source_type == "tabloid") %>% nrow()
+
+```
+
+It seems like there is more usage in tabloids than broadsheets. Let's divide the numbers by the total number of articles in tabloids/broadsheets, respectively.
+
+
+```{r fatDistrNorm}
+fat_annotated %>%
+  group_by(source_type, no_hits_in_text) %>%
+  count() %>%
+  pivot_wider(names_from = source_type, values_from = n, values_fill = 0) %>%
+  mutate(broadsheet = 1000*broadsheet/no_articles_broadsheet,
+         tabloid = 1000*tabloid/no_articles_tabloid) %>%
+  pivot_longer(cols = c(broadsheet, tabloid)) %>%
+  ggplot(aes(x = no_hits_in_text, y=value, fill = name)) +
+  geom_bar(position = "dodge2", stat="identity") +
+  labs(
+    x = "Number of hits in article, CQPWeb",
+    y = "Normalised number of articles, per 1000, in corpus",
+    fill = "Source type"
+  )
+```
+
+We can see that the trend of higher usage holds true for tabloids even if we consider that tabloids contribute more articles to the corpus than broadsheets.
+
+
+How is this usage distributed by year (number of articles in corpus)?
+
+```{r yearNarticles}
+fat_annotated_filtered <- fat_annotated %>%
+  # these sources are already not present in the data, but we will
+  # retain this code chunk as it keeps consistency of variable names with
+  # other files in work, including for obese and overweight
+  filter(!(source %in% c("BrisTimes", "Telegraph")))
+
+assess_year_source(fat_annotated)
+```
+
+How is the frequency (per thousand words) of the usage of fat distributed by tabloids/broadsheets?
+
+```{r tabloidBroadsheet}
+fat_annotated_filtered %>%
+  ggplot(aes(x = source_type, y = log(frequency))) + 
+  geom_boxplot() + 
+  labs(
+    x = "Source type",
+    y = "log(frequency per 1000 words)"
+  )
+```
+
+We can see that the frequency is slightly higher in tabloids than in broadsheets. 
+
+And let's also use a histogram to look at the distribution:
+
+```{r tabloidBroadsheetHist}
+fat_annotated_filtered %>%
+  ggplot(aes(fill = source_type,x = log(frequency))) + 
+  geom_histogram() + 
+  labs(
+    fill = "Source type",
+    x = "log(frequency per 1000 words)",
+    y = "Number of articles"
+  )
+```
+
+Note that broadsheets have somewhat longer texts than tabloids:
+
+```{r tabBroadWC}
+fat_annotated_filtered %>%
+  ggplot(aes(x = source_type, y = log(wordcount_total))) + 
+  geom_boxplot() + 
+  labs(
+    x = "Source type",
+    y = "log(Python word count)"
+  )
+```
+
+Let's use a histogram to look at the distribution in more detail: 
+
+```{r tabBroadWC2}
+fat_annotated_filtered %>%
+  ggplot(aes(fill = source_type, x = log(wordcount_total))) + 
+  geom_histogram(binwidth = 0.1)+ 
+  labs(
+    y = "Number of articles",
+    x = "log(Python word count)"
+  )
+```
+
+The log-transformed word count data is approximately normally distributed.
+
+Let's see if the difference in length of articles using the word "fat" in tabloids and broadsheets is significant? 
+
+A higher frequency per 1000 words is detected for usage of the word "fat" in tabloids than broadsheets. 
+
+```{r DiffFreq, results="asis"}
+frequency_broadsheet <- fat_annotated_filtered[fat_annotated_filtered$source_type == "broadsheet","frequency"] %>% pull()
+frequency_tabloid <- fat_annotated_filtered[fat_annotated_filtered$source_type == "tabloid","frequency"] %>% pull()
+
+report::report(t.test(frequency_broadsheet, frequency_tabloid))
+```
+
+So, yes, the frequency of use of the word "fat" is lower in broadsheets than in tabloids.
+
+Let's use bootstrapping to see if the raw frequencies of usage of the word "fat" are different?
+
+```{r bootstrap, cache=TRUE}
+broadsheet_counts <- NULL
+tabloid_counts <- NULL
+
+for (i in 1:10000) {
+  x <- mean(sample({fat_annotated_filtered %>% 
+        filter(source_type == "broadsheet") %>%
+      # note sampling 450 here as this is approx 1/2 of broadsheet
+        pull(no_hits_in_text)}, 450, replace = FALSE))
+  y <- mean(sample({fat_annotated_filtered %>% 
+        filter(source_type == "tabloid") %>%
+        pull(no_hits_in_text)}, 450, replace = FALSE))
+  broadsheet_counts <- c(broadsheet_counts, x)
+  tabloid_counts <- c(tabloid_counts, y)
+}
+
+counts_comparison <- data.frame(
+  mean_sample = c(broadsheet_counts, tabloid_counts),
+  source_type = c(
+    rep("broadsheet", length(broadsheet_counts)),
+    rep("tabloid", length(tabloid_counts))))
+
+counts_comparison %>%
+  ggplot(aes(x = mean_sample, fill = source_type)) + 
+  geom_histogram()
+```
+
+It is interesting how these two distributions do not overlap, and the raw frequencies of the use of the words "fat" in a negative connotation are higher in broadsheets than tabloids. However, the longer length of the articles from broadsheets most likely results in a lower frequency per 1000 words of counts from broadsheets than tabloids.
+
+```{r ttest, results="asis"}
+report::report(
+  t.test(
+    broadsheet_counts,
+    tabloid_counts
+  )
+)
+```
+
+
+Let's look at the jittered plot to explore this as well:
+
+
+```{r yearSourceTypeJitter}
+fat_annotated_filtered %>%
+  ggplot(aes(x = as.factor(year), 
+             y = log(frequency), 
+             fill = year)) + 
+  geom_jitter(alpha = 0.2) +
+  geom_smooth(aes(group = source_type), col = "blue", method = "loess") +
+  geom_hline(yintercept = 1, col = "red", lty = 3, size = 3) + 
+  facet_wrap(~source_type) + 
+  theme(axis.text.x = 
+          element_text(angle = 90, vjust = 0.5, hjust=1),
+        legend.position = "NA") + 
+  labs(
+    x = "Year",
+    y = "log(frequency per 1000 words)"
+  )
+```
+
+We can see that:
+
+- Broadsheets do have a lower frequency per 1000 words than tabloids.
+- There may be an effect of year for broadsheets but not tabloids with time, with relative frequency decreasing by year.
+
+
+## Differences in usage by source
+
+Is there a difference in the usage of fat by source?
+
+```{r sourceBoxplot}
+fat_annotated_filtered %>%
+  ggplot(aes(x = reorder(source,frequency), 
+             y = log(frequency), 
+             fill = source_type)) + 
+  geom_boxplot() +
+  theme(axis.text.x = 
+          element_text(angle = 90, vjust = 0.5, hjust=1),
+        legend.position = "NA")
+```
+
+The visualisation suggests there may be some differences, and definitely between   tabloids vs broadsheets. 
+
+What are the means and standard deviations of the frequency by source?
+
+```{r summariseBySource}
+fat_annotated_filtered %>% 
+  group_by(source) %>%
+  summarise(
+    mean = mean(frequency),
+    median = median(frequency),
+    sd = sd(frequency),
+    type = (source_type)
+  ) %>%
+  distinct() %>%
+  arrange(mean) %>%
+  kable()
+```
+
+It seems that within the different sources among broadsheets there is not much difference among the frequency of use of the word "fat". Among tabloids, the Northern Territorian seems to have higher frequency of use of "fat" with a negative connotation than other tabloids. 
+
+## Differences in usage by year
+
+Is there any year when "fat" is used more frequently than others? 
+
+```{r yearBoxplot}
+fat_annotated_filtered %>%
+  ggplot(aes(x = reorder(year,frequency), 
+             y = log(frequency), 
+             fill = year)) + 
+  geom_boxplot() +
+  theme(axis.text.x = 
+          element_text(angle = 90, vjust = 0.5, hjust=1),
+        legend.position = "NA")
+
+```
+
+Based on the visualisation it seems not. If we separate out by source there also doesn't seem to be much difference. If we use a jitter plot to visualise the data, then fit a smoothing line and compare with the line of "no change" (dashed red line), we can see that there really isn't much of a difference by source and year: 
+
+```{r yearSourceJitter}
+fat_annotated_filtered %>%
+  ggplot(aes(x = as.factor(year), 
+             y = log(frequency), 
+             fill = year)) + 
+  geom_jitter(alpha = 0.2) +
+  geom_smooth(aes(group = source), col = "blue", method = "loess") +
+  geom_hline(yintercept = 1, col = "red", lty = 3, size = 3) + 
+  facet_wrap(~source) + 
+  theme(axis.text.x = 
+          element_text(angle = 90, vjust = 0.5, hjust=1),
+        legend.position = "NA") + 
+  labs(
+    x = "Year",
+    y = "log(frequency per 1000 words)"
+  )
+```
+
+There may be a subtle decrease over time in the Advertiser, Age, Canberra Times and Sydney Morning Herald, however, it is unclear whether this trend is very strong.
+
+
+The distributions each year also look quite similar:
+
+```{r distrib}
+fat_annotated_filtered %>%
+  ggplot(aes(x = reorder(year,frequency), 
+             y = log(frequency), 
+             fill = year)) + 
+  geom_violin() +
+  theme(axis.text.x = 
+          element_text(angle = 90, vjust = 0.5, hjust=1),
+        legend.position = "NA")
+```
+
+
+```{r yearMeanSD}
+fat_annotated_filtered %>% 
+  group_by(year) %>%
+  summarise(
+    mean = mean(frequency),
+    median = median(frequency),
+    sd = sd(frequency),
+    year = (year)
+  ) %>%
+  distinct() %>%
+  arrange(mean) %>%
+  kable()
+```
+
+## Differences in usage by source type, source and year
+
+We can also try to simultaneously model differences by source type, source and year.
+
+As expected, a model that includes the source type (tabloid vs broadsheet) gives a better fit than one that does not:
+
+```{r}
+fat_annotated_filtered$scaled_year <- scale(
+  fat_annotated_filtered$year, scale = F)
+
+library(lme4)
+# base model
+m_0_base <- lm(log(frequency) ~ 1, 
+                data = fat_annotated_filtered)
+
+# with source type
+m_0_sourcetype <- lm(log(frequency) ~ source_type,  
+                data = fat_annotated_filtered)
+
+# with year
+m_0_year <- lm(log(frequency) ~ scaled_year,  
+                data = fat_annotated_filtered)
+
+# with source 
+m_0_source <- lm(log(frequency) ~ source,  
+                data = fat_annotated_filtered)
+
+# with source and year
+m_0_sourceyear <- lm(log(frequency) ~ source + scaled_year,  
+                data = fat_annotated_filtered)
+
+# compare
+rbind({broom::glance(m_0_base) %>% 
+    dplyr::select(-df.residual,- deviance, -nobs) %>%
+    mutate(model = "1")},
+    {broom::glance(m_0_sourcetype)%>% 
+          dplyr::select(-df.residual,- deviance, -nobs) %>%
+        mutate(model = "source_type")},
+    {broom::glance(m_0_year) %>% 
+    dplyr::select(-df.residual,- deviance, -nobs) %>%
+    mutate(model = "scaled_year")},
+    {broom::glance(m_0_source) %>% 
+    dplyr::select(-df.residual,- deviance, -nobs) %>%
+    mutate(model = "source")},
+    {broom::glance(m_0_sourceyear)%>% 
+          dplyr::select(-df.residual,- deviance, -nobs) %>%
+        mutate(model = "source_year")}
+) %>% 
+  dplyr::select(model, everything()) %>%
+  arrange(AIC) %>%
+  kable()
+```
+
+We can see that the model incorporating source and scaled year provides the best fit for the data, explaining somewhat more variability than that which includes only source or source type.
+
+```{r compareModels}
+anova(m_0_base, m_0_sourceyear)
+```
+
+
+```{r}
+source(here::here("400_analysis","model_diagnostics.R"))
+
+df_model_resid <- get_model_resid_df(m_0_sourceyear)
+
+diagnostic_lm_plot(df_model_resid)
+```
+
+Proportion of data points with:
+
+- abs(standardized residuals) > 3.29: `r {round(100*sum(abs(df_model_resid$standard) >3.29 )/nrow(df_model_resid), 2)}`%
+- abs(standardized residuals) > 2.58: `r {round(100*sum(abs(df_model_resid$standard) >2.58 )/nrow(df_model_resid), 2)}`%
+- abs(standardized residuals) > 1.96: `r {round(100*sum(abs(df_model_resid$standard) >1.96 )/nrow(df_model_resid), 2)}`%
+
+All of these indicate the model is performing reasonably well on the data.
+
+Let's summarise the model (note that the intercept corresponds to the "first" source, i.e. the Advertiser):
+
+```{r sjplot2}
+sjPlot::tab_model(m_0_sourceyear) 
+```
+
+This model indicates that the Age, Australian, Canberra Times and Sydney Morning Herald (all broadsheets in the dataset) have lower frequency of usage of the word "fat" with a negative connotation than the Advertiser, whereas the Northern Territorian has a higher usage of the language type. 
+
+
+```{r warnings="false", results="asis"}
+report::report(m_0_sourceyear)
+```
+
+Next, let's compare if using a mixed model results in improved fit.
+
+```{r}
+
+m_1_source <- lmer(log(frequency) ~  1 + (1|source), 
+                data = fat_annotated_filtered, REML = T)
+
+m_1_source_type <- lmer(log(frequency) ~  source_type + (1|source), 
+                data = fat_annotated_filtered, REML = T)
+
+m_1_source_year_type <- lmer(log(frequency) ~  source_type + scaled_year + (1|source), 
+                data = fat_annotated_filtered, REML = T)
+
+m_1_source_year <- lmer(log(frequency) ~  scaled_year + (1|source), 
+                data = fat_annotated_filtered, REML = T)
+
+m_1_source_year2 <- lmer(log(frequency) ~  scaled_year + (scaled_year|source), 
+                data = fat_annotated_filtered, REML = T)
+
+m_1_source_year_type2 <- lmer(log(frequency) ~  scaled_year + source_type+ (scaled_year|source), 
+                data = fat_annotated_filtered, REML = T)
+
+
+rbind(
+    {broom::glance(m_0_source)%>% 
+          dplyr::select(AIC, BIC, logLik) %>%
+        mutate(model = "1 + source")},
+    {broom.mixed::glance(m_1_source_year_type)%>% 
+          dplyr::select(AIC, BIC, logLik) %>%
+        mutate(model = "source_type + scaled_year + (1/source)")},
+    {broom::glance(m_0_sourceyear)%>% 
+          dplyr::select(AIC, BIC, logLik) %>%
+        mutate(model = "scaled_year + source")},
+    {broom.mixed::glance(m_1_source) %>% 
+    dplyr::select(AIC, BIC, logLik) %>%
+    mutate(model = "1 + (1/source)")
+    },
+    {broom.mixed::glance(m_1_source_year_type2) %>% 
+    dplyr::select(AIC, BIC, logLik) %>%
+    mutate(model = "source_type + scaled_year + (1/source)")
+    },
+    {broom.mixed::glance(m_1_source_year) %>% 
+    dplyr::select(AIC, BIC, logLik) %>%
+    mutate(model = "scaled_year + (1/source)")},
+    {broom.mixed::glance(m_1_source_year2) %>% 
+    dplyr::select(AIC, BIC, logLik) %>%
+    mutate(model = "scaled_year + (scaled_year/source)")},
+    {broom.mixed::glance(m_1_source_type) %>% 
+    dplyr::select(AIC, BIC, logLik) %>%
+    mutate(model = "source_type + (1/source)")
+    }
+) %>% arrange(BIC) %>%
+  kable()
+```
+
+The model that includes a random intercept for each of the sources and considers source type as a fixed effect provides the best fit based on the Bayesian Information Criterion. Tabloids have a higher usage of the language type.
+
+```{r sjplot}
+sjPlot::tab_model(m_1_source_type) 
+```
+
+
+Let's summarise this model:
+
+```{r warnings="false", results="asis"}
+report::report(m_1_source_type)
+```
+
+The intercepts for for each of the sources were:
+
+```{r}
+coef(m_1_source_type)$source %>% 
+  arrange(`(Intercept)`) %>% 
+  kable()
+```
+
+
+## Differences in usage by topic
+
+
+```{r topic_use}
+fat_annotated_filtered %>%
+  ggplot(aes(x = as.factor(
+    reorder(topic_label,frequency)), 
+             y = log(frequency), 
+             fill = topic_label)) + 
+  geom_boxplot() +
+  theme(axis.text.x = 
+          element_text(angle = 90, vjust = 0.5, hjust=1),
+        legend.position = "NA") +
+  labs(x = "Topic label",
+       y = "log(frequency per 1000 words)")
+```
+
+It seems there are some topics that use fat more than others. 
+
+We use a simple linear model with post-hoc comparisons and Bonferroni multiple testing correction:
+
+```{r topicDiffs}
+fat_by_topic <- lm(
+  frequency ~ as.factor(topic_label), 
+  data = fat_annotated_filtered)
+library(emmeans)
+fat_by_topic_comp <- emmeans(fat_by_topic, pairwise ~ as.factor(topic_label), adjust = "bonferroni")
+
+fat_by_topic_comp$contrasts %>%
+    summary(infer = TRUE) %>%
+  filter(p.value < 0.01) %>% 
+  kable()
+```
+
+We can see that there are differences in the  frequency of use of the word "fat" by topic, with articles annotated as "Awards", "Women and Pregnancy" and "Bio-medical Research" using more instances per 1000 words than articles discussing "Students and teachers", "Politics" and "Food".
+

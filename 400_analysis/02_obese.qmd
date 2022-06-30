@@ -22,13 +22,11 @@ Additional question:
 
 - More specifically, using a Welch Two Sample t-test comparing the mean word count of articles from broadsheets and tabloids (mean of broadsheet = 778.84, mean of tabloid = 485.42) suggests that the effect is positive, statistically significant, and medium (difference = 293.42, 95% CI [273.82, 313.02], t(7348.69) = 29.34, p < .001; Cohen's d = 0.60, 95% CI [0.56, 0.65])
 
-3. Investigating data by year did not result in significant differences between years being observed.
+3. Investigating the data by source and year revealed that these variables explained a small amount of variance in the data, with the word obese being used less frequently in the Age, Australian, Canberra Times and Sydney Morning Herald relative to the Advertiser, while in the Hobart Mercury and Northern Territorian it was used somewhat more frequently than in the Advertiser. Use of the word "obese" decreased with time in the corpus.
 
-4. Investigating the data by source revealed that article source explained a small amount of variance in the data, with the word obese being used less frequently in the Age, Australian, Canberra Times and Sydney Morning Herald relative to the Advertiser, while in the Hobart Mercury and Northern Territorian it was used somewhat more frequently than in the Advertiser.
+4. Significant differences in the use of "obese" were observed in articles on different topics, with articles annotated as "Awards" and "Bio-medical Research" using more instances per 1000 words than articles discussing politics, schooling, transport and commuting. 
 
-5. Significant differences in the use of "obese" were observed in articles on different topics, with articles annotated as "Awards" and "Biomedical Research" using more instances per 1000 words than articles discussing politics, schooling, transport and commuting. 
-
-6. Significant differences in article topics were also observed between tabloids and broadsheets, with the topics "ChildrenParents", "NutritionStudy", "WomenPregnancy" and "FitnessExercise" approximately 3x more frequently reported on in tabloids than broadsheets, in contrast to topics like "Politics" and "SportsDoping", which were approximately evenly represented between the two media types.
+5. Significant differences in article topics were also observed between tabloids and broadsheets, with the topics "ChildrenParents", "NutritionStudy", "WomenPregnancy" and "FitnessExercise" approximately 3x more frequently reported on in tabloids than broadsheets, in contrast to topics like "Politics" and "SportsDoping", which were approximately evenly represented between the two media types.
 
 ### Data source
 
@@ -42,7 +40,8 @@ library(dplyr)
 library(ggplot2)
 library(tidyr)
 library(knitr)
-library(report)
+library(patchwork)
+library(ggfortify)
 theme_set(theme_minimal())
 ```
 
@@ -222,6 +221,31 @@ report::report(
 ```
 
 
+Let's look at the trend over time:
+
+```{r yearSourceTypejitter}
+obese_annotated_filtered %>%
+  ggplot(aes(x = as.factor(year), 
+             y = log(frequency), 
+             fill = year)) + 
+  geom_jitter(alpha = 0.2) +
+  geom_smooth(aes(group = source_type), col = "blue", method = "loess") +
+  geom_hline(yintercept = 1, col = "red", lty = 3, size = 3) + 
+  facet_wrap(~source_type) + 
+  theme(axis.text.x = 
+          element_text(angle = 90, vjust = 0.5, hjust=1),
+        legend.position = "NA") + 
+  labs(
+    x = "Year",
+    y = "log(frequency per 1000 words)"
+  )
+```
+
+We can see that there is a difference:
+
+- between tabloids and broadsheets, as characterised above
+- usage subtly decreases in both over time
+
 ## Differences in usage by source
 
 Is there a difference in the usage of obese by source?
@@ -274,9 +298,9 @@ obese_annotated_filtered %>%
 
 ```
 
-Based on the visualisation it seems not. If we separate out by source there also doesn't seem to be much difference. If we use a jitter plot to visualise the data, then fit a smoothing line and compare with the line of "no change" (dashed red line), we can see that there really isn't much of a difference by source and year: 
+Based on the visualisation it seems not. If we separate out by source there also doesn't seem to be much difference. If we use a jitter plot to visualise the data, then fit a smoothing line and compare with the line of "no change" (dashed red line), we can see that there really isn't a very strong difference by source and year: 
 
-```{r yearSourceBoxplot}
+```{r yearSourcejitter}
 obese_annotated_filtered %>%
   ggplot(aes(x = as.factor(year), 
              y = log(frequency), 
@@ -350,6 +374,11 @@ m_0_year <- lm(log(frequency) ~ scaled_year,
 m_0_source <- lm(log(frequency) ~ source,  
                 data = obese_annotated_filtered)
 
+# with source and year
+# with source 
+m_0_sourceyear <- lm(log(frequency) ~ source + scaled_year,  
+                data = obese_annotated_filtered)
+
 # compare
 rbind({broom::glance(m_0_base) %>% 
     dplyr::select(-df.residual,- deviance, -nobs) %>%
@@ -362,43 +391,116 @@ rbind({broom::glance(m_0_base) %>%
     mutate(model = "scaled_year")},
     {broom::glance(m_0_source) %>% 
     dplyr::select(-df.residual,- deviance, -nobs) %>%
-    mutate(model = "source")}
+    mutate(model = "source")},
+    {broom::glance(m_0_sourceyear) %>% 
+    dplyr::select(-df.residual,- deviance, -nobs) %>%
+    mutate(model = "sourceyear")}
 ) %>% 
   dplyr::select(model, everything()) %>%
   arrange(AIC) %>%
   kable()
 ```
 
-We can see that the model incorporating source provides the best fit for the data, explaining somewhat more variability than that which includes only source type.
+We can see that the model incorporating source and year provides the best fit for the data, explaining somewhat more variability than that which includes only source type.
 
 ```{r compareModels}
-anova(m_0_sourcetype, m_0_source)
+anova(m_0_sourcetype, m_0_sourceyear)
 ```
 
-Next, let's compare if adding the source in as an random variable improves the fit of the model.
+
+
+Next, let's compare if having a distinct intercept for each source improves the fit of the model.
 
 ```{r}
 m_1_source <- lmer(log(frequency) ~  1 + (1|source), 
-                data = obese_annotated_filtered, REML = F)
+                data = obese_annotated_filtered, REML = T)
+
+m_1_sourceyear <- lmer(log(frequency) ~  scaled_year + (1|source), 
+                data = obese_annotated_filtered, REML = T)
+
+m_1_sourceyear2 <- lmer(log(frequency) ~  scaled_year + (scaled_year|source), 
+                data = obese_annotated_filtered, REML = T)
+
+m_1_sourceyeartype <- lmer(log(frequency) ~  scaled_year + source_type + (1|source), 
+                data = obese_annotated_filtered, REML = T)
+
+m_1_sourceyeartype2 <- lmer(log(frequency) ~  scaled_year + source_type + (scaled_year|source), 
+                data = obese_annotated_filtered, REML = T)
 
 rbind(
-    {broom::glance(m_0_source)%>% 
+    {broom::glance(m_0_sourceyear)%>% 
           dplyr::select(AIC, BIC, logLik) %>%
-        mutate(model = "1 + source")},
+        mutate(model = "scaled_year + source")},
     {broom.mixed::glance(m_1_source) %>% 
     dplyr::select(AIC, BIC, logLik) %>%
-    mutate(model = "1 + (1|source)")}
-) 
+    mutate(model = "1 + (1/source)")},
+    {broom.mixed::glance(m_1_sourceyear)%>% 
+          dplyr::select(AIC, BIC, logLik) %>%
+        mutate(model = "scaled_year + 1/source")},
+    {broom.mixed::glance(m_1_sourceyeartype)%>% 
+          dplyr::select(AIC, BIC, logLik) %>%
+        mutate(model = "scaled_year + source_type + 1/source")},
+    {broom.mixed::glance(m_1_sourceyear2)%>% 
+          dplyr::select(AIC, BIC, logLik) %>%
+        mutate(model = "scaled_year + scaled_year/source")},
+    {broom.mixed::glance(m_1_sourceyeartype2)%>% 
+          dplyr::select(AIC, BIC, logLik) %>%
+        mutate(model = "scaled_year + source_type + scaled_year/source")}
+) %>%
+  arrange(AIC) %>%
+  kable()
 ```
-Including a random intercept for source does not improve the fit of the model (AIC increases, logLik decreases).
+Including a distinct intercept for each source did not drastically improve the fit of the model (AIC increases, logLik decreases; BIC does decrease slightly, so based on this criteria it may be a slightly better fit).
 
-In summary, the model which included source only provided the best fit. Let's summarise this model:
+Let's plot the residuals for the fixed effects model:
+
+```{r}
+source(here::here("400_analysis","model_diagnostics.R"))
+
+df_model_resid <- get_model_resid_df(m_0_sourceyear)
+
+diagnostic_lm_plot(df_model_resid)
+```
+
+Proportion of data points with:
+
+
+- abs(standardized residuals) > 3.29: `r {round(100*sum(abs(df_model_resid$standard) >3.29 )/nrow(df_model_resid), 2)}`%
+- abs(standardized residuals) > 2.58: `r {round(100*sum(abs(df_model_resid$standard) >2.58 )/nrow(df_model_resid), 2)}`%
+- abs(standardized residuals) > 1.96: `r {round(100*sum(abs(df_model_resid$standard) >1.96 )/nrow(df_model_resid), 2)}`%
+
+All of these indicate the model is performing reasonably well on the data.
+
+Let's summarise the model (note that the intercept corresponds to the "first" source, i.e. the Advertiser):
+
+```{r sjplot}
+sjPlot::tab_model(m_0_sourceyear) 
+```
+
+
+In summary, the fixed effects model which included source and year provided a good fit. Let's summarise this model:
 
 ```{r warnings="false", results="asis"}
-report::report(m_0_source)
+report::report(m_0_sourceyear)
 ```
 
-To summarise, a model was fit by source, which explained a small amount of variance in the data. It showed that the Age, Australian, Canberra Times and Sydney Morning Herald had a lower frequency of use of the word "obese" relative to the Advertiser, while in the Hobart Mercury, Northern Territorian the word "obese" was used somewhat more frequently than in the Advertiser.
+To summarise, a model was fit by source and year, which explained a small amount of variance in the data. It showed that the Age, Australian, Canberra Times and Sydney Morning Herald had a lower frequency of use of the word "obese" relative to the Advertiser, while in the Hobart Mercury, Northern Territorian the word "obese" was used somewhat more frequently than in the Advertiser. Use of the word "obese" decreased with time in the corpus.
+
+
+If we look at the mixed effects model `scaled_year + source_type + scaled_year/source`, which had the lowest BIC, we can see that the observation of higher frequency of counts in tabloids is reproduced, while the signal from the decrease by year is not detected:
+
+```{r}
+sjPlot::tab_model(m_1_sourceyeartype2)
+```
+
+The intercepts and slopes for scaled year for each of the sources were:
+
+```{r}
+coef(m_1_sourceyeartype2)$source %>% 
+  arrange(`(Intercept)`) %>% 
+  kable()
+```
+
 
 ## Differences in usage by topic
 
@@ -450,5 +552,5 @@ obese_by_topic_comp$contrasts %>%
   kable()
 ```
 
-We can see that there are differences in the  frequency of use of the word "obese" by topic, with articles annotated as "Awards" and "Biomedical Research" using more instances per 1000 words than articles discussing politics, schooling, transport and commuting.
+We can see that there are differences in the  frequency of use of the word "obese" by topic, with articles annotated as "Awards" and "Bio-medical Research" using more instances per 1000 words than articles discussing politics, schooling, transport and commuting.
 

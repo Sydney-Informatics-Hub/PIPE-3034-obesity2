@@ -2,4 +2,10 @@
 title: "Obesity phase 2 project"
 ---
 
-This is the landing page for phase 2 of the obesity project. 
+This is the home page for phase 2 of the obesity project. 
+It considers whether there are differences in usage for the following in the Australian Obesity corpus:
+
+- [Condition vs person-first language](./400_analysis/01_condition_person_first.html)
+- ["Obese" used as an adjective](./400_analysis/02_obese.html)
+- ["Overweight" used as an adjective](./400_analysis/03_overweight.html)
+- ["Fat" used with a negative connotation](./400_analysis/04_fat.html)
