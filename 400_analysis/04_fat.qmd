@@ -18,12 +18,16 @@ Additional question:
 
 More specifically, a Welch Two Sample t-test testing the difference between the frequency in broadsheets per 1000 words and frequency in tabloids (mean of broadsheets = 2.62, mean of tabloids = 4.49) suggests that the effect is negative, statistically significant, and small (difference = -1.87, 95% CI [-2.18, -1.56], t(2251.24) = -11.73, p < .001; Cohen's d = -0.47, 95% CI [-0.55, -0.39])
 
+- The total number of uses of "fat" we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p < 0.001).
+
+- The number of articles with use of "fat" we observe is not different between tabloids and broadsheets.
+
 2. Tabloids have shorter article lengths than broadsheets, as demonstrated in the [analysis of obese]("./03_obese.html").
 
 3. In this case (but not that of obese or overweight), bootstrap re-sampling of the counts of use of the word "fat" in a negative connotation revealed that raw counts were *higher* in broadsheets than in tabloids (so the opposite of the above result), in part due to more articles in broadsheets having 7+ uses vs only tabloids (23 vs 10 articles, respectively). So the result described above is in part attributable to the longer length of articles in broadsheets vs tabloids.
 
 
-4. Investigating the data by source and year revealed that these variables explained a small amount of variance in the data, with the word fat being used less frequently in the      Age, Australian, Canberra Times and Sydney Morning Herald had a lower frequency of use of the word "fat" relative to the Advertiser, while in the Northern Territorian the word "fat" was used somewhat more frequently than in the Advertiser. The word "fat" was not used differently in the corpus across the time period.
+4. Investigating the data by source and year revealed that these variables explained a small amount of variance in the data, with the word fat being used less frequently in the  Age, Australian, Canberra Times and Sydney Morning Herald had a lower frequency of use of the word "fat" relative to the Advertiser, while in the Northern Territorian the word "fat" was used somewhat more frequently than in the Advertiser. The word "fat" was not used differently in the corpus across the time period.
 
 4. Significant differences in the use of "fat" were observed in articles on different topics, with articles annotated as "Awards", "Women and Pregnancy" and "Bio-medical Research" using more instances per 1000 words than articles discussing "Students and teachers", "Politics" and "Food".
 
@@ -45,19 +49,9 @@ library(report)
 theme_set(theme_minimal())
 library(patchwork)
 library(ggfortify)
-```
 
-```{r DefineKeyFunctions}
-assess_year_source <- function(df){
-  df %>% 
-  dplyr::select(source, year) %>%
-  group_by(year, source) %>% 
-  count(year) %>%
-  rename(count = n) %>%
-  pivot_wider(id_cols = c(source), names_from = year, values_from = c(count), values_fill = 0) %>%
-  janitor::adorn_totals(c("row", "col")) %>%
-  kable()
-} 
+source(here::here("400_analysis", "functions.R"))
+
 ```
 
 ```{r loadData}
@@ -164,7 +158,7 @@ fat_annotated_filtered %>%
 
 Note that broadsheets have somewhat longer texts than tabloids:
 
-```{r tabBroadWC}
+```{r}
 fat_annotated_filtered %>%
   ggplot(aes(x = source_type, y = log(wordcount_total))) + 
   geom_boxplot() + 
@@ -199,7 +193,67 @@ frequency_tabloid <- fat_annotated_filtered[fat_annotated_filtered$source_type =
 report::report(t.test(frequency_broadsheet, frequency_tabloid))
 ```
 
-So, yes, the frequency of use of the word "fat" is lower in broadsheets than in tabloids.
+
+The non-parametric FP test supports this observation:
+
+```{r}
+fp_test(
+  wc1 = frequency_broadsheet,
+    wc2 = frequency_tabloid,
+    label1 = "broadsheet",
+    label2 = "tabloid",
+    dist = mydistribution
+)
+```
+
+So, yes, the frequency of use of the word "fat" is lower in broadsheets than in tabloids. Are articles that use the word "fat" longer in broadsheets than tabloids?
+
+```{r }
+fat_annotated_filtered %>%
+  ggplot(aes(x = source_type, y = log(wordcount_total))) + 
+  geom_boxplot() + 
+  labs(
+    x = "Source type",
+    y = "log(Python word count)"
+  )
+```
+
+Let's use a histogram to look at the distribution in more detail: 
+
+```{r }
+fat_annotated_filtered %>%
+  ggplot(aes(fill = source_type, x = log(wordcount_total))) + 
+  geom_histogram(binwidth = 0.1)+ 
+  labs(
+    y = "Number of articles",
+    x = "log(Python word count)"
+  )
+```
+
+
+Let's see if the difference in length of articles using the word "fat" in tabloids and broadsheets is significant? 
+
+```{r WCdiff, results="asis"}
+wordcount_broadsheet <- fat_annotated_filtered[fat_annotated_filtered$source_type == "broadsheet","wordcount_total", drop = T]
+wordcount_tabloid <- fat_annotated_filtered[fat_annotated_filtered$source_type == "tabloid","wordcount_total", drop = T]
+
+report::report(t.test(wordcount_broadsheet,wordcount_tabloid))
+```
+
+Yes, overall articles that use the word "fat" in tabloids are significantly shorter than in broadsheets.
+
+
+The non-parametric FP test supports this observation:
+
+```{r}
+fp_test(
+  wc1 = wordcount_broadsheet,
+    wc2 = wordcount_tabloid,
+    label1 = "broadsheet",
+    label2 = "tabloid",
+    dist = mydistribution
+)
+```
 
 Let's use bootstrapping to see if the raw frequencies of usage of the word "fat" are different?
 
@@ -241,6 +295,17 @@ report::report(
 )
 ```
 
+The non-parametric FP test supports this observation:
+
+```{r}
+fp_test(
+  wc1 = broadsheet_counts,
+    wc2 = tabloid_counts,
+    label1 = "broadsheet",
+    label2 = "tabloid",
+    dist = mydistribution
+)
+```
 
 Let's look at the jittered plot to explore this as well:
 
@@ -267,6 +332,50 @@ We can see that:
 
 - Broadsheets do have a lower frequency per 1000 words than tabloids.
 - There may be an effect of year for broadsheets but not tabloids with time, with relative frequency decreasing by year.
+
+### Comparing observed to normalised to subcorpus size data
+
+We can investigate the prevalence of the use of "fat" using goodness of fit tests, comparing the distribution in:
+
+- tabloids vs broadsheets
+- left and right leaning publications
+
+We can do this by looking at:
+
+- the total number of instances in each subcorpus, normalised to the total number of words in each subcorpus
+- the number of articles that feature this language type, normalised to the total number of articles in each subcorpus
+
+#### Tabloids vs broadsheets
+
+The total number of uses of "fat" we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p < 0.001).
+
+```{r}
+chisq_instances_wc_normalised(fat_annotated_filtered, metadata_full, source_type)
+```
+
+
+The number of articles with use of "fat" we observe is not different between tabloids and broadsheets.
+
+```{r}
+chisq_articles_totalart_normalised(fat_annotated_filtered, metadata_full, source_type)
+```
+
+#### Left vs right-leaning publications
+
+The total number of uses of "fat" we observe is higher in right and lower in left-leaning publications than we would expect based on the word count in these subcorpora (p < 0.001).
+
+```{r}
+chisq_instances_wc_normalised(fat_annotated_filtered, metadata_full, orientation)
+```
+
+
+The number of articles that use "fat" we observe is not different between left and right leaning publications.
+
+```{r}
+chisq_articles_totalart_normalised(fat_annotated_filtered, metadata_full, orientation)
+```
+
+
 
 
 ## Differences in usage by source

@@ -12,8 +12,24 @@ In this notebook, we explore whether there is a difference in the use of conditi
   
   - The Pearson's Chi-squared test with Yates' continuity correction contrasting articles from tabloids and broadsheets that use only condition-first vs only person-first language indicate a significant link (X-squared = 4.8274, p-value = 0.02801) between type of publication and number of articles using a specific language type. The effect size is quite small (\<0.2), indicating that while the result is statistically significant, the fields are  weakly associated.
   
+- The total number of uses of condition-first language we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p < 0.001).
+
+- The number of articles with condition-first language we observe is also higher in tabloids and lower in broadsheets than we would expect based on the total article count in these subcorpora (p < 0.001).
+
+- The total number of uses of person-first language we observe is somwhat higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora, but this result is not strongly significant (p < 0.05).
+
+- The number of articles with person-first language we observe is, in contrast, lower in tabloids and higher in broadsheets than we would expect based on the total article count in these subcorpora (p < 0.002).
+  
   
 4. Person-first language is present in approximately the same number of articles in left- and right-leaning newspapers, whereas articles with only condition-first language are higher in number in right-leaning publications.
+
+- The total number of uses of condition-first language we observe is higher in right and lower in left-leaning publications than we would expect based on the word count in these subcorpora (p < 0.001).
+
+- The number of articles with condition-first language we observe is also is higher in right and lower in left-leaning publications than we would expect based on the total article count in these subcorpora (p < 0.001).
+
+- The total number of uses of person-first language we observe is higher in left and lower in right-leaning publications than we would expect based on the word count in these subcorpora (p < 0.002).
+
+- The number of articles with person-first language we observe is also is higher in left and lower in right-leaning publications than we would expect based on the total article count in these subcorpora (p < 0.002).
   
   - The Pearson's Chi-squared test with Yates' continuity correction contrasting articles from left- and right-leaning publications that use only condition-first vs only person-first language indicate a significant link (X-squared = 4.6405, p-value = 0.03123) between type of publication and number of articles using a specific language type. The effect size is, however, also negligible, indicating that while the result is statistically significant, the fields are  weakly associated.
   
@@ -46,12 +62,8 @@ library(optimx)
 # unless explicitly specified otherwise
 theme_set(theme_minimal())
 
-read_cqpweb <- function(filename){
-  read.csv(
-    here("100_data_raw", filename), 
-    skip = 3, sep = "\t") %>% 
-    janitor::clean_names()
-}
+source(here::here("400_analysis", "functions.R"))
+
 
 
 condition_first <- read_cqpweb("aoc_all_condition_first.txt")
@@ -72,6 +84,8 @@ corpus_articlecounts <- read_csv(here("100_data_raw", "articlecounts_full.csv"),
 
 ```
 
+
+
 As discussed in the EDA, we use the Python-generated word counts to count the frequency of occurrences per thousand words, as these do not include counts for punctuation symbols and hence do not distort counts for longer texts.
 
 ## Total number of articles with each of the language usages
@@ -83,14 +97,9 @@ This table shows how the number and percentage (out of 100%) of articles in whic
 ```{r HowManyPerJournal}
 
 condition_person_rbound <-
-  person_first_annotated %>%
-  select(article_id, year, source) %>%
-  mutate(type = "Person-first") %>%
-  rbind({
-  condition_first_annotated %>%
-  select(article_id, year, source) %>%
-  mutate(type = "Condition-first")  
-  })
+  rbind(
+    articles_per_journal(person_first_annotated, "Person-first"),
+    articles_per_journal(condition_first_annotated, "Condition-first"))
 
 # generate how many articles per source are in the corpus
 corpus_total_articles_bysource <-
@@ -147,17 +156,6 @@ We can see that condition-first language is used in 7-14% of articles per year a
 Furthermore, the numbers of articles that use person-first language within the corpus are quite small, so we cannot simultaneously explore whether this type of language changes across both publication and year:
 
 ```{r BothYearAndSource}
-assess_year_source <- function(df){
-  df %>% 
-  select(source, year) %>%
-  group_by(year, source) %>% 
-  count(year) %>%
-  rename(count = n) %>%
-  pivot_wider(id_cols = c(source), names_from = year, values_from = c(count), values_fill = 0) %>%
-  janitor::adorn_totals(c("row", "col")) %>%
-  kable()
-} 
-
 assess_year_source(person_first_annotated) 
 ```
 
@@ -198,17 +196,9 @@ We can, however, compare the number of articles that use either language type (i
 
 ```{r LangSourcetype}
 language_sourcetype_table <-
-  condition_first_annotated %>%
-  filter(!(article_id %in% person_first_annotated$article_id)) %>%
-  mutate(type = "condition-first") %>%
-  rbind({
-    person_first_annotated %>%
-    filter(!(article_id %in% condition_first_annotated$article_id)) %>%
-    mutate(type = "person-first")
-  }) %>%
-  group_by(source_type, type) %>%
-  count() %>%
-  pivot_wider(names_from = type, values_from = n) 
+  get_article_counts_nooverlap(condition_first_annotated,
+                     person_first_annotated,
+                     source_type)
 
 language_sourcetype_table %>% 
   kable()
@@ -219,42 +209,33 @@ We can see that person-first language is present in approximately the same numbe
 ```{r chisq_LangSourcetype}
 chisq_source_res <- chisq.test(language_sourcetype_table[,c("condition-first", "person-first")])
 
-chisq_source_res
+prettyrbind_chisq_result(
+  df = language_sourcetype_table[,c("condition-first", "person-first")], 
+  chisq_source_res, 
+  prefix = "corrected") |> kable()
+
 ```
 
 The Chi-square test results in a p-value that is less than 0.05, indicating a significant link between type of publication and type of language used.
 
-What is the effect size of this link?
+The effect size is quite small (\<0.2), indicating that while the result is statistically significant, the fields are only weakly associated.
 
-```{r chisq_LangSourcetype_effsize}
-cramers_v <- function(df, chisq_result){
-  df_interest <- df[,c("condition-first", "person-first")]
-  deg_f <- min(dim(df_interest)) - 1
-  sqrt(chisq_result$statistic / (sum(df_interest) * deg_f))
-}
+There has been criticism of use of the Yates correction, so we also provide the uncorrected results below:
 
+```{r}
+chisq_source_res_uncorr <- chisq.test(language_sourcetype_table[,c("condition-first", "person-first")], correct = F)
 
-cramers_v(language_sourcetype_table, chisq_source_res)
-
+prettyrbind_chisq_result(
+  df = language_sourcetype_table[,c("condition-first", "person-first")], 
+  chisq_source_res_uncorr, 
+  prefix = "uncorrected") |> kable()
 ```
 
-The effect size is quite small (\<0.2), indicating that while the result is statistically significant, the fields are only weakly associated.
 
 Let's next use a similar approach to identify whether left- or right- leaning publications are different in their use of condition- vs person-first language. What is the total number of articles that use EITHER condition-first or person-first language by orientation of publication?
 
 ```{r}
-
-language_orientation_table <- condition_first_annotated %>%
-  filter(!(article_id %in% person_first_annotated$article_id)) %>%
-  mutate(type = "condition-first") %>%
-  rbind({
-    person_first_annotated %>%
-    filter(!(article_id %in% condition_first_annotated$article_id)) %>%
-    mutate(type = "person-first")
-  }) %>%
-  group_by(orientation, type) %>%
-  count() %>%
-  pivot_wider(names_from = type, values_from = n) 
+language_orientation_table <- get_article_counts_nooverlap(condition_first_annotated, person_first_annotated, var = orientation)
 
 language_orientation_table %>% kable()
 ```
@@ -262,17 +243,28 @@ language_orientation_table %>% kable()
 Next, let's run a Chi-square test on this contingency table:
 
 ```{r}
-chisq_language_orientation <- chisq.test(language_orientation_table[,c("condition-first", "person-first")])
-chisq_language_orientation
+chisq_language_orientation_corr <- chisq.test(language_orientation_table[,c("condition-first", "person-first")])
+
+prettyrbind_chisq_result(
+  df = language_orientation_table[,c("condition-first", "person-first")], 
+  chisq_language_orientation_corr, 
+  prefix = "corrected") |> kable()
 ```
 
 The Chi-square test of independence is significant.
 
-```{r}
-cramers_v(language_orientation_table, chisq_language_orientation)
-```
-
 However, the effect size is negligible (\<= 0.2), indicating that once again the fields are only weakly associated.
+
+There has been criticism of use of the Yates correction, so we also provide the uncorrected results below:
+
+```{r}
+chisq_language_orientation_uncorr <- chisq.test(language_orientation_table[,c("condition-first", "person-first")], correct = F)
+
+prettyrbind_chisq_result(
+  df = language_orientation_table[,c("condition-first", "person-first")], 
+  chisq_language_orientation_uncorr, 
+  prefix = "uncorrected") |> kable()
+```
 
 
 ### Comparing article counts that use condition-first, person-first and no language type
@@ -344,6 +336,19 @@ report(t.test(diff_boot$person_first, diff_boot$condition_first))
 
 This shows that on average of every 1000 articles sampled from the corpus, 4 will use person-first and 122 will use condition-first language.
 
+A non-parametric FP test supports this result:
+
+```{r}
+fp_test(
+  wc1 = diff_boot$condition_first,
+  wc2 = diff_boot$person_first,
+  label1 = "condition",
+  label2 = "person", 
+  dist = mydistribution
+)
+```
+
+
 
 ### Comparing the frequency of condition-first, person-first and no language type
 
@@ -374,6 +379,18 @@ report(t.test(diff_boot$freq_pers_first, diff_boot$freq_cond_first))
 ```
 
 This shows that on average of every 1000 articles sampled from the corpus, 4 will use person-first and 122 will use condition-first language.
+
+A non-parametric FP test confirms this result:
+
+```{r}
+fp_test(
+  wc1 = diff_boot$freq_cond_first,
+  wc2 = diff_boot$freq_pers_first,
+  label1 = "condition",
+  label2 = "person", 
+  dist = mydistribution
+)
+```
 
 
 
@@ -484,6 +501,19 @@ report(t.test(condition_first_frequencies,
 
 In texts that use either condition-first, person-first languages or both, the frequency of condition-first language is higher (mean 4 words per 1000) than person-first (mean 2.7 words per 1000).
 
+We can also use a non-parametric FP test to support this:
+
+```{r}
+fp_test(
+  wc1 = condition_first_frequencies,
+  wc2 = person_first_frequencies,
+  label1 = "condition",
+  label2 = "person", 
+  dist = mydistribution
+)
+```
+
+
 The below plot shows the article ids of articles with a word count less than 100 for person-first language, and article ids with word counts less than 100 where the frequency is greater than 20 for condition-first language
 
 ```{r lowWCtextsPlot}
@@ -529,6 +559,20 @@ report(t.test(
   person_first_frequencies_gt100
        ))
 ```
+
+This is supported by a non-parametric FP test
+
+```{r}
+fp_test(
+  wc1 = condition_first_frequencies_gt100,
+  wc2 = person_first_frequencies_gt100,
+  label1 = "condition",
+  label2 = "person", 
+  dist = mydistribution
+)
+```
+
+
 
 ## Person-first language frequency
 
@@ -781,6 +825,78 @@ freq_entire_corpus({
 ```
 
 
+## Condition-first language use
+
+We can investigate the prevalence of condition-first language using goodness of fit tests, comparing their distribution in:
+
+- tabloids vs broadsheets
+- left and right leaning publications
+
+We can do this by looking at:
+
+- the total number of instances in the subcorpus
+- the number of articles that feature this language type
+
+### Tabloids vs broadsheets
+
+The total number of uses of condition-first language we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p < 0.001).
+
+```{r}
+chisq_instances_wc_normalised(condition_first_annotated, metadata_full, source_type)
+```
+
+
+The number of articles with condition-first language we observe is also higher in tabloids and lower in broadsheets than we would expect based on the total article count in these subcorpora (p < 0.001).
+
+```{r}
+chisq_articles_totalart_normalised(condition_first_annotated, metadata_full, source_type)
+```
+
+### Left vs right-leaning publications
+
+The total number of uses of condition-first language we observe is higher in right and lower in left-leaning publications than we would expect based on the word count in these subcorpora (p < 0.001).
+
+```{r}
+chisq_instances_wc_normalised(condition_first_annotated, metadata_full, orientation)
+```
+
+
+The number of articles with condition-first language we observe is also is higher in right and lower in left-leaning publications than we would expect based on the total article count in these subcorpora (p < 0.001).
+
+```{r}
+chisq_articles_totalart_normalised(condition_first_annotated, metadata_full, orientation)
+```
+
+
+## Person-first language use
+### Tabloids vs broadsheets
+
+The total number of uses of person-first language we observe is somwhat higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora, but this result is not strongly significant (p < 0.05).
+
+```{r}
+chisq_instances_wc_normalised(person_first_annotated, metadata_full, source_type)
+```
+
+The number of articles with person-first language we observe is, in contrast, lower in tabloids and higher in broadsheets than we would expect based on the total article count in these subcorpora (p < 0.002).
+
+```{r}
+chisq_articles_totalart_normalised(person_first_annotated, metadata_full, source_type)
+```
+
+### Left vs right-leaning publications
+
+The total number of uses of person-first language we observe is higher in left and lower in right-leaning publications than we would expect based on the word count in these subcorpora (p < 0.002).
+
+```{r}
+chisq_instances_wc_normalised(person_first_annotated, metadata_full, orientation)
+```
+
+
+The number of articles with person-first language we observe is also is higher in left and lower in right-leaning publications than we would expect based on the total article count in these subcorpora (p < 0.002).
+
+```{r}
+chisq_articles_totalart_normalised(person_first_annotated, metadata_full, orientation)
+```
 
 ## Condition-first language across time
 
@@ -1014,7 +1130,7 @@ m_1_year_sourcetype_nosource <-
 
 We end up needing to use the `nlminb` optimiser from the `optimx` library (originally used by lme4), as the default REML fails to converge for the most complex model.
 
-```{r modelEval}
+```{r}
 purrr::map_dfr(list(
   m_1_base,
   m_1_year,
@@ -1034,7 +1150,7 @@ purrr::map_dfr(list(
   arrange(AIC)
 ```
 
-The full model has the lowest AIC and highest log-Likelihood among the mixed effects models. However, it's AIC is not that different (7524 vs 7525) to the simpler model `scaled_year + source`, while the simpler model has a lower BIC and higher logLik.
+The full model (scaled_year + source_type + (scaled_year|source)) has the lowest AIC and highest log-Likelihood among the mixed effects models. However, it's AIC is not that different (7524 vs 7525) to the simpler model `scaled_year + source`, while the simpler model has a lower BIC and higher logLik.
 
 Let's compare the two models: the full mixed effects model and the simple `scaled_year + source`
 
@@ -1044,9 +1160,40 @@ anova(m_1_full, m_0_yearsource)
 
 It seems that the more complex model does not offer a substantial improvement in fit over the simpler one. Let's summarise that model.
 
-```{r modSum,  results="asis"}
+```{r  results="asis"}
 report::report(m_0_yearsource)
 ```
+
+If we use the BIC as our model selection criteria instead, the model of the form has the lowest BIC:
+
+
+```{r}
+purrr::map_dfr(list(
+  m_1_base,
+  m_1_year,
+  m_1_year_sourcetype,
+  m_1_yearsource,
+  m_1_year_sourcetype_nosource,
+  m_1_full),
+        ~(glance(.x))) %>%
+  mutate(model = c(
+    "1 + (1|source)",
+    "scaled_year + (1|source)",
+    "scaled_year + source_type +(1|source)",
+    "scaled_year + (scaled_year|source)",
+    "scaled_year + (1|sourcetype)",
+    "scaled_year + source_type + (scaled_year|source)"
+  )) %>%
+  arrange(BIC)
+```
+
+We obtain a result similar to that of the simpler model:
+
+```{r results="asis"}
+report::report(m_1_year_sourcetype)
+```
+
+
 
 To summarise:
 

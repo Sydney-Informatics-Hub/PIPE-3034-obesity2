@@ -150,6 +150,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="dropdown-item" href="../400_analysis/04_fat.html">
  <span class="dropdown-text">Use of ‘fat’ in a negative context</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../400_analysis/05_ShowcaseCounts.html">
+ <span class="dropdown-text">Counts vs frequency simulation</span></a>
+  </li>  
     </ul>
 </li>
 </ul>
@@ -194,7 +198,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Tabloids use the word “obese” more frequently than broadsheets.</li>
 </ol>
 <ul>
-<li>More specifically, a Welch Two Sample t-test testing the difference between the frequency in broadsheets per 1000 words and frequency in tabloids (mean of broadsheets = 3.16, mean of tabloids = 5.59) suggests that the effect is negative, statistically significant, and small (difference = -2.43, 95% CI [-2.63, -2.23], t(10062.88) = -24.01, p &lt; .001; Cohen’s d = -0.46, 95% CI [-0.50, -0.42]).</li>
+<li><p>More specifically, a Welch Two Sample t-test testing the difference between the frequency in broadsheets per 1000 words and frequency in tabloids (mean of broadsheets = 3.16, mean of tabloids = 5.59) suggests that the effect is negative, statistically significant, and small (difference = -2.43, 95% CI [-2.63, -2.23], t(10062.88) = -24.01, p &lt; .001; Cohen’s d = -0.46, 95% CI [-0.50, -0.42]).</p></li>
+<li><p>The total number of uses of “obese” we observe is higher in tabloids and right leaning-publications, and and lower in broadsheets and left-leaning publications than we would expect based on the word count in these subcorpora (p &lt; 0.001).</p></li>
+<li><p>The number of articles with use of “obese” we observe is not different between tabloids and broadsheets, or between left and right leaning publications.</p></li>
 </ul>
 <ol start="2" type="1">
 <li>Tabloids have shorter article lengths than broadsheets.</li>
@@ -208,7 +214,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Significant differences in article topics were also observed between tabloids and broadsheets, with the topics “ChildrenParents”, “NutritionStudy”, “WomenPregnancy” and “FitnessExercise” approximately 3x more frequently reported on in tabloids than broadsheets, in contrast to topics like “Politics” and “SportsDoping”, which were approximately evenly represented between the two media types.</p></li>
 </ol></section><section id="data-source" class="level3"><h3 class="anchored" data-anchor-id="data-source">Data source</h3>
 <p>CQPweb data was provided. To calculate normalised frequency, we divide the number of observations from CQPweb by the word count as calculated in Python, and multiple by 1000.</p>
-<div class="cell">
+<div class="cell" data-hash="02_obese_cache/html/loadLibs_6304632476d0e7546e5f2a82f375554f">
 <details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sfirke/janitor">janitor</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span>
@@ -221,26 +227,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">assess_year_source</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">{</span>
-  <span class="va">df</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
-  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">source</span>, <span class="va">year</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">source</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>count <span class="op">=</span> <span class="va">n</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>id_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">source</span><span class="op">)</span>, names_from <span class="op">=</span> <span class="va">year</span>, values_from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span>, values_fill <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
-  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/janitor/man/adorn_totals.html">adorn_totals</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"row"</span>, <span class="st">"col"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">}</span> 
-<span class="va">read_cqpweb</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span><span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span>
-    <span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"100_data_raw"</span>, <span class="va">filename</span><span class="op">)</span>, 
-    skip <span class="op">=</span> <span class="fl">3</span>, sep <span class="op">=</span> <span class="st">"\t"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
-    <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span>
-<span class="op">}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02_obese_cache/html/DefineKeyFunctions_6db1ceac9955e00bd5d8e65846174bdd">
+<details><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"400_analysis"</span>, <span class="st">"functions.R"</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div class="cell">
+<div class="cell" data-hash="02_obese_cache/html/loadData_98147f0ba061c0427ff3b51ac0abda06">
 <details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">adj_obese</span> <span class="op">&lt;-</span> <span class="fu">read_cqpweb</span><span class="op">(</span><span class="st">"aoc_all_obese_tagadjlemma.txt"</span><span class="op">)</span> 
 <span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"100_data_raw"</span>, <span class="st">"corpus_cqpweb_metadata.csv"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">additional_source_metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"100_data_raw"</span>, <span class="st">"addition_source_metadata.csv"</span><span class="op">)</span><span class="op">)</span>
@@ -251,12 +242,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
                             <span class="va">additional_source_metadata</span><span class="op">)</span>
 <span class="va">obese_annotated</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span>
   <span class="va">adj_obese</span>, <span class="va">metadata_full</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"text"</span> <span class="op">=</span> <span class="st">"article_id"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>frequency <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="fl">3</span><span class="op">*</span><span class="va">no_hits_in_text</span><span class="op">/</span><span class="va">wordcount_total</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>frequency <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="fl">3</span><span class="op">*</span><span class="va">no_hits_in_text</span><span class="op">/</span><span class="va">wordcount_total</span><span class="op">)</span>|&gt;
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>article_id <span class="op">=</span> <span class="va">text</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section></section><section id="tabloid-vs-broadsheet" class="level2"><h2 class="anchored" data-anchor-id="tabloid-vs-broadsheet">Tabloid vs broadsheet</h2>
 <p>What is the distribution of obese in articles?</p>
-<div class="cell">
+<div class="cell" data-hash="02_obese_cache/html/obeseDistr_ba537834c8383228514b097f4fcb74a9">
 <details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">no_hits_in_text</span>, fill <span class="op">=</span> <span class="va">source_type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"dodge2"</span><span class="op">)</span> <span class="op">+</span>
@@ -270,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>How is this usage distributed by year (number of articles in corpus)?</p>
-<div class="cell">
+<div class="cell" data-hash="02_obese_cache/html/yearNarticles_1c46ab6992a2ac086b6b386a8b1c8250">
 <details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span> <span class="op">&lt;-</span> <span class="va">obese_annotated</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="op">(</span><span class="va">source</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"BrisTimes"</span>, <span class="st">"Telegraph"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="fu">assess_year_source</span><span class="op">(</span><span class="va">obese_annotated</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -523,7 +515,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>We can see that apart from the Brisbane times and Daily Telegraph, there are articles using “obese” every year and in every publication. We will filter out these two sources.</p>
 <p>How is the frequency (per thousand words) of the usage of obese distributed by tabloids/broadsheets?</p>
-<div class="cell">
+<div class="cell" data-hash="02_obese_cache/html/tabloidBroadsheet_b7cd9301411d36f5754f1237b69913a4">
 <details><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">source_type</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
@@ -536,7 +528,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>And let’s also use a histogram to look at the distribution:</p>
-<div class="cell">
+<div class="cell" data-hash="02_obese_cache/html/tabloidBroadsheetHist_df3c2eaa1d7efc5868ab79f97f72402b">
 <details><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">source_type</span>,x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
@@ -550,7 +542,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Note that broadsheets have somewhat longer texts than tabloids:</p>
-<div class="cell">
+<div class="cell" data-hash="02_obese_cache/html/tabBroadWC_91dd7685ebb46440cbd77ea5b37de807">
 <details><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">source_type</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">wordcount_total</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
@@ -563,7 +555,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Let’s use a histogram to look at the distribution in more detail:</p>
-<div class="cell">
+<div class="cell" data-hash="02_obese_cache/html/tabBroadWC2_dccf8a02ee422630f5e665dea93f0e56">
 <details><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">source_type</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">wordcount_total</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">+</span> 
@@ -577,20 +569,98 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>The log-transformed word count data is approximately normally distributed.</p>
 <p>Let’s see if the difference in length of articles using the word “obese” in tabloids and broadsheets is significant?</p>
-<details><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">wordcount_broadsheet</span> <span class="op">&lt;-</span> <span class="va">obese_annotated_filtered</span><span class="op">[</span><span class="va">obese_annotated_filtered</span><span class="op">$</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"broadsheet"</span>,<span class="st">"wordcount_total"</span><span class="op">]</span>
-<span class="va">wordcount_tabloid</span> <span class="op">&lt;-</span> <span class="va">obese_annotated_filtered</span><span class="op">[</span><span class="va">obese_annotated_filtered</span><span class="op">$</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"tabloid"</span>,<span class="st">"wordcount_total"</span><span class="op">]</span>
+<details><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">wordcount_broadsheet</span> <span class="op">&lt;-</span> <span class="va">obese_annotated_filtered</span><span class="op">[</span><span class="va">obese_annotated_filtered</span><span class="op">$</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"broadsheet"</span>,<span class="st">"wordcount_total"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span>
+<span class="va">wordcount_tabloid</span> <span class="op">&lt;-</span> <span class="va">obese_annotated_filtered</span><span class="op">[</span><span class="va">obese_annotated_filtered</span><span class="op">$</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"tabloid"</span>,<span class="st">"wordcount_total"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span>
 <span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">wordcount_broadsheet</span>,<span class="va">wordcount_tabloid</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><p>The Welch Two Sample t-test testing the difference between wordcount_broadsheet and wordcount_tabloid (mean of x = 778.84, mean of y = 485.42) suggests that the effect is positive, statistically significant, and medium (difference = 293.42, 95% CI [273.82, 313.02], t(7348.69) = 29.34, p &lt; .001; Cohen’s d = 0.60, 95% CI [0.56, 0.65])</p>
-<p>Yes, overall articles in tabloids are significantly shorter than in broadsheets.</p>
+<p>Yes, overall articles that use the word “obese” in tabloids are significantly shorter than in broadsheets.</p>
+<p>This is supported by a non-parametric test as well:</p>
+<div class="cell" data-hash="02_obese_cache/html/unnamed-chunk-1_89d27a0c1c298dfc636515cd6041b6da">
+<details><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">fp_test</span><span class="op">(</span>wc1 <span class="op">=</span> <span class="va">wordcount_broadsheet</span>,
+        wc2 <span class="op">=</span> <span class="va">wordcount_tabloid</span>,
+        label1 <span class="op">=</span> <span class="st">"broadsheet"</span>,
+        label2 <span class="op">=</span> <span class="st">"tabloid"</span>,
+        dist <span class="op">=</span> <span class="va">mydistribution</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>
+    Approximative Two-Sample Fisher-Pitman Permutation Test
+data:  wc by label (broadsheet, tabloid)
+Z = 29.474, p-value &lt; 1e-04
+alternative hypothesis: true mu is not equal to 0</code></pre>
+</div>
+</div>
+<p>Let’s see whether this holds overall, across all articles in tabloids vs broadsheets, not just the ones that use the word “obese”:</p>
+<div class="cell" data-hash="02_obese_cache/html/tabBroadWCall_a241c3b3d3b8467e81d3b6923e737abc">
+<details><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">metadata_full</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">source_type</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">wordcount_total</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>
+    x <span class="op">=</span> <span class="st">"Source type"</span>,
+    y <span class="op">=</span> <span class="st">"log(Python word count)"</span>
+  <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="02_obese_files/figure-html/tabBroadWCall-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Let’s use a histogram to look at the distribution in more detail:</p>
+<div class="cell" data-hash="02_obese_cache/html/tabBroadWC2all_625f77150b40f96485a5a95459bce1d8">
+<details><summary>Code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">metadata_full</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">source_type</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">wordcount_total</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>
+    y <span class="op">=</span> <span class="st">"Number of articles"</span>,
+    x <span class="op">=</span> <span class="st">"log(Python word count)"</span>
+  <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<p><img src="02_obese_files/figure-html/tabBroadWC2all-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The log-transformed word count data is approximately normally distributed.</p>
+<p>Let’s see if the difference in length of articles using the word “obese” in tabloids and broadsheets is significant?</p>
+<details><summary>Code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">wordcount_broadsheet</span> <span class="op">&lt;-</span> <span class="va">metadata_full</span><span class="op">[</span><span class="va">metadata_full</span><span class="op">$</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"broadsheet"</span>,<span class="st">"wordcount_total"</span>, drop <span class="op">=</span> <span class="cn">T</span><span class="op">]</span>
+<span class="va">wordcount_tabloid</span> <span class="op">&lt;-</span> <span class="va">metadata_full</span><span class="op">[</span><span class="va">metadata_full</span><span class="op">$</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"tabloid"</span>,<span class="st">"wordcount_total"</span>, drop <span class="op">=</span> <span class="cn">T</span><span class="op">]</span>
+<span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">wordcount_broadsheet</span>,<span class="va">wordcount_tabloid</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><p>The Welch Two Sample t-test testing the difference between wordcount_broadsheet and wordcount_tabloid (mean of x = 810.15, mean of y = 502.44) suggests that the effect is positive, statistically significant, and small (difference = 307.71, 95% CI [291.01, 324.42], t(16482.54) = 36.11, p &lt; .001; Cohen’s d = 0.47, 95% CI [0.45, 0.50])</p>
+<p>Yes, we can see that across the entire dataset, the word count of articles published in broadsheets are longer than that in tabloids.</p>
+<p>This is supported by a non-parametric test as well:</p>
+<div class="cell" data-hash="02_obese_cache/html/unnamed-chunk-2_2d94d76c8e1e6d72c79158ab95d706df">
+<details><summary>Code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">fp_test</span><span class="op">(</span>wc1 <span class="op">=</span> <span class="va">wordcount_broadsheet</span>,
+        wc2 <span class="op">=</span> <span class="va">wordcount_tabloid</span>,
+        label1 <span class="op">=</span> <span class="st">"broadsheet"</span>,
+        label2 <span class="op">=</span> <span class="st">"tabloid"</span>,
+        dist <span class="op">=</span> <span class="va">mydistribution</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>
+    Approximative Two-Sample Fisher-Pitman Permutation Test
+data:  wc by label (broadsheet, tabloid)
+Z = 37.999, p-value &lt; 1e-04
+alternative hypothesis: true mu is not equal to 0</code></pre>
+</div>
+</div>
 <p>If we then test the difference between the frequency of the word “obese” in tabloids and broadsheets, we can see that a higher frequency per 1000 words is detected for usage of the word “obese” in tabloids than broadsheets.</p>
-<details><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">frequency_broadsheet</span> <span class="op">&lt;-</span> <span class="va">obese_annotated_filtered</span><span class="op">[</span><span class="va">obese_annotated_filtered</span><span class="op">$</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"broadsheet"</span>,<span class="st">"frequency"</span><span class="op">]</span>
-<span class="va">frequency_tabloid</span> <span class="op">&lt;-</span> <span class="va">obese_annotated_filtered</span><span class="op">[</span><span class="va">obese_annotated_filtered</span><span class="op">$</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"tabloid"</span>,<span class="st">"frequency"</span><span class="op">]</span>
+<details><summary>Code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">frequency_broadsheet</span> <span class="op">&lt;-</span> <span class="va">obese_annotated_filtered</span><span class="op">[</span><span class="va">obese_annotated_filtered</span><span class="op">$</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"broadsheet"</span>,<span class="st">"frequency"</span>, drop <span class="op">=</span> <span class="cn">T</span><span class="op">]</span>
+<span class="va">frequency_tabloid</span> <span class="op">&lt;-</span> <span class="va">obese_annotated_filtered</span><span class="op">[</span><span class="va">obese_annotated_filtered</span><span class="op">$</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"tabloid"</span>,<span class="st">"frequency"</span>, drop <span class="op">=</span> <span class="cn">T</span><span class="op">]</span>
 <span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">frequency_broadsheet</span>, <span class="va">frequency_tabloid</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><p>The Welch Two Sample t-test testing the difference between frequency_broadsheet and frequency_tabloid (mean of x = 3.16, mean of y = 5.59) suggests that the effect is negative, statistically significant, and small (difference = -2.43, 95% CI [-2.63, -2.23], t(10062.88) = -24.01, p &lt; .001; Cohen’s d = -0.46, 95% CI [-0.50, -0.42])</p>
-<p>So, yes, the frequency of use of the word “obese” is lower in broadsheets than in tabloids.</p>
+<p>So, yes, the frequency of use of the word “obese” is higher in tabloids than in broadsheets</p>
+<p>This is supported by a non-parametric test as well:</p>
+<div class="cell" data-hash="02_obese_cache/html/unnamed-chunk-3_54110fb9e8620b29eb880756e2d24dc8">
+<details><summary>Code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">fp_test</span><span class="op">(</span>wc1 <span class="op">=</span> <span class="va">frequency_broadsheet</span>,
+        wc2 <span class="op">=</span> <span class="va">frequency_tabloid</span>,
+        label1 <span class="op">=</span> <span class="st">"broadsheet"</span>,
+        label2 <span class="op">=</span> <span class="st">"tabloid"</span>,
+        dist <span class="op">=</span> <span class="va">mydistribution</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>
+    Approximative Two-Sample Fisher-Pitman Permutation Test
+data:  wc by label (broadsheet, tabloid)
+Z = -21.36, p-value &lt; 1e-04
+alternative hypothesis: true mu is not equal to 0</code></pre>
+</div>
+</div>
 <p>Let’s use bootstrapping to see if the raw frequencies of usage of the word obese are different?</p>
 <div class="cell" data-hash="02_obese_cache/html/bootstrap_d0c06013492caae334920fef5cceab60">
-<details><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">broadsheet_counts</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
+<details><summary>Code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">broadsheet_counts</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
 <span class="va">tabloid_counts</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
 <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10000</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="op">{</span><span class="va">obese_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
@@ -615,16 +685,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>It is interesting that the distribution of usage of “obese” is ~1.6 uses per article in tabloid publications, while the distribution for broadsheets was bimodal.</p>
-<details><summary>Code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span>
+<details><summary>Code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span>
     <span class="va">broadsheet_counts</span>,
     <span class="va">tabloid_counts</span>
   <span class="op">)</span>
 <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><p>The Welch Two Sample t-test testing the difference between broadsheet_counts and tabloid_counts (mean of x = 1.71, mean of y = 1.60) suggests that the effect is positive, statistically significant, and large (difference = 0.11, 95% CI [0.11, 0.11], t(18721.64) = 182.01, p &lt; .001; Cohen’s d = 2.57, 95% CI [2.83, 2.83])</p>
+</details><p>The Welch Two Sample t-test testing the difference between broadsheet_counts and tabloid_counts (mean of x = 1.71, mean of y = 1.60) suggests that the effect is positive, statistically significant, and large (difference = 0.11, 95% CI [0.11, 0.11], t(18859.07) = 181.24, p &lt; .001; Cohen’s d = 2.56, 95% CI [2.82, 2.82])</p>
+<p>This is supported by a non-parametric test as well:</p>
+<div class="cell" data-hash="02_obese_cache/html/unnamed-chunk-4_0abb1da93fb1f08a6b34366de993f287">
+<details><summary>Code</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">fp_test</span><span class="op">(</span>wc1 <span class="op">=</span> <span class="va">broadsheet_counts</span>,
+        wc2 <span class="op">=</span> <span class="va">tabloid_counts</span>,
+        label1 <span class="op">=</span> <span class="st">"broadsheet"</span>,
+        label2 <span class="op">=</span> <span class="st">"tabloid"</span>,
+        dist <span class="op">=</span> <span class="va">mydistribution</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>
+    Approximative Two-Sample Fisher-Pitman Permutation Test
+data:  wc by label (broadsheet, tabloid)
+Z = 111.49, p-value &lt; 1e-04
+alternative hypothesis: true mu is not equal to 0</code></pre>
+</div>
+</div>
+<p>So the COUNT of instances of the word “obese” is HIGHER in broadsheets than tabloids - the opposite result of when we consider the frequency. This is likely to be due to broadsheets having much longer articles than tabloids.</p>
 <p>Let’s look at the trend over time:</p>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+<div class="cell" data-hash="02_obese_cache/html/yearSourceTypejitter_fc3957224e23d1ece61a918cfe296754">
+<details><summary>Code</summary><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>, 
              fill <span class="op">=</span> <span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -647,10 +733,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>between tabloids and broadsheets, as characterised above</li>
 <li>usage subtly decreases in both over time</li>
-</ul></section><section id="differences-in-usage-by-source" class="level2"><h2 class="anchored" data-anchor-id="differences-in-usage-by-source">Differences in usage by source</h2>
+</ul>
+<section id="comparing-observed-to-normalised-to-subcorpus-size-data" class="level3"><h3 class="anchored" data-anchor-id="comparing-observed-to-normalised-to-subcorpus-size-data">Comparing observed to normalised to subcorpus size data</h3>
+<p>We can investigate the prevalence of the use of “obese” using goodness of fit tests, comparing the distribution in:</p>
+<ul>
+<li>tabloids vs broadsheets</li>
+<li>left and right leaning publications</li>
+</ul>
+<p>We can do this by looking at:</p>
+<ul>
+<li>the total number of instances in each subcorpus, normalised to the total number of words in each subcorpus</li>
+<li>the number of articles that feature this language type, normalised to the total number of articles in each subcorpus</li>
+</ul>
+<section id="tabloids-vs-broadsheets" class="level4"><h4 class="anchored" data-anchor-id="tabloids-vs-broadsheets">Tabloids vs broadsheets</h4>
+<p>The total number of uses of “obese” we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p &lt; 0.001).</p>
+<div class="cell" data-hash="02_obese_cache/html/unnamed-chunk-5_ebe0410c90f29f4952c51f1fea0db99c">
+<details><summary>Code</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_instances_wc_normalised</span><span class="op">(</span><span class="va">obese_annotated_filtered</span>, <span class="va">metadata_full</span>, <span class="va">source_type</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>             variable                                    value
+1              method Chi-squared test for given probabilities
+2           parameter                                        1
+3           statistic                                 778.4111
+4             p.value                            2.666527e-171
+5 broadsheet_observed                                     7071
+6 broadsheet_expected                         8878.82882136884
+7    tabloid_observed                                     9773
+8    tabloid_expected                         7965.17117863116</code></pre>
+</div>
+</div>
+<p>The number of articles with use of “obese” we observe is not different between tabloids and broadsheets.</p>
+<div class="cell" data-hash="02_obese_cache/html/unnamed-chunk-6_fc89c4ecf83665cc8f037aeccc6438b5">
+<details><summary>Code</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_articles_totalart_normalised</span><span class="op">(</span><span class="va">obese_annotated_filtered</span>, <span class="va">metadata_full</span>, <span class="va">source_type</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>             variable                                    value
+1              method Chi-squared test for given probabilities
+2           parameter                                        1
+3           statistic                                 1.012291
+4             p.value                                0.3143545
+5 broadsheet_observed                                     4142
+6 broadsheet_expected                         4192.09050949815
+7    tabloid_observed                                     6114
+8    tabloid_expected                         6063.90949050185</code></pre>
+</div>
+</div>
+</section><section id="left-vs-right-leaning-publications" class="level4"><h4 class="anchored" data-anchor-id="left-vs-right-leaning-publications">Left vs right-leaning publications</h4>
+<p>The total number of uses of “obese” we observe is higher in right and lower in left-leaning publications than we would expect based on the word count in these subcorpora (p &lt; 0.001).</p>
+<div class="cell" data-hash="02_obese_cache/html/unnamed-chunk-7_b4ad6de8a29142ec3d5b74c4d170b9fe">
+<details><summary>Code</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_instances_wc_normalised</span><span class="op">(</span><span class="va">obese_annotated_filtered</span>, <span class="va">metadata_full</span>, <span class="va">orientation</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>        variable                                    value
+1         method Chi-squared test for given probabilities
+2      parameter                                        1
+3      statistic                                 336.0413
+4        p.value                             4.645282e-75
+5  left_observed                                     5938
+6  left_expected                         7113.11347665779
+7 right_observed                                    10906
+8 right_expected                         9730.88652334221</code></pre>
+</div>
+</div>
+<p>The number of articles that use “obese” we observe is not different between left and right leaning publications.</p>
+<div class="cell" data-hash="02_obese_cache/html/unnamed-chunk-8_e96a0fe7263a667126bfabe873557cb9">
+<details><summary>Code</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_articles_totalart_normalised</span><span class="op">(</span><span class="va">obese_annotated_filtered</span>, <span class="va">metadata_full</span>, <span class="va">orientation</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>        variable                                    value
+1         method Chi-squared test for given probabilities
+2      parameter                                        1
+3      statistic                               0.03741104
+4        p.value                                0.8466306
+5  left_observed                                     3433
+6  left_expected                          3423.7627183427
+7 right_observed                                     6823
+8 right_expected                          6832.2372816573</code></pre>
+</div>
+</div>
+</section></section></section><section id="differences-in-usage-by-source" class="level2"><h2 class="anchored" data-anchor-id="differences-in-usage-by-source">Differences in usage by source</h2>
 <p>Is there a difference in the usage of obese by source?</p>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+<div class="cell" data-hash="02_obese_cache/html/sourceBoxplot_71a4ce1c35cb1716d0a796c11ea205fa">
+<details><summary>Code</summary><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">source</span>,<span class="va">frequency</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>, 
              fill <span class="op">=</span> <span class="va">source_type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -664,8 +824,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>The visualisation suggests there are not - only the differences observed above for tabloids vs broadsheets.</p>
 <p>What are the means and standard deviations of the frequency by source?</p>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
+<div class="cell" data-hash="02_obese_cache/html/summariseBySource_80a5e7529765da016937de939c57fb1c">
+<details><summary>Code</summary><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">source</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>
     mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>,
@@ -763,8 +923,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>It seems that within the different sources among broadsheets and tabloids there is not much difference among the frequency of use of the word “obese”.</p>
 </section><section id="differences-in-usage-by-year" class="level2"><h2 class="anchored" data-anchor-id="differences-in-usage-by-year">Differences in usage by year</h2>
 <p>Is there any year when “obese” is used more frequently than others?</p>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+<div class="cell" data-hash="02_obese_cache/html/yearBoxplot_5085dbb4d5088283173282aa4eab0d80">
+<details><summary>Code</summary><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">year</span>,<span class="va">frequency</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>, 
              fill <span class="op">=</span> <span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -777,8 +937,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Based on the visualisation it seems not. If we separate out by source there also doesn’t seem to be much difference. If we use a jitter plot to visualise the data, then fit a smoothing line and compare with the line of “no change” (dashed red line), we can see that there really isn’t a very strong difference by source and year:</p>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+<div class="cell" data-hash="02_obese_cache/html/yearSourcejitter_3b92c7225ecb312fd1edd3ef0427be71">
+<details><summary>Code</summary><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>, 
              fill <span class="op">=</span> <span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -798,8 +958,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>The distributions each year also look quite similar:</p>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+<div class="cell" data-hash="02_obese_cache/html/distrib_19d6681674a5b7cda1597ba48f3490cb">
+<details><summary>Code</summary><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">year</span>,<span class="va">frequency</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>, 
              fill <span class="op">=</span> <span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -811,8 +971,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="02_obese_files/figure-html/distrib-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
+<div class="cell" data-hash="02_obese_cache/html/yearMeanSD_51e75bc048c0587d31abb916f216ab6a">
+<details><summary>Code</summary><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>
     mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>,
@@ -911,8 +1071,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section><section id="differences-in-usage-by-source-type-source-and-year" class="level2"><h2 class="anchored" data-anchor-id="differences-in-usage-by-source-type-source-and-year">Differences in usage by source type, source and year</h2>
 <p>We can also try to simultaneously model differences by source type, source and year.</p>
 <p>As expected, a model that includes the source type (tabloid vs broadsheet) gives a better fit than one that does not:</p>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span><span class="op">$</span><span class="va">scaled_year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span>
+<div class="cell" data-hash="02_obese_cache/html/unnamed-chunk-9_18f6bf841861c9840730058a44f012a2">
+<details><summary>Code</summary><div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span><span class="op">$</span><span class="va">scaled_year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span>
   <span class="va">obese_annotated_filtered</span><span class="op">$</span><span class="va">year</span>, scale <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lme4/lme4/">lme4</a></span><span class="op">)</span>
 <span class="co"># base model</span>
@@ -1043,8 +1203,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>We can see that the model incorporating source and year provides the best fit for the data, explaining somewhat more variability than that which includes only source type.</p>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">m_0_sourcetype</span>, <span class="va">m_0_sourceyear</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02_obese_cache/html/compareModels_15893b6573db44e73170685527ef3acc">
+<details><summary>Code</summary><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">m_0_sourcetype</span>, <span class="va">m_0_sourceyear</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 Model 1: log(frequency) ~ source_type
@@ -1057,8 +1217,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <p>Next, let’s compare if having a distinct intercept for each source improves the fit of the model.</p>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">m_1_source</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span> <span class="op">~</span>  <span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">source</span><span class="op">)</span>, 
+<div class="cell" data-hash="02_obese_cache/html/unnamed-chunk-10_fcce6658cbea585ffd8ccb43c985d7c6">
+<details><summary>Code</summary><div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">m_1_source</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span> <span class="op">~</span>  <span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">source</span><span class="op">)</span>, 
                 data <span class="op">=</span> <span class="va">obese_annotated_filtered</span>, REML <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 <span class="va">m_1_sourceyear</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span> <span class="op">~</span>  <span class="va">scaled_year</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">source</span><span class="op">)</span>, 
                 data <span class="op">=</span> <span class="va">obese_annotated_filtered</span>, REML <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
@@ -1147,12 +1307,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>Including a distinct intercept for each source did not drastically improve the fit of the model (AIC increases, logLik decreases; BIC does decrease slightly, so based on this criteria it may be a slightly better fit).</p>
 <p>Let’s plot the residuals for the fixed effects model:</p>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"400_analysis"</span>,<span class="st">"model_diagnostics.R"</span><span class="op">)</span><span class="op">)</span>
+<div class="cell" data-hash="02_obese_cache/html/unnamed-chunk-11_6d6e9addefcc42253eb592129ebfe78b">
+<details><summary>Code</summary><div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"400_analysis"</span>,<span class="st">"model_diagnostics.R"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">df_model_resid</span> <span class="op">&lt;-</span> <span class="fu">get_model_resid_df</span><span class="op">(</span><span class="va">m_0_sourceyear</span><span class="op">)</span>
 <span class="fu">diagnostic_lm_plot</span><span class="op">(</span><span class="va">df_model_resid</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="02_obese_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<p><img src="02_obese_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Proportion of data points with:</p>
@@ -1163,8 +1323,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </ul>
 <p>All of these indicate the model is performing reasonably well on the data.</p>
 <p>Let’s summarise the model (note that the intercept corresponds to the “first” source, i.e.&nbsp;the Advertiser):</p>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">sjPlot</span><span class="fu">::</span><span class="fu"><a href="https://strengejacke.github.io/sjPlot/reference/tab_model.html">tab_model</a></span><span class="op">(</span><span class="va">m_0_sourceyear</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02_obese_cache/html/sjplot_66523b4e4150ec73922fca4dba3c75b2">
+<details><summary>Code</summary><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">sjPlot</span><span class="fu">::</span><span class="fu"><a href="https://strengejacke.github.io/sjPlot/reference/tab_model.html">tab_model</a></span><span class="op">(</span><span class="va">m_0_sourceyear</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <table style="border-collapse:collapse; border:none;">
 <tbody><tr>
@@ -1255,7 +1415,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <p>In summary, the fixed effects model which included source and year provided a good fit. Let’s summarise this model:</p>
-<details><summary>Code</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="va">m_0_sourceyear</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="va">m_0_sourceyear</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><p>We fitted a linear model (estimated using OLS) to predict frequency with source and scaled_year (formula: log(frequency) ~ source + scaled_year). The model explains a statistically significant and weak proportion of variance (R2 = 0.10, F(10, 10245) = 109.54, p &lt; .001, adj. R2 = 0.10). The model’s intercept, corresponding to source = Advertiser and scaled_year = 0, is at 1.27 (95% CI [1.22, 1.31], t(10245) = 54.39, p &lt; .001). Within this model:</p>
 <ul>
 <li>The effect of source [Age] is statistically significant and negative (beta = -0.55, 95% CI [-0.62, -0.48], t(10245) = -15.82, p &lt; .001; Std. beta = -0.21, 95% CI [-0.23, -0.18])</li>
@@ -1272,8 +1432,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using the Wald approximation.</p>
 <p>To summarise, a model was fit by source and year, which explained a small amount of variance in the data. It showed that the Age, Australian, Canberra Times and Sydney Morning Herald had a lower frequency of use of the word “obese” relative to the Advertiser, while in the Hobart Mercury, Northern Territorian the word “obese” was used somewhat more frequently than in the Advertiser. Use of the word “obese” decreased with time in the corpus.</p>
 <p>If we look at the mixed effects model <code>scaled_year + source_type + scaled_year/source</code>, which had the lowest BIC, we can see that the observation of higher frequency of counts in tabloids is reproduced, while the signal from the decrease by year is not detected:</p>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">sjPlot</span><span class="fu">::</span><span class="fu"><a href="https://strengejacke.github.io/sjPlot/reference/tab_model.html">tab_model</a></span><span class="op">(</span><span class="va">m_1_sourceyeartype2</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="02_obese_cache/html/unnamed-chunk-13_e885c458655844bd500d5ede5119ef39">
+<details><summary>Code</summary><div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">sjPlot</span><span class="fu">::</span><span class="fu"><a href="https://strengejacke.github.io/sjPlot/reference/tab_model.html">tab_model</a></span><span class="op">(</span><span class="va">m_1_sourceyeartype2</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <table style="border-collapse:collapse; border:none;">
 <tbody><tr>
@@ -1349,8 +1509,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <p>The intercepts and slopes for scaled year for each of the sources were:</p>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_1_sourceyeartype2</span><span class="op">)</span><span class="op">$</span><span class="va">source</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
+<div class="cell" data-hash="02_obese_cache/html/unnamed-chunk-14_d155276b368c8d920cbef1692a519206">
+<details><summary>Code</summary><div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_1_sourceyeartype2</span><span class="op">)</span><span class="op">$</span><span class="va">source</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">`(Intercept)`</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
@@ -1427,8 +1587,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 </section><section id="differences-in-usage-by-topic" class="level2"><h2 class="anchored" data-anchor-id="differences-in-usage-by-topic">Differences in usage by topic</h2>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">metadata_full</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+<div class="cell" data-hash="02_obese_cache/html/unnamed-chunk-15_e6281c1fd1f99c21e4dacacd01c6b176">
+<details><summary>Code</summary><div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">metadata_full</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">source_type</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">topic_label</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">source_type</span>, values_from <span class="op">=</span> <span class="va">n</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
@@ -1579,8 +1739,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <p>We can see that articles labelled with the topics “ChildrenParents”, “NutritionStudy”, “WomenPregnancy” and “FitnessExercise” are approximately 3x more frequently reported on in tabloids than broadsheets, in contrast to topics like “Politics” and “SportsDoping” which are approximately evenly represented between the two media types.</p>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+<div class="cell" data-hash="02_obese_cache/html/topic_use_b8ce64c645d0dcbf96fba2b04489bb04">
+<details><summary>Code</summary><div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span>
     <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">topic_label</span>,<span class="va">frequency</span><span class="op">)</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>, 
@@ -1597,8 +1757,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>It seems there are some topics that use obese more than others.</p>
 <p>We use a simple linear model with post-hoc comparisons and Bonferroni multiple testing correction:</p>
-<div class="cell">
-<details><summary>Code</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_by_topic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>
+<div class="cell" data-hash="02_obese_cache/html/topicDiffs_49b7df24dbe3960a3304322f86d9739d">
+<details><summary>Code</summary><div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">obese_by_topic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>
   <span class="va">frequency</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">topic_label</span><span class="op">)</span>, 
   data <span class="op">=</span> <span class="va">obese_annotated_filtered</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rvlenth/emmeans">emmeans</a></span><span class="op">)</span>
