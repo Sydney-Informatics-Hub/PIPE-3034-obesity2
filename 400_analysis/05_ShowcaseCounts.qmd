@@ -1,0 +1,95 @@
+## Showcase counts vs frequncy comparison
+
+```{r loadLibs}
+library(here)
+library(janitor)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+library(report)
+theme_set(theme_minimal())
+library(patchwork)
+library(ggfortify)
+
+source(here::here("400_analysis", "functions.R"))
+
+```
+
+The mean word count of articles in the Australian corpus is:
+
+- broadsheet: 810
+- tabloid:  502
+
+Let's generate some word counts and then see what happens with data where we have one instance of a particular language type in each article.
+
+```{r}
+broad_wc <- fGarch::rsnorm(1000, mean = 810, sd = 800, xi = 5)
+broad_wc <- broad_wc[broad_wc > 0]
+
+tabl_wc <- fGarch::rsnorm(1000, mean = 502, sd = 490, xi = 5)
+tabl_wc <- tabl_wc[tabl_wc > 0]
+
+
+```
+
+
+Let's plot these:
+
+```{r}
+histogram_pairwise(
+  wc1 = broad_wc,
+  wc2 = tabl_wc,
+  label1 = "broadsheet",
+  label2 = "tabloid") +
+  xlab("Word count") +
+  labs(fill = "")
+```
+
+Now, let's generate a frequency per thousand words for each of these articles, assuming they each have one instance of the language type (so from a journalist's perspective, they've used the same number of instances in each article).
+
+```{r}
+broad_freq <- 1000/broad_wc
+tabl_freq <- 1000/tabl_wc
+```
+
+Note that we observe a SIGNIFICANT difference between the two samples, even though we have simulated them to each feature only ONE instance of the preferred language type. 
+
+```{r}
+report::report(t.test(broad_freq, tabl_freq))
+```
+
+Using a non-parametric test does not improve the situation:
+
+```{r}
+mydistribution_custom <- coin::approximate(nresample = 1000,
+                              parallel = "multicore",
+                              ncpus = 8)
+
+fp_test(
+  wc1 = broad_freq,
+    wc2 = tabl_freq,
+    label1 = "broadsheet",
+    label2 = "tabloid",
+    dist = mydistribution_custom
+)
+```
+
+Note, however, that using the Chi-square goodness of fit allows us to avoid this issue, when considering the number of articles in each group:
+
+```{r}
+stats::chisq.test(c(length(broad_wc), length(tabl_wc)),
+                  p = c(length(broad_wc), length(tabl_wc)),
+                  rescale.p = T)
+```
+
+This does remain an issue when using the Chi-square goodness of fit test when considering the total number of instances:
+
+```{r}
+stats::chisq.test(c(length(broad_wc), length(tabl_wc)),
+                  p = c(sum(broad_wc), sum(tabl_wc)),
+                  rescale.p = T)
+```
+
+

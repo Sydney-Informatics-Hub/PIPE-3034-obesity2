@@ -16,7 +16,16 @@ Additional question:
 
 1. Tabloids use the word "overweight" more frequently than broadsheets.
 
+- The total number of uses of "overweight" we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p < 0.001).
+
+- The number of articles with use of "overweight" we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p < 0.001).
+
 - More specifically, a Welch Two Sample t-test testing the difference between the frequency in broadsheets per 1000 words and frequency in tabloids (mean of broadsheets = 3.55, mean of tabloids = 5.73) suggests that the effect is negative, statistically significant, and small (difference = -2.18, 95% CI [-2.42, -1.95], t(6712.33) = -18.20, p < .001; Cohen's d = -0.43, 95% CI [-0.48, -0.38])
+
+- The total number of uses of "overweight" we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p < 0.001).
+
+- The number of articles with use of "overweight" we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p < 0.001).
+
 
 2. Tabloids have shorter article lengths than broadsheets, as demonstrated in the [analysis of obese]("./03_obese.html").
 
@@ -43,25 +52,8 @@ library(patchwork)
 
 library(ggfortify)
 
-```
+source(here::here("400_analysis", "functions.R"))
 
-```{r DefineKeyFunctions}
-assess_year_source <- function(df){
-  df %>% 
-  dplyr::select(source, year) %>%
-  group_by(year, source) %>% 
-  count(year) %>%
-  rename(count = n) %>%
-  pivot_wider(id_cols = c(source), names_from = year, values_from = c(count), values_fill = 0) %>%
-  janitor::adorn_totals(c("row", "col")) %>%
-  kable()
-} 
-read_cqpweb <- function(filename){
-  read.csv(
-    here("100_data_raw", filename), 
-    skip = 3, sep = "\t") %>% 
-    janitor::clean_names()
-}
 ```
 
 ```{r loadData}
@@ -201,6 +193,19 @@ report::report(t.test(wordcount_broadsheet,wordcount_tabloid))
 
 Yes, overall articles in tabloids are significantly shorter than in broadsheets.
 
+This is confirmed using an FP test:
+
+```{r}
+fp_test(
+  wc1 = wordcount_broadsheet,
+    wc2 = wordcount_tabloid,
+    label1 = "broadsheet",
+    label2 = "tabloid",
+    dist = mydistribution
+)
+```
+
+
 If we then test the difference between the frequency of the word "overweight" in tabloids and broadsheets, we can see that a higher frequency per 1000 words is detected for usage of the word "overweight" in tabloids than broadsheets. 
 
 ```{r DiffFreq, results="asis"}
@@ -211,6 +216,18 @@ report::report(t.test(frequency_broadsheet, frequency_tabloid))
 ```
 
 So, yes, the frequency of use of the word "overweight" is lower in broadsheets than in tabloids.
+
+This is confirmed using an FP test:
+
+```{r}
+fp_test(
+  wc1 = frequency_broadsheet,
+    wc2 = frequency_tabloid,
+    label1 = "broadsheet",
+    label2 = "tabloid",
+    dist = mydistribution
+)
+```
 
 Let's use bootstrapping to see if the raw frequencies of usage of the word "overweight" are different?
 
@@ -251,6 +268,18 @@ report::report(
 )
 ```
 
+This is confirmed using an FP test:
+
+```{r}
+fp_test(
+  wc1 = broadsheet_counts,
+    wc2 = tabloid_counts,
+    label1 = "broadsheet",
+    label2 = "tabloid",
+    dist = mydistribution
+)
+```
+
 Let's look at a jitter plot of the data:
 
 ```{r yearSourceTypeJitter}
@@ -276,6 +305,50 @@ The jitter plot suggests that:
 
 - Tabloids have a higher frequency of usage than broadsheets
 - There may be a subtle decrease in frequency with time, especially in broadsheets
+
+### Comparing observed to normalised to subcorpus size data
+
+We can investigate the prevalence of the use of "overweight" using goodness of fit tests, comparing the distribution in:
+
+- tabloids vs broadsheets
+- left and right leaning publications
+
+We can do this by looking at:
+
+- the total number of instances in each subcorpus, normalised to the total number of words in each subcorpus
+- the number of articles that feature this language type, normalised to the total number of articles in each subcorpus
+
+#### Tabloids vs broadsheets
+
+The total number of uses of "overweight" we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p < 0.001).
+
+```{r}
+chisq_instances_wc_normalised(overweight_annotated_filtered, metadata_full, source_type)
+```
+
+The number of articles with use of "overweight" we observe is higher in tabloids and lower in broadsheets than we would expect based on the article count in these subcorpora (p < 0.001).
+
+```{r}
+chisq_articles_totalart_normalised(overweight_annotated_filtered, metadata_full, source_type)
+```
+
+#### Left vs right-leaning publications
+
+The total number of uses of "overweight" we observe is higher in right and lower in left-leaning publications than we would expect based on the word count in these subcorpora (p < 0.001).
+
+```{r}
+chisq_instances_wc_normalised(overweight_annotated_filtered, metadata_full, orientation)
+```
+
+
+The number of articles that use "overweight" we observe is somewhat higher in right and lower in left-leaning publications than we would expect based on total article count in these subcorpora (p < 0.002).
+
+```{r}
+chisq_articles_totalart_normalised(overweight_annotated_filtered, metadata_full, orientation)
+```
+
+
+
 
 
 ## Differences in usage by source

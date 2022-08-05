@@ -9,3 +9,4 @@ It considers whether there are differences in usage for the following in the Aus
 - ["Obese" used as an adjective](./400_analysis/02_obese.html)
 - ["Overweight" used as an adjective](./400_analysis/03_overweight.html)
 - ["Fat" used with a negative connotation](./400_analysis/04_fat.html)
+- ["Frequency vs instances analysis"](./400_analysis/05_ShowcaseCounts.html)
