@@ -1,8 +1,10 @@
 ---
 title: "Loading and exploring Spacy-annotated tags."
+message: false
+warning: false
 ---
 
-In this file, we start by loading and exploring the data as provided by CQPweb.
+In this file, we start by loading and exploring the data from Spacy. We do not explore the tags as these did not end up used in the project. 
 
 ```{r loadLibs}
 library(here)
@@ -82,6 +84,7 @@ condition_first_full <- full_join(
   condition_first_annotated,
   {condition_first_spacy_monika_defined %>% group_by(article_id) %>% count()}
 )
+
 ```
 
 

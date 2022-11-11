@@ -4,12 +4,12 @@ title: "Loading and exploring the data"
 
 ### Executive summary
 
-In the below document, we show that we should use the Python-generated total word count for calculating normalised frequencies (or the counts provided in the metadata, the two are nearly identical and well correlated across all text lengths.
+In the below document, we show that we should use the Python-generated total word count for calculating normalised frequencies (or the counts provided in the metadata, as the two are nearly identical and well correlated across all text lengths.
 
 
 ***
 
-In this file, we start by loading and exploring the data for the obesity corpus.
+In this file, we start by loading and exploring the data for the Australian Obesity Corpus.
 
 ```{r getData}
 library(here)
@@ -69,7 +69,7 @@ write_csv(fat_annotated, file = here::here("200_data_clean", "fat_annotated.csv"
 
 ```
 
-Check that all `text` in the CQP web export file are found in the `article_id` of the metadata file. 
+Check that all `text` in the CQP web export file are found in the `article_id` of the metadata file, to ensure that there was no corruption of `article_id`s when we imported and exported from CQPWeb.
 
 
 ```{r checkArticleID, echo=TRUE}
@@ -87,6 +87,8 @@ Yes, this is true for all of them.
 Have we sampled the articles consistently by month, year and publication?
 
 ```{r}
+#| label: tbl-1
+#| tbl-cap: Number of articles by source and year.
 assess_year_source <- function(df, var){
   var <- enquo(var)
   df %>% 
@@ -103,10 +105,13 @@ assess_year_source(metadata_full, year)
 ```
 
 We can see that we are:
+
 - missing articles from the Brisbane Times and Daily Telegraph in 2008-2012.
 - There are fewer articles in 2019 than in previous years. Let's explore if we have data for all of the months for that year:
 
 ```{r byMonth}
+#| label: tbl-2
+#| tbl-cap: Number of articles by source and month of publication.
 metadata_full %>%
   filter(year == 2019) %>%
   assess_year_source(., month_metadata)
@@ -116,6 +121,8 @@ We can see that we do have data for each month from 2019, although there are man
 
 Let's also visualise this trend by publication
 ```{r byNoArticlesBySource}
+#| label: fig-1
+#| fig-cap: Number of articles by publication and year. The overall number of articles featuring the terms seems to decrease with time. 
 metadata_full %>%
   group_by(source, year) %>%
   count() %>%
@@ -128,6 +135,8 @@ metadata_full %>%
 We can also look at this using facets:
 
 ```{r byNoArticlesBySourceFacet}
+#| label: fig-2
+#| fig-cap: Number of articles by publication and year, faceted by source publication.
 metadata_full %>%
   group_by(source, year) %>%
   count() %>%
@@ -152,6 +161,8 @@ This could be due to:
 It is important for us to acknowledge this trend, as it will influence our inferences around using the raw number of articles in temporal comparisons.
 
 ```{r declineBoxplot}
+#| label: fig-3
+#| fig-cap: Boxplot of articles by year. The overall number of articles featuring the terms seems to decrease with time. 
 metadata_full %>%
   # don't have all years of data for these
   filter(!(source %in% c("BrisTimes", "Telegraph"))) %>%
@@ -173,6 +184,8 @@ When carrying out modelling, it is often important to use data normalised to art
 First, compare the counts from Python and the metadata:
 
 ```{r WC_python_metadata}
+#| label: fig-4
+#| fig-cap: Correlation between word counts derived from the Lexis-supplied metadata and generated via Python counting. The correlation seems to be near-perfect (blue dashed line shows perfect equality, red is line of best fit of data). 
 p <- condition_first_annotated %>%
   ggplot(aes(x = wordcount_total,
              y = wordcount_from_metatata)) + 
@@ -189,6 +202,8 @@ The word counts are well correlated across all text lengths.
 Next, we compare the word counts from CQP-web and the metadata:
 
 ```{r WC_cqp_metadata}
+#| label: fig-5
+#| fig-cap: Correlation between word counts derived from the Lexis-supplied metadata and reported by CQPweb. It appears that there is a strong overestimate of word counts by CQPweb.
 p <- condition_first_annotated %>%
   ggplot(aes(x = no_words_in_text,
              y = wordcount_from_metatata)) + 
@@ -204,6 +219,8 @@ We can see that the longer the text, the more the counts do not match what is in
 We can add a smoothed conditional means line (in red) to show the deviation between the identity line (y = x, shown dashed in blue) and the line of best fit:
 
 ```{r WC_cqp_metadatasmooth}
+#| label: fig-6
+#| fig-cap: Correlation between word counts derived from the Lexis-supplied metadata and reported by CQPweb. The blue dashed line shows perfect equality, red is line of best fit of data. The overestimate by CQPweb is clearly detectable.  
 condition_first_annotated %>%
   ggplot(aes(x = no_words_in_text,
              y = wordcount_from_metatata)) + 
@@ -220,6 +237,8 @@ To make this more apparent, we plot the difference between the metadata-provided
 
 
 ```{r}
+#| label: fig-7
+#| fig-cap: Boxplot of absolute difference between (Python-metadata) and (CQPweb-metadata) derived word counts. It's clear that the longer the text, the more CQPweb overestimates the word count, especially for the top decile of texts by length.  
 condition_first_annotated %>%
   mutate(
     `Python - metadata` = (abs(wordcount_total - wordcount_from_metatata)),
@@ -240,6 +259,8 @@ condition_first_annotated %>%
 This also affects the normalised counts. To show this, we have broken the dataset into 6 groups based on text length, with 1 being the shortest and 6 being the longest texts. We can see that for the ~500 longest texts (panel 6), the line of best fit between frequencies is curved, showcasing how the normalised frequency is under-estimated for longer texts (due to the denominator for normalisation being bigger, as punctuation is included in the calculation).
 
 ```{r normFreqDiff}
+#| label: fig-8
+#| fig-cap: Comparison of effect of using CQPweb vs Python word counts by texts grouped into 6 length bins  
 condition_first_annotated %>%
   mutate(frequency = 10^6*no_hits_in_text/wordcount_total,
          length_quantile = ntile(desc(condition_first_annotated$wordcount_total),6)) %>%

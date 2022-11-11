@@ -1,12 +1,16 @@
-## Exploring usage of the word "overweight"
+---
+title: "Exploring usage of the lemma OVERWEIGHT"
+author: "Darya Vanichkina"
+fig-cap-location: bottom
+---
 
-There is interest in exploring statistics around the use of the word "overweight" around the following research questions:
+There is interest in exploring statistics around the use of OVERWEIGHT around the following research questions:
 
-- Do tabloids use "overweight" more than broadsheets? 
-- Or do broadsheets use "overweight" more than tabloids? 
+- Do tabloids use OVERWEIGHT more than broadsheets? 
+- Or do broadsheets use OVERWEIGHT more than tabloids? 
 - Or is there no discernible pattern of use?  
-- Is there any newspaper that uses overweight more than others? 
-- Any year where overweight is the most frequent/least frequent? 
+- Is there any newspaper that uses OVERWEIGHT more than others? 
+- Any year where OVERWEIGHT is the most frequent/least frequent? 
 
 Additional question:
 
@@ -14,26 +18,26 @@ Additional question:
 
 ### Executive summary
 
-1. Tabloids use the word "overweight" more frequently than broadsheets.
+**1. Tabloids use OVERWEIGHT more frequently than broadsheets.**
 
-- The total number of uses of "overweight" we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p < 0.001).
+- The total number of uses of OVERWEIGHT we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p < 0.001).
 
-- The number of articles with use of "overweight" we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p < 0.001).
+- The number of articles with use of OVERWEIGHT we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p < 0.001).
 
 - More specifically, a Welch Two Sample t-test testing the difference between the frequency in broadsheets per 1000 words and frequency in tabloids (mean of broadsheets = 3.55, mean of tabloids = 5.73) suggests that the effect is negative, statistically significant, and small (difference = -2.18, 95% CI [-2.42, -1.95], t(6712.33) = -18.20, p < .001; Cohen's d = -0.43, 95% CI [-0.48, -0.38])
 
-- The total number of uses of "overweight" we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p < 0.001).
+- The total number of uses of OVERWEIGHT we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p < 0.001).
 
-- The number of articles with use of "overweight" we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p < 0.001).
+- The number of articles with use of OVERWEIGHT we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p < 0.001).
 
 
-2. Tabloids have shorter article lengths than broadsheets, as demonstrated in the [analysis of obese]("./03_obese.html").
+**2. Tabloids have shorter article lengths than broadsheets, as demonstrated in the [analysis of OBESE](./03_obese.html).**
 
-3. Investigating the data by source and year revealed that these variables explained a small amount of variance in the data, with the word overweight being used less frequently in the Age, Australian, Canberra Times and Sydney Morning Herald relative to the Advertiser, while in the Hobart Mercury and Northern Territorian it was used somewhat more frequently than in the Advertiser. Use of the word "overweight" decreased with time in the corpus.
+**3. Investigating the data by source and year revealed that these variables explained a small amount of variance in the data, with OVERWEIGHT being used less frequently in the Age, Australian, Canberra Times and Sydney Morning Herald relative to the Advertiser, while in the Hobart Mercury and Northern Territorian it was used somewhat more frequently than in the Advertiser. Use of OVERWEIGHT decreased with time in the corpus.**
 
-4. Significant differences in the use of "overweight" were observed in articles on different topics, with articles annotated as "Bio-medical Research", "Women and Pregnancy" and "Children & Parents" using more instances per 1000 words than articles discussing "Politics", schooling and "Music and Movies". 
+**4. Significant differences in the use of OVERWEIGHT were observed in articles on different topics, with articles annotated as "Bio-medical Research", "Women and Pregnancy" and "Children & Parents" using more instances per 1000 words than articles discussing "Politics", schooling and "Music and Movies". **
 
-5. Significant differences in article topics were also observed between tabloids and broadsheets, as discussed in the [analysis of obese]("./03_obese.html").
+**5. Significant differences in article topics were also observed between tabloids and broadsheets, as discussed in the [analysis of OBESE](./03_obese.html).**
 
 ### Data source
 
@@ -73,11 +77,24 @@ overweight_annotated <- inner_join(
   mutate(frequency = 10^3*no_hits_in_text/wordcount_total) 
 ```
 
+We group articles into tabloids and broadsheets, and by orientation, in the following manner:
+
+```{r}
+#| tbl-cap: Classification of sources into types and by orientation.
+#| label: tbl-l1
+metadata_full |>
+  select(source, source_type, orientation) |>
+  distinct() |>
+  kable()
+```
+
 ## Tabloid vs broadsheet
 
-What is the distribution of "overweight" in articles?
+What is the distribution of OVERWEIGHT in articles?
 
 ```{r overweightDistr}
+#| fig-cap: Number of uses of OVERWEIGHT across articles from broadsheets and tabloids.
+#| label: fig-l2
 overweight_annotated %>%
   ggplot(aes(x = no_hits_in_text, fill = source_type)) +
   geom_bar(position = "dodge2") +
@@ -99,6 +116,8 @@ It seems like there is more usage in tabloids than broadsheets. Let's divide the
 
 
 ```{r overweightDistrNorm}
+#| fig-cap: Number of uses of OVERWEIGHT across articles from broadsheets and tabloids, normalised to the number of articles in tabloids and broadsheets in which OVERWEIGHT is used.
+#| label: fig-l294949
 overweight_annotated %>%
   group_by(source_type, no_hits_in_text) %>%
   count() %>%
@@ -121,17 +140,21 @@ We can see that the trend of higher usage holds true for tabloids even if we con
 How is this usage distributed by year (number of articles in corpus)?
 
 ```{r yearNarticles}
+#| tbl-cap: Number of articles that use OVERWEIGHT by year and source.
+#| label: tbl-l2
 overweight_annotated_filtered <- overweight_annotated %>%
   filter(!(source %in% c("BrisTimes", "Telegraph")))
 
 assess_year_source(overweight_annotated)
 ```
 
-We can see that apart from the Brisbane times and Daily Telegraph, there are articles using "overweight" every year and in every publication. We will filter out these two sources.
+We can see that apart from the Brisbane times and Daily Telegraph, there are articles using OVERWEIGHT every year and in every publication. We will filter out these two sources.
 
-How is the frequency (per thousand words) of the usage of overweight distributed by tabloids/broadsheets?
+How is the frequency (per thousand words) of the usage of OVERWEIGHT distributed by tabloids/broadsheets?
 
 ```{r tabloidBroadsheet}
+#| fig-cap: Frequency per 1000 words of usage of OVERWEIGHT in tabloids and broadsheets.
+#| label: fig-l4
 overweight_annotated_filtered %>%
   ggplot(aes(x = source_type, y = log(frequency))) + 
   geom_boxplot() + 
@@ -146,6 +169,8 @@ We can see that the frequency is slightly higher in tabloids than in broadsheets
 And let's also use a histogram to look at the distribution:
 
 ```{r tabloidBroadsheetHist}
+#| fig-cap: Histogram of the distribution of usage of OVERWEIGHT in tabloids and broadsheets.
+#| label: fig-l5
 overweight_annotated_filtered %>%
   ggplot(aes(fill = source_type,x = log(frequency))) + 
   geom_histogram() + 
@@ -159,6 +184,8 @@ overweight_annotated_filtered %>%
 Note that broadsheets have somewhat longer texts than tabloids:
 
 ```{r tabBroadWC}
+#| fig-cap: Length of articles that use the lemma OVERWEIGHT in tabloids and broadsheets.
+#| label: fig-l6
 overweight_annotated_filtered %>%
   ggplot(aes(x = source_type, y = log(wordcount_total))) + 
   geom_boxplot() + 
@@ -171,6 +198,8 @@ overweight_annotated_filtered %>%
 Let's use a histogram to look at the distribution in more detail: 
 
 ```{r tabBroadWC2}
+#| fig-cap: Histogram of article lengths in tabloids and broadsheets that use the lemma OVERWEIGHT.
+#| label: fig-l7
 overweight_annotated_filtered %>%
   ggplot(aes(fill = source_type, x = log(wordcount_total))) + 
   geom_histogram(binwidth = 0.1)+ 
@@ -182,7 +211,7 @@ overweight_annotated_filtered %>%
 
 The log-transformed word count data is approximately normally distributed.
 
-Let's see if the difference in length of articles using the word "overweight" in tabloids and broadsheets is significant? 
+Let's see if the difference in length of articles using OVERWEIGHT in tabloids and broadsheets is significant? 
 
 ```{r WCdiff, results="asis"}
 wordcount_broadsheet <- overweight_annotated_filtered[overweight_annotated_filtered$source_type == "broadsheet","wordcount_total"]
@@ -206,7 +235,7 @@ fp_test(
 ```
 
 
-If we then test the difference between the frequency of the word "overweight" in tabloids and broadsheets, we can see that a higher frequency per 1000 words is detected for usage of the word "overweight" in tabloids than broadsheets. 
+If we then test the difference between the frequency of OVERWEIGHT in tabloids and broadsheets, we can see that a higher frequency per 1000 words is detected for usage of OVERWEIGHT in tabloids than broadsheets. 
 
 ```{r DiffFreq, results="asis"}
 frequency_broadsheet <- overweight_annotated_filtered[overweight_annotated_filtered$source_type == "broadsheet","frequency"]
@@ -215,7 +244,7 @@ frequency_tabloid <- overweight_annotated_filtered[overweight_annotated_filtered
 report::report(t.test(frequency_broadsheet, frequency_tabloid))
 ```
 
-So, yes, the frequency of use of the word "overweight" is lower in broadsheets than in tabloids.
+So, yes, the frequency of use of OVERWEIGHT is lower in broadsheets than in tabloids.
 
 This is confirmed using an FP test:
 
@@ -229,9 +258,11 @@ fp_test(
 )
 ```
 
-Let's use bootstrapping to see if the raw frequencies of usage of the word "overweight" are different?
+Let's use bootstrapping to see if the raw frequencies of usage of OVERWEIGHT are different?
 
 ```{r bootstrap, cache=TRUE}
+#| fig-cap: Histogram of sampling of counts per article of the raw frequency of use of OVERWEIGHT in tabloids and broadsheets.
+#| label: fig-l7kdkdkd
 broadsheet_counts <- NULL
 tabloid_counts <- NULL
 
@@ -257,7 +288,7 @@ counts_comparison %>%
   geom_histogram()
 ```
 
-It is interesting that the distribution of usage of "overweight" is ~1.8 uses per article in tabloid publications (the results for "obese" were 1.6), while the distribution for broadsheets was bimodal.
+It is interesting that the distribution of usage of OVERWEIGHT is ~1.8 uses per article in tabloid publications (the results for "OVERWEIGHT" were 1.6), while the distribution for broadsheets was bimodal.
 
 ```{r ttest, results="asis"}
 report::report(
@@ -283,6 +314,8 @@ fp_test(
 Let's look at a jitter plot of the data:
 
 ```{r yearSourceTypeJitter}
+#| fig-cap: Raw and smoothed frequency of use of OVERWEIGHT in the corpus in tabloids and broadsheets, by year and publication type.
+#| label: fig-l10
 overweight_annotated_filtered %>%
   ggplot(aes(x = as.factor(year), 
              y = log(frequency), 
@@ -308,7 +341,7 @@ The jitter plot suggests that:
 
 ### Comparing observed to normalised to subcorpus size data
 
-We can investigate the prevalence of the use of "overweight" using goodness of fit tests, comparing the distribution in:
+We can investigate the prevalence of the use of OVERWEIGHT using goodness of fit tests, comparing the distribution in:
 
 - tabloids vs broadsheets
 - left and right leaning publications
@@ -320,31 +353,39 @@ We can do this by looking at:
 
 #### Tabloids vs broadsheets
 
-The total number of uses of "overweight" we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p < 0.001).
+The total number of uses of OVERWEIGHT we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p < 0.001).
 
 ```{r}
-chisq_instances_wc_normalised(overweight_annotated_filtered, metadata_full, source_type)
+#| tbl-cap: Chi-Squared test for number of uses of OVERWEIGHT in tabloids and broadsheets vs what would be expected given word count across all articles in the publication types.
+#| label: tbl-l11
+chisq_instances_wc_normalised(overweight_annotated_filtered, metadata_full, source_type) |> kable()
 ```
 
-The number of articles with use of "overweight" we observe is higher in tabloids and lower in broadsheets than we would expect based on the article count in these subcorpora (p < 0.001).
+The number of articles with use of OVERWEIGHT we observe is higher in tabloids and lower in broadsheets than we would expect based on the article count in these subcorpora (p < 0.001).
 
 ```{r}
-chisq_articles_totalart_normalised(overweight_annotated_filtered, metadata_full, source_type)
+#| tbl-cap: Chi-Squared test for number of articles that use OVERWEIGHT in tabloids and broadsheets vs what would be expected given total number of articles in the publication types.
+#| label: tbl-l12
+chisq_articles_totalart_normalised(overweight_annotated_filtered, metadata_full, source_type) |> kable()
 ```
 
 #### Left vs right-leaning publications
 
-The total number of uses of "overweight" we observe is higher in right and lower in left-leaning publications than we would expect based on the word count in these subcorpora (p < 0.001).
+The total number of uses of OVERWEIGHT we observe is higher in right and lower in left-leaning publications than we would expect based on the word count in these subcorpora (p < 0.001).
 
 ```{r}
-chisq_instances_wc_normalised(overweight_annotated_filtered, metadata_full, orientation)
+#| tbl-cap: Chi-Squared test for number of uses of OVERWEIGHT in left and right leaning publications vs what would be expected given word count across all articles in the publication types.
+#| label: tbl-l13
+chisq_instances_wc_normalised(overweight_annotated_filtered, metadata_full, orientation) |> kable()
 ```
 
 
-The number of articles that use "overweight" we observe is somewhat higher in right and lower in left-leaning publications than we would expect based on total article count in these subcorpora (p < 0.002).
+The number of articles that use OVERWEIGHT we observe is somewhat higher in right and lower in left-leaning publications than we would expect based on total article count in these subcorpora (p < 0.002).
 
 ```{r}
-chisq_articles_totalart_normalised(overweight_annotated_filtered, metadata_full, orientation)
+#| tbl-cap: Chi-Squared test for number of articles that use OVERWEIGHT left and right leaning publications vs what would be expected given total number of articles in the publication types.
+#| label: tbl-l14
+chisq_articles_totalart_normalised(overweight_annotated_filtered, metadata_full, orientation) |> kable()
 ```
 
 
@@ -356,6 +397,8 @@ chisq_articles_totalart_normalised(overweight_annotated_filtered, metadata_full,
 Is there a difference in the usage of overweight by source?
 
 ```{r sourceBoxplot}
+#| fig-cap: Box plot of usage of OVERWEIGHT by source.
+#| label: fig-l123
 overweight_annotated_filtered %>%
   ggplot(aes(x = reorder(source,frequency), 
              y = log(frequency), 
@@ -371,6 +414,8 @@ The visualisation suggests there are not - only the differences observed above f
 What are the means and standard deviations of the frequency by source?
 
 ```{r summariseBySource}
+#| tbl-cap: Mean, median and standard deviation of frequency of use of OVERWEIGHT by source.
+#| label: tbl-l15
 overweight_annotated_filtered %>% 
   group_by(source) %>%
   summarise(
@@ -384,13 +429,15 @@ overweight_annotated_filtered %>%
   kable()
 ```
 
-It seems that within the different sources among broadsheets there is not much difference among the frequency of use of the word "overweight". Among tabloids, the Hobart Mercury and the Northern Territorian seem to have higher frequency of use of "overweight" than other tabloids. 
+It seems that within the different sources among broadsheets there is not much difference among the frequency of use of OVERWEIGHT. Among tabloids, the Hobart Mercury and the Northern Territorian seem to have higher frequency of use of OVERWEIGHT than other tabloids. 
 
 ## Differences in usage by year
 
-Is there any year when "overweight" is used more frequently than others? 
+Is there any year when OVERWEIGHT is used more frequently than others? 
 
 ```{r yearBoxplot}
+#| fig-cap: Use of OVERWEIGHT by year, sorted by median use per year from least frequent to most frequent.
+#| label: fig-l12
 overweight_annotated_filtered %>%
   ggplot(aes(x = reorder(year,frequency), 
              y = log(frequency), 
@@ -405,6 +452,8 @@ overweight_annotated_filtered %>%
 Based on the visualisation it seems not. If we separate out by source there also doesn't seem to be much difference. If we use a jitter plot to visualise the data, then fit a smoothing line and compare with the line of "no change" (dashed red line), we can see that there really isn't much of a difference by source and year: 
 
 ```{r yearSourceJitter}
+#| fig-cap: Use of OVERWEIGHT by year and source, split by publication.
+#| label: fig-l13
 overweight_annotated_filtered %>%
   ggplot(aes(x = as.factor(year), 
              y = log(frequency), 
@@ -428,6 +477,8 @@ There may be a slight increase over time in the Courier Mail.
 The distributions each year also look quite similar:
 
 ```{r distrib}
+#| fig-cap: Violin plot of the distributions of use of OVERWEIGHT by year.
+#| label: fig-l14
 overweight_annotated_filtered %>%
   ggplot(aes(x = reorder(year,frequency), 
              y = log(frequency), 
@@ -440,6 +491,8 @@ overweight_annotated_filtered %>%
 
 
 ```{r yearMeanSD}
+#| tbl-cap: Descriptive statistics of the use of OVERWEIGHT by year across the dataset.
+#| label: tbl-l168f8f
 overweight_annotated_filtered %>% 
   group_by(year) %>%
   summarise(
@@ -460,6 +513,8 @@ We can also try to simultaneously model differences by source type, source and y
 As expected, a model that includes the source type (tabloid vs broadsheet) gives a better fit than one that does not:
 
 ```{r}
+#| tbl-cap: Comparison of model summary statistics for simple linear models that incorporate source, scaled year and/or source type.
+#| label: tbl-l17
 overweight_annotated_filtered$scaled_year <- scale(
   overweight_annotated_filtered$year, scale = F)
 
@@ -513,6 +568,8 @@ anova(m_0_base, m_0_sourceyear)
 ```
 
 ```{r}
+#| fig-cap: Plot of model residuals for the fixed effects model log(frequency) ~ source + scaled_year.
+#| label: fig-l20
 source(here::here("400_analysis","model_diagnostics.R"))
 
 df_model_resid <- get_model_resid_df(m_0_sourceyear)
@@ -531,22 +588,26 @@ All of these indicate the model is performing reasonably well on the data.
 Let's summarise the model (note that the intercept corresponds to the "first" source, i.e. the Advertiser):
 
 ```{r sjplot}
+#| tbl-cap: Coefficients and confidence intervals for the fixed effects model log(frequency) ~ source + scaled_year.
+#| label: tbl-l22jsjsjs
 sjPlot::tab_model(m_0_sourceyear) 
 ```
 
-This model is suggesting that relative to the Advertiser, the Age, Australian, Canberra Times and Sydney Morning Herald (so all broadsheets) have lower frequency of usage of "overweight", while the Hobart Mercury and Northern Territorian have higher frequency of usage.  The word "overweight" is used less frequently in later years in the corpus relative to earlier ones.
+This model is suggesting that relative to the Advertiser, the Age, Australian, Canberra Times and Sydney Morning Herald (so all broadsheets) have lower frequency of usage of OVERWEIGHT, while the Hobart Mercury and Northern Territorian have higher frequency of usage.  OVERWEIGHT is used less frequently in later years in the corpus relative to earlier ones.
 
 
 ```{r warnings="false", results="asis"}
 report::report(m_0_sourceyear)
 ```
 
-To summarise, a model was fit by source and year, which explains a very small amount of variance in the data. It showed that the Age, Australian, Canberra Times and Sydney Morning Herald had a lower frequency of use of the word "overweight" relative to the Advertiser, while in the Hobart Mercury, Northern Territorian the word "overweight" was used somewhat more frequently than in the Advertiser.  The word "overweight" is used less frequently in later years in the corpus relative to earlier ones.
+To summarise, a model was fit by source and year, which explains a very small amount of variance in the data. It showed that the Age, Australian, Canberra Times and Sydney Morning Herald had a lower frequency of use of OVERWEIGHT relative to the Advertiser, while in the Hobart Mercury, Northern Territorian OVERWEIGHT was used somewhat more frequently than in the Advertiser.  OVERWEIGHT is used less frequently in later years in the corpus relative to earlier ones.
 
 
 Next, let's compare if using a mixed model improves the fit of the model.
 
 ```{r lme}
+#| tbl-cap: Comparison of model summary statistics for linear mixed effects models that incorporate source, scaled year and/or source type.
+#| label: tbl-l18
 m_1_source <- lmer(log(frequency) ~  1 + (1|source), 
                 data = overweight_annotated_filtered, REML = T)
 
@@ -588,8 +649,9 @@ rbind(
 The AIC of the fixed effects model is lower than that of the mixed effects models. However, if we use the Bayesian Information Criteria as our metric for choosing a model, the random effects model for `scaled_year` by source with `source_type` as a fixed effect was identified as the best preforming model. 
 
 ```{r sjplot2}
+#| tbl-cap: Coefficients and confidence intervals for the mixed effects model log(frequency) ~  scaled_year + source_type + scaled_year/source.
+#| label: tbl-l22
 # broom.mixed::tidy(as(m_1_source_year_type2,"merModLmerTest"), effects="fixed")
-
 sjPlot::tab_model(m_1_source_year_type2) 
 ```
 
@@ -604,19 +666,23 @@ report::report(m_1_source_year_type2)
 The intercepts for each of the sources were:
 
 ```{r}
+#| tbl-cap: Intercepts and coefficients for the mixed effects model log(frequency) ~  scaled_year + source_type + scaled_year/source.
+#| label: tbl-l24
 coef(m_1_source_year_type2)$source %>% 
   arrange(`(Intercept)`) %>% 
   kable()
 ```
 
 
-This random effects model for source and year included a fixed effect for source type, which explains a very small amount of variance in the data.  The word "overweight" is used less frequently in later years in the corpus relative to earlier ones, and more frequently in tabloids than in broadsheets.
+This random effects model for source and year included a fixed effect for source type, which explains a very small amount of variance in the data.  OVERWEIGHT is used less frequently in later years in the corpus relative to earlier ones, and more frequently in tabloids than in broadsheets.
 
 
 
 ## Differences in usage by topic
 
 ```{r topic_use}
+#| fig-cap: Frequency of use of OVERWEIGHT per 1000 words in articles annotated with specific topic lables.
+#| label: fig-l25
 overweight_annotated_filtered %>%
   ggplot(aes(x = as.factor(
     reorder(topic_label,frequency)), 
@@ -635,6 +701,8 @@ It seems there are some topics that use overweight more than others.
 We use a simple linear model with post-hoc comparisons and Bonferroni multiple testing correction:
 
 ```{r topicDiffs}
+#| tbl-cap: Differences in use of OVERWEIGHT in articles annoated with specific topics, with topics compared pairwise with each other. 
+#| label: tbl-l25
 overweight_by_topic <- lm(
   frequency ~ as.factor(topic_label), 
   data = overweight_annotated_filtered)
@@ -647,5 +715,5 @@ overweight_by_topic_comp$contrasts %>%
   kable()
 ```
 
-We can see that there are differences in the  frequency of use of the word "overweight" by topic, with articles annotated as "Bio-medical Research", "Children and Parents" using more instances per 1000 words than articles discussing politics, schooling, transport and commuting.
+We can see that there are differences in the  frequency of use of OVERWEIGHT by topic, with articles annotated as "Bio-medical Research", "Children and Parents" using more instances per 1000 words than articles discussing politics, schooling, transport and commuting.
 

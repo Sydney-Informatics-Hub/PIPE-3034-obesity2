@@ -1,4 +1,9 @@
-## Showcase counts vs frequncy comparison
+---
+title: "Comparison of statistical test outcomes on synthetic data when counts vs frequency are different between two groups of publications."
+author: "Darya Vanichkina"
+fig-cap-location: bottom
+---
+
 
 ```{r loadLibs}
 library(here)
@@ -38,6 +43,8 @@ tabl_wc <- tabl_wc[tabl_wc > 0]
 Let's plot these:
 
 ```{r}
+#| fig-cap: Histogram of the word counts sampled from the distribution for broadsheet and tabloid data.
+#| label: fig-l25
 histogram_pairwise(
   wc1 = broad_wc,
   wc2 = tabl_wc,
@@ -56,7 +63,7 @@ tabl_freq <- 1000/tabl_wc
 
 Note that we observe a SIGNIFICANT difference between the two samples, even though we have simulated them to each feature only ONE instance of the preferred language type. 
 
-```{r}
+```{r results="asis"}
 report::report(t.test(broad_freq, tabl_freq))
 ```
 
