@@ -957,7 +957,7 @@ The total number of uses of condition-first language we observe is higher in tab
 #| label: tbl-l37
 #| tbl-cap: Results of goodness of fit test of the number of uses of condition-first language we observe in tabloids and broadsheets relative to the total word count across these two types of sources.
 
-chisq_instances_wc_normalised(condition_first_annotated, metadata_full, source_type)
+chisq_instances_wc_normalised(condition_first_annotated, metadata_full, source_type) |> kable()
 ```
 
 The number of articles with condition-first language we observe is also higher in tabloids and lower in broadsheets than we would expect based on the total article count in these subcorpora (p \< 0.001).
@@ -966,7 +966,7 @@ The number of articles with condition-first language we observe is also higher i
 #| label: tbl-l38
 #| tbl-cap: Results of goodness of fit test of the number of articles that use condition-first language we observe in tabloids and broadsheets relative to the total word count across these two types of sources.
 
-chisq_articles_totalart_normalised(condition_first_annotated, metadata_full, source_type)
+chisq_articles_totalart_normalised(condition_first_annotated, metadata_full, source_type) |> kable()
 ```
 
 ### Left vs right-leaning publications
@@ -977,16 +977,16 @@ The total number of uses of condition-first language we observe is higher in rig
 #| label: tbl-l39
 #| tbl-cap: Results of goodness of fit test of the number of uses of condition-first language we observe in right and left leaning publications relative to the total word count across these two types.
 
-chisq_instances_wc_normalised(condition_first_annotated, metadata_full, orientation)
+chisq_instances_wc_normalised(condition_first_annotated, metadata_full, orientation) |> kable()
 ```
 
 The number of articles with condition-first language we observe is also is higher in right and lower in left-leaning publications than we would expect based on the total article count in these subcorpora (p \< 0.001).
 
 ```{r}
-#| label: tbl-l40
+#| label: tbl-l4dddd
 #| tbl-cap: Results of goodness of fit test of the number of articles that use condition-first language we observe in left and right leaning publications relative to the total word count across these two types.
 
-chisq_articles_totalart_normalised(condition_first_annotated, metadata_full, orientation)
+chisq_articles_totalart_normalised(condition_first_annotated, metadata_full, orientation) |> kable()
 ```
 
 ## Person-first language use
@@ -999,7 +999,7 @@ The total number of uses of person-first language we observe is somewhat higher 
 #| label: tbl-l41
 #| tbl-cap: Results of goodness of fit test of the number of uses of person-first language we observe in tabloids and broadsheets relative to the total word count across these two types of sources.
 
-chisq_instances_wc_normalised(person_first_annotated, metadata_full, source_type)
+chisq_instances_wc_normalised(person_first_annotated, metadata_full, source_type) |> kable()
 ```
 
 The number of articles with person-first language we observe is, in contrast, lower in tabloids and higher in broadsheets than we would expect based on the total article count in these subcorpora (p \< 0.002).
@@ -1008,7 +1008,7 @@ The number of articles with person-first language we observe is, in contrast, lo
 #| label: tbl-l42
 #| tbl-cap: Results of goodness of fit test of the number of articles that use person-first language we observe in tabloids and broadsheets relative to the total word count across these two types of sources.
 
-chisq_articles_totalart_normalised(person_first_annotated, metadata_full, source_type)
+chisq_articles_totalart_normalised(person_first_annotated, metadata_full, source_type) |> kable()
 ```
 
 ### Left vs right-leaning publications
@@ -1019,7 +1019,7 @@ The total number of uses of person-first language we observe is higher in left a
 #| label: tbl-l43
 #| tbl-cap: Results of goodness of fit test of the number of uses of person-first language we observe in right and left leaning publications relative to the total word count across these two types.
 
-chisq_instances_wc_normalised(person_first_annotated, metadata_full, orientation)
+chisq_instances_wc_normalised(person_first_annotated, metadata_full, orientation) |> kable()
 ```
 
 The number of articles with person-first language we observe is also is higher in left and lower in right-leaning publications than we would expect based on the total article count in these subcorpora (p \< 0.002).
@@ -1028,7 +1028,7 @@ The number of articles with person-first language we observe is also is higher i
 #| label: tbl-l44
 #| tbl-cap: Results of goodness of fit test of the number of articles that use person-first language we observe in left and right leaning publications relative to the total word count across these two types.
 
-chisq_articles_totalart_normalised(person_first_annotated, metadata_full, orientation)
+chisq_articles_totalart_normalised(person_first_annotated, metadata_full, orientation) |> kable()
 ```
 
 ## Condition-first language across time

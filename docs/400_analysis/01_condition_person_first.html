@@ -1600,7 +1600,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <details><summary>Code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">PersonFirst</span> <span class="op">&lt;-</span> <span class="va">diff_boot</span><span class="op">$</span><span class="va">person_first</span>
 <span class="va">ConditionFirst</span> <span class="op">&lt;-</span> <span class="va">diff_boot</span><span class="op">$</span><span class="va">condition_first</span>
 <span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">PersonFirst</span>, <span class="va">ConditionFirst</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><p>The Welch Two Sample t-test testing the difference between PersonFirst and ConditionFirst (mean of x = 4.05, mean of y = 122.79) suggests that the effect is negative, statistically significant, and large (difference = -118.74, 95% CI [-118.94, -118.54], t(10744.91) = -1144.40, p &lt; .001; Cohen’s d = -16.18, 95% CI [-16.40, -15.97])</p>
+</details><p>The Welch Two Sample t-test testing the difference between PersonFirst and ConditionFirst (mean of x = 4.03, mean of y = 122.61) suggests that the effect is negative, statistically significant, and large (difference = -118.58, 95% CI [-118.78, -118.38], t(10751.74) = -1151.43, p &lt; .001; Cohen’s d = -16.28, 95% CI [-16.50, -16.06])</p>
 </div>
 <p>This shows that on average of every 1000 articles sampled from the corpus, 4 will use person-first and 122 will use condition-first language.</p>
 <p>A non-parametric FP test supports this result:</p>
@@ -1616,7 +1616,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>
     Approximative Two-Sample Fisher-Pitman Permutation Test
 data:  wc by label (condition, person)
-Z = 140.35, p-value &lt; 1e-04
+Z = 140.36, p-value &lt; 1e-04
 alternative hypothesis: true mu is not equal to 0</code></pre>
 </div>
 <details><summary>Code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">ConditionFirst</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
@@ -1654,7 +1654,7 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 <span class="va">PersonFirst</span> <span class="op">&lt;-</span> <span class="va">diff_boot</span><span class="op">$</span><span class="va">freq_pers_first</span>
 <span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">PersonFirst</span>, 
               <span class="va">ConditionFirst</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><p>The Welch Two Sample t-test testing the difference between PersonFirst and ConditionFirst (mean of x = 8.24, mean of y = 285.14) suggests that the effect is negative, statistically significant, and large (difference = -276.89, 95% CI [-277.51, -276.27], t(10648.85) = -875.70, p &lt; .001; Cohen’s d = -12.38, 95% CI [-12.54, -12.22])</p>
+</details><p>The Welch Two Sample t-test testing the difference between PersonFirst and ConditionFirst (mean of x = 8.23, mean of y = 284.87) suggests that the effect is negative, statistically significant, and large (difference = -276.64, 95% CI [-277.26, -276.01], t(10658.76) = -870.06, p &lt; .001; Cohen’s d = -12.30, 95% CI [-12.47, -12.14])</p>
 </div>
 <p>This shows that on average of every 1000 articles sampled from the corpus, 4 will use person-first and 122 will use condition-first language.</p>
 <p>A non-parametric FP test confirms this result:</p>
@@ -1670,7 +1670,7 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 <pre><code>
     Approximative Two-Sample Fisher-Pitman Permutation Test
 data:  wc by label (condition, person)
-Z = 139.61, p-value &lt; 1e-04
+Z = 139.59, p-value &lt; 1e-04
 alternative hypothesis: true mu is not equal to 0</code></pre>
 </div>
 </div>
@@ -1891,7 +1891,7 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 <pre><code>
     Approximative Two-Sample Fisher-Pitman Permutation Test
 data:  wc by label (condition, person)
-Z = 3.5855, p-value = 8e-04
+Z = 3.5855, p-value = 0.0012
 alternative hypothesis: true mu is not equal to 0</code></pre>
 </div>
 </div>
@@ -1955,7 +1955,7 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 <pre><code>
     Approximative Two-Sample Fisher-Pitman Permutation Test
 data:  wc by label (condition, person)
-Z = 3.3794, p-value = 0.0016
+Z = 3.3794, p-value = 8e-04
 alternative hypothesis: true mu is not equal to 0</code></pre>
 </div>
 </div>
@@ -4589,193 +4589,409 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 </ul>
 <section id="tabloids-vs-broadsheets" class="level3"><h3 data-anchor-id="tabloids-vs-broadsheets">Tabloids vs broadsheets</h3>
 <p>The total number of uses of condition-first language we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p &lt; 0.001).</p>
-<div>
-<details><summary>Code</summary><div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_instances_wc_normalised</span><span class="op">(</span><span class="va">condition_first_annotated</span>, <span class="va">metadata_full</span>, <span class="va">source_type</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="tbl-l37" class="cell tbl-parent quarto-layout-panel" data-tbl-cap="Results of goodness of fit test of the number of uses of condition-first language we observe in tabloids and broadsheets relative to the total word count across these two types of sources." data-hash="01_condition_person_first_cache/html/tbl-l37_a230c6e7e2edc5d8bfe6f5d529f49f29">
-<div class="panel-caption table-caption">
-<p><strong>?(caption)</strong></p>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<pre><code>             variable                                    value
-1              method Chi-squared test for given probabilities
-2           parameter                                        1
-3           statistic                                 308.1251
-4             p.value                             5.593314e-69
-5 broadsheet_observed                                     1866
-6 broadsheet_expected                         2465.34566596664
-7    tabloid_observed                                     2811
-8    tabloid_expected                         2211.65433403336</code></pre>
-</div>
+<div class="cell" data-hash="01_condition_person_first_cache/html/tbl-l37_f4add6d86150877e73d46960d68a0741">
+<details><summary>Code</summary><div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_instances_wc_normalised</span><span class="op">(</span><span class="va">condition_first_annotated</span>, <span class="va">metadata_full</span>, <span class="va">source_type</span><span class="op">)</span> |&gt; <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="tbl-l37">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;20: Results of goodness of fit test of the number of uses of condition-first language we observe in tabloids and broadsheets relative to the total word count across these two types of sources.</caption>
+<thead><tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">method</td>
+<td style="text-align: left;">Chi-squared test for given probabilities</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">parameter</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">statistic</td>
+<td style="text-align: left;">308.1251</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">p.value</td>
+<td style="text-align: left;">5.593314e-69</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">broadsheet_observed</td>
+<td style="text-align: left;">1866</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">broadsheet_expected</td>
+<td style="text-align: left;">2465.34566596664</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tabloid_observed</td>
+<td style="text-align: left;">2811</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tabloid_expected</td>
+<td style="text-align: left;">2211.65433403336</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <p>The number of articles with condition-first language we observe is also higher in tabloids and lower in broadsheets than we would expect based on the total article count in these subcorpora (p &lt; 0.001).</p>
-<div>
-<details><summary>Code</summary><div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_articles_totalart_normalised</span><span class="op">(</span><span class="va">condition_first_annotated</span>, <span class="va">metadata_full</span>, <span class="va">source_type</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="tbl-l38" class="cell tbl-parent quarto-layout-panel" data-tbl-cap="Results of goodness of fit test of the number of articles that use condition-first language we observe in tabloids and broadsheets relative to the total word count across these two types of sources." data-hash="01_condition_person_first_cache/html/tbl-l38_e81fa7c9cce743658e5ed4860599c4ad">
-<div class="panel-caption table-caption">
-<p><strong>?(caption)</strong></p>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<pre><code>             variable                                    value
-1              method Chi-squared test for given probabilities
-2           parameter                                        1
-3           statistic                                 25.73612
-4             p.value                             3.914328e-07
-5 broadsheet_observed                                     1170
-6 broadsheet_expected                         1311.25451974162
-7    tabloid_observed                                     2038
-8    tabloid_expected                         1896.74548025838</code></pre>
-</div>
+<div class="cell" data-hash="01_condition_person_first_cache/html/tbl-l38_210a8b962990bf654e2945185c385649">
+<details><summary>Code</summary><div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_articles_totalart_normalised</span><span class="op">(</span><span class="va">condition_first_annotated</span>, <span class="va">metadata_full</span>, <span class="va">source_type</span><span class="op">)</span> |&gt; <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="tbl-l38">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;21: Results of goodness of fit test of the number of articles that use condition-first language we observe in tabloids and broadsheets relative to the total word count across these two types of sources.</caption>
+<thead><tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">method</td>
+<td style="text-align: left;">Chi-squared test for given probabilities</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">parameter</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">statistic</td>
+<td style="text-align: left;">25.73612</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">p.value</td>
+<td style="text-align: left;">3.914328e-07</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">broadsheet_observed</td>
+<td style="text-align: left;">1170</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">broadsheet_expected</td>
+<td style="text-align: left;">1311.25451974162</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tabloid_observed</td>
+<td style="text-align: left;">2038</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tabloid_expected</td>
+<td style="text-align: left;">1896.74548025838</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 </section><section id="left-vs-right-leaning-publications" class="level3"><h3 data-anchor-id="left-vs-right-leaning-publications">Left vs right-leaning publications</h3>
 <p>The total number of uses of condition-first language we observe is higher in right and lower in left-leaning publications than we would expect based on the word count in these subcorpora (p &lt; 0.001).</p>
-<div>
-<details><summary>Code</summary><div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_instances_wc_normalised</span><span class="op">(</span><span class="va">condition_first_annotated</span>, <span class="va">metadata_full</span>, <span class="va">orientation</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="tbl-l39" class="cell tbl-parent quarto-layout-panel" data-tbl-cap="Results of goodness of fit test of the number of uses of condition-first language we observe in right and left leaning publications relative to the total word count across these two types." data-hash="01_condition_person_first_cache/html/tbl-l39_75dec06f9c39bb08e69155d4619ac697">
-<div class="panel-caption table-caption">
-<p><strong>?(caption)</strong></p>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<pre><code>        variable                                    value
-1         method Chi-squared test for given probabilities
-2      parameter                                        1
-3      statistic                                   134.72
-4        p.value                             3.801809e-31
-5  left_observed                                     1583
-6  left_expected                          1975.0671889295
-7 right_observed                                     3094
-8 right_expected                          2701.9328110705</code></pre>
-</div>
+<div class="cell" data-hash="01_condition_person_first_cache/html/tbl-l39_a7148b03c451698c1efb5aa9f08d6c86">
+<details><summary>Code</summary><div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_instances_wc_normalised</span><span class="op">(</span><span class="va">condition_first_annotated</span>, <span class="va">metadata_full</span>, <span class="va">orientation</span><span class="op">)</span> |&gt; <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="tbl-l39">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;22: Results of goodness of fit test of the number of uses of condition-first language we observe in right and left leaning publications relative to the total word count across these two types.</caption>
+<thead><tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">method</td>
+<td style="text-align: left;">Chi-squared test for given probabilities</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">parameter</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">statistic</td>
+<td style="text-align: left;">134.72</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">p.value</td>
+<td style="text-align: left;">3.801809e-31</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">left_observed</td>
+<td style="text-align: left;">1583</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">left_expected</td>
+<td style="text-align: left;">1975.0671889295</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">right_observed</td>
+<td style="text-align: left;">3094</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">right_expected</td>
+<td style="text-align: left;">2701.9328110705</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <p>The number of articles with condition-first language we observe is also is higher in right and lower in left-leaning publications than we would expect based on the total article count in these subcorpora (p &lt; 0.001).</p>
-<div>
-<details><summary>Code</summary><div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_articles_totalart_normalised</span><span class="op">(</span><span class="va">condition_first_annotated</span>, <span class="va">metadata_full</span>, <span class="va">orientation</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="tbl-l40" class="cell tbl-parent quarto-layout-panel" data-tbl-cap="Results of goodness of fit test of the number of articles that use condition-first language we observe in left and right leaning publications relative to the total word count across these two types." data-hash="01_condition_person_first_cache/html/tbl-l40_c1bebdf7e387c1ea4af9498bf7dcf0ab">
-<div class="panel-caption table-caption">
-<p><strong>?(caption)</strong></p>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<pre><code>        variable                                    value
-1         method Chi-squared test for given probabilities
-2      parameter                                        1
-3      statistic                                 11.84526
-4        p.value                             0.0005780843
-5  left_observed                                      979
-6  left_expected                         1070.92734013683
-7 right_observed                                     2229
-8 right_expected                         2137.07265986317</code></pre>
-</div>
+<div class="cell" data-hash="01_condition_person_first_cache/html/tbl-l4dddd_d4874f420fc39b364250e1ce110f37b6">
+<details><summary>Code</summary><div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_articles_totalart_normalised</span><span class="op">(</span><span class="va">condition_first_annotated</span>, <span class="va">metadata_full</span>, <span class="va">orientation</span><span class="op">)</span> |&gt; <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="tbl-l4dddd">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;23: Results of goodness of fit test of the number of articles that use condition-first language we observe in left and right leaning publications relative to the total word count across these two types.</caption>
+<thead><tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">method</td>
+<td style="text-align: left;">Chi-squared test for given probabilities</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">parameter</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">statistic</td>
+<td style="text-align: left;">11.84526</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">p.value</td>
+<td style="text-align: left;">0.0005780843</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">left_observed</td>
+<td style="text-align: left;">979</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">left_expected</td>
+<td style="text-align: left;">1070.92734013683</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">right_observed</td>
+<td style="text-align: left;">2229</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">right_expected</td>
+<td style="text-align: left;">2137.07265986317</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 </section></section><section id="person-first-language-use" class="level2"><h2 data-anchor-id="person-first-language-use">Person-first language use</h2>
 <section id="tabloids-vs-broadsheets-1" class="level3"><h3 data-anchor-id="tabloids-vs-broadsheets-1">Tabloids vs broadsheets</h3>
 <p>The total number of uses of person-first language we observe is somewhat higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora, but this result is not strongly significant (p &lt; 0.05).</p>
-<div>
-<details><summary>Code</summary><div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_instances_wc_normalised</span><span class="op">(</span><span class="va">person_first_annotated</span>, <span class="va">metadata_full</span>, <span class="va">source_type</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="tbl-l41" class="cell tbl-parent quarto-layout-panel" data-tbl-cap="Results of goodness of fit test of the number of uses of person-first language we observe in tabloids and broadsheets relative to the total word count across these two types of sources." data-hash="01_condition_person_first_cache/html/tbl-l41_5b277ef96e4123effea22c94ac622a1b">
-<div class="panel-caption table-caption">
-<p><strong>?(caption)</strong></p>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<pre><code>             variable                                    value
-1              method Chi-squared test for given probabilities
-2           parameter                                        1
-3           statistic                                 6.041885
-4             p.value                               0.01397036
-5 broadsheet_observed                                       86
-6 broadsheet_expected                         71.6884777788033
-7    tabloid_observed                                       50
-8    tabloid_expected                         64.3115222211967</code></pre>
-</div>
+<div class="cell" data-hash="01_condition_person_first_cache/html/tbl-l41_9820527e857cfe66dacc11398cbec7a9">
+<details><summary>Code</summary><div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_instances_wc_normalised</span><span class="op">(</span><span class="va">person_first_annotated</span>, <span class="va">metadata_full</span>, <span class="va">source_type</span><span class="op">)</span> |&gt; <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="tbl-l41">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;24: Results of goodness of fit test of the number of uses of person-first language we observe in tabloids and broadsheets relative to the total word count across these two types of sources.</caption>
+<thead><tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">method</td>
+<td style="text-align: left;">Chi-squared test for given probabilities</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">parameter</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">statistic</td>
+<td style="text-align: left;">6.041885</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">p.value</td>
+<td style="text-align: left;">0.01397036</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">broadsheet_observed</td>
+<td style="text-align: left;">86</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">broadsheet_expected</td>
+<td style="text-align: left;">71.6884777788033</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tabloid_observed</td>
+<td style="text-align: left;">50</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tabloid_expected</td>
+<td style="text-align: left;">64.3115222211967</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <p>The number of articles with person-first language we observe is, in contrast, lower in tabloids and higher in broadsheets than we would expect based on the total article count in these subcorpora (p &lt; 0.002).</p>
-<div>
-<details><summary>Code</summary><div class="sourceCode" id="cb60"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_articles_totalart_normalised</span><span class="op">(</span><span class="va">person_first_annotated</span>, <span class="va">metadata_full</span>, <span class="va">source_type</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="tbl-l42" class="cell tbl-parent quarto-layout-panel" data-tbl-cap="Results of goodness of fit test of the number of articles that use person-first language we observe in tabloids and broadsheets relative to the total word count across these two types of sources." data-hash="01_condition_person_first_cache/html/tbl-l42_abeed7567667d9f3d79ec5ae59f78aac">
-<div class="panel-caption table-caption">
-<p><strong>?(caption)</strong></p>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<pre><code>             variable                                    value
-1              method Chi-squared test for given probabilities
-2           parameter                                        1
-3           statistic                                 9.588964
-4             p.value                              0.001957503
-5 broadsheet_observed                                       59
-6 broadsheet_expected                         43.3269884952032
-7    tabloid_observed                                       47
-8    tabloid_expected                         62.6730115047968</code></pre>
-</div>
+<div class="cell" data-hash="01_condition_person_first_cache/html/tbl-l42_165146f0b966c4bc081c7825b0c42d87">
+<details><summary>Code</summary><div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_articles_totalart_normalised</span><span class="op">(</span><span class="va">person_first_annotated</span>, <span class="va">metadata_full</span>, <span class="va">source_type</span><span class="op">)</span> |&gt; <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="tbl-l42">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;25: Results of goodness of fit test of the number of articles that use person-first language we observe in tabloids and broadsheets relative to the total word count across these two types of sources.</caption>
+<thead><tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">method</td>
+<td style="text-align: left;">Chi-squared test for given probabilities</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">parameter</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">statistic</td>
+<td style="text-align: left;">9.588964</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">p.value</td>
+<td style="text-align: left;">0.001957503</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">broadsheet_observed</td>
+<td style="text-align: left;">59</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">broadsheet_expected</td>
+<td style="text-align: left;">43.3269884952032</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tabloid_observed</td>
+<td style="text-align: left;">47</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tabloid_expected</td>
+<td style="text-align: left;">62.6730115047968</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 </section><section id="left-vs-right-leaning-publications-1" class="level3"><h3 data-anchor-id="left-vs-right-leaning-publications-1">Left vs right-leaning publications</h3>
 <p>The total number of uses of person-first language we observe is higher in left and lower in right-leaning publications than we would expect based on the word count in these subcorpora (p &lt; 0.002).</p>
-<div>
-<details><summary>Code</summary><div class="sourceCode" id="cb62"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_instances_wc_normalised</span><span class="op">(</span><span class="va">person_first_annotated</span>, <span class="va">metadata_full</span>, <span class="va">orientation</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="tbl-l43" class="cell tbl-parent quarto-layout-panel" data-tbl-cap="Results of goodness of fit test of the number of uses of person-first language we observe in right and left leaning publications relative to the total word count across these two types." data-hash="01_condition_person_first_cache/html/tbl-l43_f91573cc6617ed84b75614114e451d7d">
-<div class="panel-caption table-caption">
-<p><strong>?(caption)</strong></p>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<pre><code>        variable                                    value
-1         method Chi-squared test for given probabilities
-2      parameter                                        1
-3      statistic                                 10.39137
-4        p.value                              0.001266055
-5  left_observed                                       76
-6  left_expected                         57.4319302318606
-7 right_observed                                       60
-8 right_expected                         78.5680697681394</code></pre>
-</div>
+<div class="cell" data-hash="01_condition_person_first_cache/html/tbl-l43_00c9123e4aac0799dc811d6b6b94ed1e">
+<details><summary>Code</summary><div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_instances_wc_normalised</span><span class="op">(</span><span class="va">person_first_annotated</span>, <span class="va">metadata_full</span>, <span class="va">orientation</span><span class="op">)</span> |&gt; <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="tbl-l43">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;26: Results of goodness of fit test of the number of uses of person-first language we observe in right and left leaning publications relative to the total word count across these two types.</caption>
+<thead><tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">method</td>
+<td style="text-align: left;">Chi-squared test for given probabilities</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">parameter</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">statistic</td>
+<td style="text-align: left;">10.39137</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">p.value</td>
+<td style="text-align: left;">0.001266055</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">left_observed</td>
+<td style="text-align: left;">76</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">left_expected</td>
+<td style="text-align: left;">57.4319302318606</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">right_observed</td>
+<td style="text-align: left;">60</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">right_expected</td>
+<td style="text-align: left;">78.5680697681394</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <p>The number of articles with person-first language we observe is also is higher in left and lower in right-leaning publications than we would expect based on the total article count in these subcorpora (p &lt; 0.002).</p>
-<div>
-<details><summary>Code</summary><div class="sourceCode" id="cb64"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_articles_totalart_normalised</span><span class="op">(</span><span class="va">person_first_annotated</span>, <span class="va">metadata_full</span>, <span class="va">orientation</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div id="tbl-l44" class="cell tbl-parent quarto-layout-panel" data-tbl-cap="Results of goodness of fit test of the number of articles that use person-first language we observe in left and right leaning publications relative to the total word count across these two types." data-hash="01_condition_person_first_cache/html/tbl-l44_f0cca63f8b7cb6b12f525bffb3c9ff27">
-<div class="panel-caption table-caption">
-<p><strong>?(caption)</strong></p>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
-<pre><code>        variable                                    value
-1         method Chi-squared test for given probabilities
-2      parameter                                        1
-3      statistic                                 10.34217
-4        p.value                               0.00130025
-5  left_observed                                       51
-6  left_expected                         35.3860031341972
-7 right_observed                                       55
-8 right_expected                         70.6139968658029</code></pre>
-</div>
+<div class="cell" data-hash="01_condition_person_first_cache/html/tbl-l44_f85faee49820c11af5e5f652478c83cd">
+<details><summary>Code</summary><div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_articles_totalart_normalised</span><span class="op">(</span><span class="va">person_first_annotated</span>, <span class="va">metadata_full</span>, <span class="va">orientation</span><span class="op">)</span> |&gt; <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="tbl-l44">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;27: Results of goodness of fit test of the number of articles that use person-first language we observe in left and right leaning publications relative to the total word count across these two types.</caption>
+<thead><tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">method</td>
+<td style="text-align: left;">Chi-squared test for given probabilities</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">parameter</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">statistic</td>
+<td style="text-align: left;">10.34217</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">p.value</td>
+<td style="text-align: left;">0.00130025</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">left_observed</td>
+<td style="text-align: left;">51</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">left_expected</td>
+<td style="text-align: left;">35.3860031341972</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">right_observed</td>
+<td style="text-align: left;">55</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">right_expected</td>
+<td style="text-align: left;">70.6139968658029</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 </section></section><section id="condition-first-language-across-time" class="level2"><h2 data-anchor-id="condition-first-language-across-time">Condition-first language across time</h2>
 <p>As we discussed, we have sufficient data to explore the use of condition-first language across time and by type of publication, except for the Brisbane Times and Daily Telegraph, for which we are missing data from 2008-2013:</p>
 <div class="cell" data-hash="01_condition_person_first_cache/html/tbl-l45_891555eecd330dd34a0250c1e50abf3a">
-<details><summary>Code</summary><div class="sourceCode" id="cb66"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">assess_year_source</span><span class="op">(</span><span class="va">condition_first_annotated</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">assess_year_source</span><span class="op">(</span><span class="va">condition_first_annotated</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div id="tbl-l45">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;20: Number of articles that use condition-first language by year and source.</caption>
+<caption>Table&nbsp;28: Number of articles that use condition-first language by year and source.</caption>
 <colgroup>
 <col style="width: 15%">
 <col style="width: 6%">
@@ -5021,13 +5237,13 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 </table>
 </div>
 </div>
-<details><summary>Code</summary><div class="sourceCode" id="cb67"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">condition_first_annotated_for_modelling</span> <span class="op">&lt;-</span> <span class="va">condition_first_annotated</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">condition_first_annotated_for_modelling</span> <span class="op">&lt;-</span> <span class="va">condition_first_annotated</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span> <span class="op">!</span><span class="op">(</span><span class="va">source</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"BrisTimes"</span>, <span class="st">"Telegraph"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Let’s look at the number of articles by publication and year. We can see that this number is declining; however, this is likely to be attributable to the overall decline in the number of articles featuring obes*, as discussed in the exploratory data analysis section</p>
 <div class="cell" data-hash="01_condition_person_first_cache/html/fig-l46_5a9ed3572dd8ff683b3b4f063f170523">
-<details><summary>Code</summary><div class="sourceCode" id="cb68"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">condition_first_annotated</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb60"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">condition_first_annotated</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">source</span>, <span class="va">source_type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">source</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
@@ -5049,7 +5265,7 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 <section id="normalised-frequency" class="level4"><h4 data-anchor-id="normalised-frequency">Normalised frequency</h4>
 <p>The normalised frequency is distributed log-normally across all texts:</p>
 <div class="cell" data-hash="01_condition_person_first_cache/html/fig-l47_467246d346d9e0064f549147ae641d3b">
-<details><summary>Code</summary><div class="sourceCode" id="cb69"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">condition_first_annotated</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb61"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">condition_first_annotated</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">75</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -5064,7 +5280,7 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 <p>Let’s look at the difference in frequency across time (only the variability of which should be sensitive to the number of articles per year, not the absolute values):</p>
 <p>We can start by using a jitter plot:</p>
 <div class="cell" data-hash="01_condition_person_first_cache/html/fig-l48_50f8094ff91f0ae67bb24a96e84fcfa5">
-<details><summary>Code</summary><div class="sourceCode" id="cb70"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">condition_first_annotated</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb62"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">condition_first_annotated</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>, 
              fill <span class="op">=</span> <span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -5090,7 +5306,7 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 <p>Note that the dashed red line is always at the same position (with a value of <code>exp(1) = 2.72</code>). Comparing it with the blue line of best fit for each source for which we have complete data suggests that visually we cannot discern strong trends in the use of condition-first language across the study time period, so using variability-based neighbor clustering (VNC) is unlikely to provide meaningful results for this research question.</p>
 <p>We can see that the Advertiser seems to have higher median frequencies than others, as does the Northern Territorian. Let’s look at it grouped as tabloid vs broadsheet (with outliers not shown):</p>
 <div class="cell" data-hash="01_condition_person_first_cache/html/fig-l49_3809b7896f26cbfcf0730550794056db">
-<details><summary>Code</summary><div class="sourceCode" id="cb71"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">condition_first_annotated</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">condition_first_annotated</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">source</span>, <span class="va">source_type</span>, <span class="va">frequency</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">source_type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
@@ -5112,7 +5328,7 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 </div>
 <p>It appears that median frequency in tabloids is somewhat higher, although the intervals do overlap across all years.</p>
 <div class="cell" data-hash="01_condition_person_first_cache/html/fig-l50_73e47d9db38bf2a587b6d79cf6bc3ffa">
-<details><summary>Code</summary><div class="sourceCode" id="cb72"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">condition_first_annotated</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+<details><summary>Code</summary><div class="sourceCode" id="cb64"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">condition_first_annotated</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>, 
              fill <span class="op">=</span> <span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -5138,7 +5354,7 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 <p>We can see that the frequency seems to decrease in broadsheets but not in tabloids across years.</p>
 <p>Let’s quickly look at differences by month:</p>
 <div class="cell" data-hash="01_condition_person_first_cache/html/fig-l51_cbd31338d3d2ea3b1e5617e9b3852575">
-<details><summary>Code</summary><div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">condition_first_annotated_for_modelling</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+<details><summary>Code</summary><div class="sourceCode" id="cb65"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">condition_first_annotated_for_modelling</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">month_metadata</span>, <span class="va">source</span>, <span class="va">frequency</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">frequency</span>, x <span class="op">=</span> <span class="va">month_metadata</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -5152,7 +5368,7 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 </div>
 <p>The frequency doesn’t seem to be different month to month, when visualised using a violin or box plots.</p>
 <div class="cell" data-hash="01_condition_person_first_cache/html/fig-l52_181d54a6dabf6cdf9f6f06cfd76c7ebd">
-<details><summary>Code</summary><div class="sourceCode" id="cb74"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">condition_first_annotated_for_modelling</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+<details><summary>Code</summary><div class="sourceCode" id="cb66"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">condition_first_annotated_for_modelling</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">month_metadata</span>, <span class="va">source</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">month_metadata</span>, <span class="va">source</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>count_source <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
@@ -5176,7 +5392,7 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 <li>Center and scale the date</li>
 </ul>
 <div class="cell" data-hash="01_condition_person_first_cache/html/scale&amp;setupbase_f44775ccef61234d3bfc67047150c431">
-<details><summary>Code</summary><div class="sourceCode" id="cb75"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">condition_first_annotated_for_modelling</span><span class="op">$</span><span class="va">scaled_year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">condition_first_annotated_for_modelling</span><span class="op">$</span><span class="va">year</span>, scale <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
+<details><summary>Code</summary><div class="sourceCode" id="cb67"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">condition_first_annotated_for_modelling</span><span class="op">$</span><span class="va">scaled_year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">condition_first_annotated_for_modelling</span><span class="op">$</span><span class="va">year</span>, scale <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bbolker/broom.mixed">broom.mixed</a></span><span class="op">)</span>
 <span class="co"># base model</span>
 <span class="va">m_0_base</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span>, family <span class="op">=</span> <span class="va">gaussian</span>, 
@@ -5197,7 +5413,7 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 </div>
 <p>Does including a random intercept for each source improve our model?</p>
 <div class="cell" data-hash="01_condition_person_first_cache/html/tbl-l53_e1aaf3c72e55d4cb300a61b796cae4bc">
-<details><summary>Code</summary><div class="sourceCode" id="cb76"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span>
+<details><summary>Code</summary><div class="sourceCode" id="cb68"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span>
   <span class="op">{</span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html">glance</a></span><span class="op">(</span><span class="va">m_0_base</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>model <span class="op">=</span> <span class="st">"Base"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">df.null</span>, <span class="op">-</span><span class="va">null.deviance</span>, <span class="op">-</span><span class="va">deviance</span><span class="op">)</span><span class="op">}</span>,
   <span class="op">{</span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html">glance</a></span><span class="op">(</span><span class="va">m_0_year</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>model <span class="op">=</span> <span class="st">"With year"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">df.null</span>, <span class="op">-</span><span class="va">null.deviance</span>, <span class="op">-</span><span class="va">deviance</span><span class="op">)</span><span class="op">}</span>,
   <span class="op">{</span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html">glance</a></span><span class="op">(</span><span class="va">m_0_yearsourcetype</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>model <span class="op">=</span> <span class="st">"With year &amp; source type"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">df.null</span>, <span class="op">-</span><span class="va">null.deviance</span>, <span class="op">-</span><span class="va">deviance</span><span class="op">)</span><span class="op">}</span>,
@@ -5209,7 +5425,7 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 </details><div class="cell-output-display">
 <div id="tbl-l53">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;21: Log-likelihood, Akaike Information Criterion (AIC), Bayesian Information Criterion (BIC), residual number of degrees of freedom and number of observations used to fit a range of general linear models.</caption>
+<caption>Table&nbsp;29: Log-likelihood, Akaike Information Criterion (AIC), Bayesian Information Criterion (BIC), residual number of degrees of freedom and number of observations used to fit a range of general linear models.</caption>
 <colgroup>
 <col style="width: 14%">
 <col style="width: 13%">
@@ -5279,7 +5495,7 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 <li>Including each specific source (random effect) individually and year</li>
 </ul>
 <div class="cell" data-hash="01_condition_person_first_cache/html/lmeModelsGenerate_8a8c19f4ec472b4aa31c3a2a329cf8da">
-<details><summary>Code</summary><div class="sourceCode" id="cb77"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co">#library(afex)</span>
+<details><summary>Code</summary><div class="sourceCode" id="cb69"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co">#library(afex)</span>
 <span class="va">m_1_base</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span> <span class="op">~</span> <span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">source</span><span class="op">)</span>, 
                  data <span class="op">=</span> <span class="va">condition_first_annotated_for_modelling</span>,
                  REML <span class="op">=</span> <span class="cn">FALSE</span>, 
@@ -5323,7 +5539,7 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 </div>
 <p>We end up needing to use the <code>nlminb</code> optimiser from the <code>optimx</code> library (originally used by lme4), as the default REML fails to converge for the most complex model.</p>
 <div class="cell" data-hash="01_condition_person_first_cache/html/tbl-l54_18d4619e7a30fad84bec15ca1b9e7644">
-<details><summary>Code</summary><div class="sourceCode" id="cb78"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+<details><summary>Code</summary><div class="sourceCode" id="cb70"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
   <span class="va">m_1_base</span>,
   <span class="va">m_1_year</span>,
   <span class="va">m_1_year_sourcetype</span>,
@@ -5344,7 +5560,7 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 </details><div class="cell-output-display">
 <div id="tbl-l54">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;22: Log-likelihood, Akaike Information Criterion (AIC), Bayesian Information Criterion (BIC), residual number of degrees of freedom and number of observations used to fit a range of random effects models.</caption>
+<caption>Table&nbsp;30: Log-likelihood, Akaike Information Criterion (AIC), Bayesian Information Criterion (BIC), residual number of degrees of freedom and number of observations used to fit a range of random effects models.</caption>
 <colgroup>
 <col style="width: 4%">
 <col style="width: 8%">
@@ -5434,7 +5650,7 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 <p>The full model (scaled_year + source_type + (scaled_year|source)) has the lowest AIC and highest log-Likelihood among the mixed effects models. However, it’s AIC is not that different (7524 vs 7525) to the simpler model <code>scaled_year + source</code>, while the simpler model has a lower BIC and higher logLik.</p>
 <p>Let’s compare the two models: the full mixed effects model and the simple <code>scaled_year + source</code></p>
 <div class="cell" data-hash="01_condition_person_first_cache/html/compModels_664289c4ae97e0560c2cd6d330452630">
-<details><summary>Code</summary><div class="sourceCode" id="cb79"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">m_1_full</span>, <span class="va">m_0_yearsource</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb71"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">m_1_full</span>, <span class="va">m_0_yearsource</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>Data: condition_first_annotated_for_modelling
 Models:
@@ -5449,7 +5665,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>It seems that the more complex model does not offer a substantial improvement in fit over the simpler one. Let’s summarise that model.</p>
 <div class="cell" data-hash="01_condition_person_first_cache/html/unnamed-chunk-35_63df1e853ac88038b2910fd87f0bbeeb">
-<details><summary>Code</summary><div class="sourceCode" id="cb81"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="va">m_0_yearsource</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="va">m_0_yearsource</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><p>‘r2()’ does not support models of class ‘glm’. ‘r2()’ does not support models of class ‘glm’. We fitted a linear model (estimated using ML) to predict frequency with scaled_year and source (formula: log(frequency) ~ scaled_year + source). . The model’s intercept, corresponding to scaled_year = 0 and source = Advertiser, is at 1.28 (95% CI [1.21, 1.36], t(3031) = 32.98, p &lt; .001). Within this model:</p>
 <ul>
 <li>The effect of scaled year is statistically non-significant and negative (beta = -7.05e-03, 95% CI [-0.02, 2.13e-03], t(3031) = -1.50, p = 0.132; Std. beta = -9.82e-03, 95% CI [-0.02, 3.54e-03])</li>
@@ -5467,7 +5683,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>If we use the BIC as our model selection criteria instead, the model of the form has the lowest BIC:</p>
 <div class="cell" data-hash="01_condition_person_first_cache/html/tbl-l55_80153add44ed849082a05140ad6f395a">
-<details><summary>Code</summary><div class="sourceCode" id="cb82"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+<details><summary>Code</summary><div class="sourceCode" id="cb74"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
   <span class="va">m_1_base</span>,
   <span class="va">m_1_year</span>,
   <span class="va">m_1_year_sourcetype</span>,
@@ -5488,7 +5704,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </details><div class="cell-output-display">
 <div id="tbl-l55">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;23: Log-likelihood, Akaike Information Criterion (AIC), Bayesian Information Criterion (BIC), residual number of degrees of freedom and number of observations used to fit a range of random effects models.</caption>
+<caption>Table&nbsp;31: Log-likelihood, Akaike Information Criterion (AIC), Bayesian Information Criterion (BIC), residual number of degrees of freedom and number of observations used to fit a range of random effects models.</caption>
 <colgroup>
 <col style="width: 4%">
 <col style="width: 8%">
@@ -5577,7 +5793,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>We obtain a result similar to that of the simpler model:</p>
 <div class="cell" data-hash="01_condition_person_first_cache/html/unnamed-chunk-37_48ec75ef32ce87df7d12695c2e1e882e">
-<details><summary>Code</summary><div class="sourceCode" id="cb83"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="va">m_1_year_sourcetype</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb75"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="va">m_1_year_sourcetype</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><p>We fitted a linear mixed model (estimated using ML and optimx optimizer) to predict frequency with scaled_year and source_type (formula: log(frequency) ~ scaled_year + source_type). The model included source as random effect (formula: ~1 | source). The model’s total explanatory power is weak (conditional R2 = 0.09) and the part related to the fixed effects alone (marginal R2) is of 0.08. The model’s intercept, corresponding to scaled_year = 0 and source_type = broadsheet, is at 0.79 (95% CI [0.69, 0.88], t(3037) = 16.43, p &lt; .001). Within this model:</p>
 <ul>
 <li>The effect of scaled year is statistically non-significant and negative (beta = -6.94e-03, 95% CI [-0.02, 2.23e-03], t(3037) = -1.48, p = 0.138; Std. beta = -9.60e-03, 95% CI [-0.02, 3.73e-03])</li>
