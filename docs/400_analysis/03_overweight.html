@@ -2,16 +2,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.345">
+<meta name="generator" content="quarto-1.1.251">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Obesity phase 2 – overweight</title>
+<meta name="author" content="Darya Vanichkina">
+<title>Obesity phase 2 - Exploring usage of the lemma OVERWEIGHT</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -50,7 +56,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -63,7 +69,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -76,14 +82,24 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script><script src="../site_libs/quarto-nav/headroom.min.js"></script><script src="../site_libs/clipboard/clipboard.min.js"></script><meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script><script src="../site_libs/quarto-search/fuse.min.js"></script><script src="../site_libs/quarto-search/quarto-search.js"></script><script src="../site_libs/quarto-html/quarto.js"></script><script src="../site_libs/quarto-html/popper.min.js"></script><script src="../site_libs/quarto-html/tippy.umd.min.js"></script><script src="../site_libs/quarto-html/anchor.min.js"></script><link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link class="quarto-color-scheme" id="quarto-text-highlighting-styles" href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
-<link class="quarto-color-scheme quarto-color-alternate" rel="prefetch" id="quarto-text-highlighting-styles" href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script><link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link class="quarto-color-scheme" href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
-<link class="quarto-color-scheme quarto-color-alternate" rel="prefetch" href="../site_libs/bootstrap/bootstrap-dark.min.css">
-<script id="quarto-search-options" type="application/json">{
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -107,9 +123,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
-      <a class="navbar-brand" href="../index.html">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Obesity phase 2</span>
-  </a>
+    </a>
+  </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -119,8 +137,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="nav-link" href="../index.html">Home</a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data-cleaning--eda" role="button" data-bs-toggle="dropdown" aria-expanded="false">Data Cleaning &amp; EDA</a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-data-cleaning--eda">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data-cleaning--exploratory-data-analysis" role="button" data-bs-toggle="dropdown" aria-expanded="false">Data Cleaning &amp; Exploratory Data Analysis</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-data-cleaning--exploratory-data-analysis">
 <li>
     <a class="dropdown-item" href="../100_data_cleaning_scripts_EDA/01_ExploreCQPwebData.html">
  <span class="dropdown-text">Exploring the CQPWeb data</span></a>
@@ -179,37 +197,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="quarto-about-solana column-body">
   <div class="about-entity">
     <div class="entity-contents">
-      <div class="about-contents"><main class="content" id="quarto-document-content"><section id="exploring-usage-of-the-word-overweight" class="level2"><h2 class="anchored" data-anchor-id="exploring-usage-of-the-word-overweight">Exploring usage of the word “overweight”</h2>
-<p>There is interest in exploring statistics around the use of the word “overweight” around the following research questions:</p>
+      <header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">Exploring usage of the lemma OVERWEIGHT</h1>
+</div>
+<div class="quarto-title-meta">
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Darya Vanichkina </p>
+          </div>
+  </div>
+  </div>
+</header> 
+      <div class="about-contents"><main class="content" id="quarto-document-content"><p>There is interest in exploring statistics around the use of OVERWEIGHT around the following research questions:</p>
 <ul>
-<li>Do tabloids use “overweight” more than broadsheets?</li>
-<li>Or do broadsheets use “overweight” more than tabloids?</li>
+<li>Do tabloids use OVERWEIGHT more than broadsheets?</li>
+<li>Or do broadsheets use OVERWEIGHT more than tabloids?</li>
 <li>Or is there no discernible pattern of use?<br>
 </li>
-<li>Is there any newspaper that uses overweight more than others?</li>
-<li>Any year where overweight is the most frequent/least frequent?</li>
+<li>Is there any newspaper that uses OVERWEIGHT more than others?</li>
+<li>Any year where OVERWEIGHT is the most frequent/least frequent?</li>
 </ul>
 <p>Additional question:</p>
 <ul>
 <li>Is there a difference of use by primary topic?</li>
 </ul>
-<section id="executive-summary" class="level3"><h3 class="anchored" data-anchor-id="executive-summary">Executive summary</h3>
-<ol type="1">
-<li>Tabloids use the word “overweight” more frequently than broadsheets.</li>
-</ol>
+<section id="executive-summary" class="level3"><h3 data-anchor-id="executive-summary">Executive summary</h3>
+<p><strong>1. Tabloids use OVERWEIGHT more frequently than broadsheets.</strong></p>
 <ul>
-<li><p>The total number of uses of “overweight” we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p &lt; 0.001).</p></li>
-<li><p>The number of articles with use of “overweight” we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p &lt; 0.001).</p></li>
+<li><p>The total number of uses of OVERWEIGHT we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p &lt; 0.001).</p></li>
+<li><p>The number of articles with use of OVERWEIGHT we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p &lt; 0.001).</p></li>
 <li><p>More specifically, a Welch Two Sample t-test testing the difference between the frequency in broadsheets per 1000 words and frequency in tabloids (mean of broadsheets = 3.55, mean of tabloids = 5.73) suggests that the effect is negative, statistically significant, and small (difference = -2.18, 95% CI [-2.42, -1.95], t(6712.33) = -18.20, p &lt; .001; Cohen’s d = -0.43, 95% CI [-0.48, -0.38])</p></li>
-<li><p>The total number of uses of “overweight” we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p &lt; 0.001).</p></li>
-<li><p>The number of articles with use of “overweight” we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p &lt; 0.001).</p></li>
+<li><p>The total number of uses of OVERWEIGHT we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p &lt; 0.001).</p></li>
+<li><p>The number of articles with use of OVERWEIGHT we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p &lt; 0.001).</p></li>
 </ul>
-<ol start="2" type="1">
-<li><p>Tabloids have shorter article lengths than broadsheets, as demonstrated in the <a href="%22./03_obese.html%22">analysis of obese</a>.</p></li>
-<li><p>Investigating the data by source and year revealed that these variables explained a small amount of variance in the data, with the word overweight being used less frequently in the Age, Australian, Canberra Times and Sydney Morning Herald relative to the Advertiser, while in the Hobart Mercury and Northern Territorian it was used somewhat more frequently than in the Advertiser. Use of the word “overweight” decreased with time in the corpus.</p></li>
-<li><p>Significant differences in the use of “overweight” were observed in articles on different topics, with articles annotated as “Bio-medical Research”, “Women and Pregnancy” and “Children &amp; Parents” using more instances per 1000 words than articles discussing “Politics”, schooling and “Music and Movies”.</p></li>
-<li><p>Significant differences in article topics were also observed between tabloids and broadsheets, as discussed in the <a href="%22./03_obese.html%22">analysis of obese</a>.</p></li>
-</ol></section><section id="data-source" class="level3"><h3 class="anchored" data-anchor-id="data-source">Data source</h3>
+<p><strong>2. Tabloids have shorter article lengths than broadsheets, as demonstrated in the <a href="./03_obese.html">analysis of OBESE</a>.</strong></p>
+<p><strong>3. Investigating the data by source and year revealed that these variables explained a small amount of variance in the data, with OVERWEIGHT being used less frequently in the Age, Australian, Canberra Times and Sydney Morning Herald relative to the Advertiser, while in the Hobart Mercury and Northern Territorian it was used somewhat more frequently than in the Advertiser. Use of OVERWEIGHT decreased with time in the corpus.</strong></p>
+<p><strong>4. Significant differences in the use of OVERWEIGHT were observed in articles on different topics, with articles annotated as “Bio-medical Research”, “Women and Pregnancy” and “Children &amp; Parents” using more instances per 1000 words than articles discussing “Politics”, schooling and “Music and Movies”. </strong></p>
+<p><strong>5. Significant differences in article topics were also observed between tabloids and broadsheets, as discussed in the <a href="./03_obese.html">analysis of OBESE</a>.</strong></p>
+</section><section id="data-source" class="level3"><h3 data-anchor-id="data-source">Data source</h3>
 <p>CQPweb data was provided. To calculate normalised frequency, we divide the number of observations from CQPweb by the word count as calculated in Python, and multiple by 1000.</p>
 <div class="cell" data-hash="03_overweight_cache/html/loadLibs_47dc4d72022cabdf8f261eb22d59b2fd">
 <details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span>
@@ -239,28 +265,112 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>frequency <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="fl">3</span><span class="op">*</span><span class="va">no_hits_in_text</span><span class="op">/</span><span class="va">wordcount_total</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section><section id="tabloid-vs-broadsheet" class="level2"><h2 class="anchored" data-anchor-id="tabloid-vs-broadsheet">Tabloid vs broadsheet</h2>
-<p>What is the distribution of “overweight” in articles?</p>
-<div class="cell" data-hash="03_overweight_cache/html/overweightDistr_243b12f70bb6226d3c4a4e704f0d4b0b">
-<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+<p>We group articles into tabloids and broadsheets, and by orientation, in the following manner:</p>
+<div class="cell" data-hash="03_overweight_cache/html/tbl-l1_28cb6df825cdc5b3e4ab3897bae0a621">
+<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">metadata_full</span> |&gt;
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">source</span>, <span class="va">source_type</span>, <span class="va">orientation</span><span class="op">)</span> |&gt;
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="op">)</span> |&gt;
+  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="tbl-l1">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;1: Classification of sources into types and by orientation.</caption>
+<thead><tr class="header">
+<th style="text-align: left;">source</th>
+<th style="text-align: left;">source_type</th>
+<th style="text-align: left;">orientation</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Advertiser</td>
+<td style="text-align: left;">tabloid</td>
+<td style="text-align: left;">right</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Australian</td>
+<td style="text-align: left;">broadsheet</td>
+<td style="text-align: left;">right</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NorthernT</td>
+<td style="text-align: left;">tabloid</td>
+<td style="text-align: left;">right</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CourierMail</td>
+<td style="text-align: left;">tabloid</td>
+<td style="text-align: left;">right</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Age</td>
+<td style="text-align: left;">broadsheet</td>
+<td style="text-align: left;">left</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SydHerald</td>
+<td style="text-align: left;">broadsheet</td>
+<td style="text-align: left;">left</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Telegraph</td>
+<td style="text-align: left;">tabloid</td>
+<td style="text-align: left;">right</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">WestAus</td>
+<td style="text-align: left;">tabloid</td>
+<td style="text-align: left;">right</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CanTimes</td>
+<td style="text-align: left;">broadsheet</td>
+<td style="text-align: left;">left</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HeraldSun</td>
+<td style="text-align: left;">tabloid</td>
+<td style="text-align: left;">right</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HobMercury</td>
+<td style="text-align: left;">tabloid</td>
+<td style="text-align: left;">right</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BrisTimes</td>
+<td style="text-align: left;">broadsheet</td>
+<td style="text-align: left;">left</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section><section id="tabloid-vs-broadsheet" class="level2"><h2 data-anchor-id="tabloid-vs-broadsheet">Tabloid vs broadsheet</h2>
+<p>What is the distribution of OVERWEIGHT in articles?</p>
+<div class="cell" data-hash="03_overweight_cache/html/fig-l2_e97e780772ec2164dc51fc78c5e62c61">
+<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">no_hits_in_text</span>, fill <span class="op">=</span> <span class="va">source_type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"dodge2"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>
     x <span class="op">=</span> <span class="st">"Number of hits in article, CQPWeb"</span>,
     y <span class="op">=</span> <span class="st">"Number of articles in corpus"</span>,
     fill <span class="op">=</span> <span class="st">"Source type"</span>
-  <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<p><img src="03_overweight_files/figure-html/overweightDistr-1.png" class="img-fluid" width="672"></p>
-</div>
-<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">no_articles_broadsheet</span> <span class="op">&lt;-</span> <span class="va">metadata_full</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
+  <span class="op">)</span>
+<span class="va">no_articles_broadsheet</span> <span class="op">&lt;-</span> <span class="va">metadata_full</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"broadsheet"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">no_articles_tabloid</span> <span class="op">&lt;-</span> <span class="va">metadata_full</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"tabloid"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+</details><div class="cell-output-display">
+<div id="fig-l2" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03_overweight_files/figure-html/fig-l2-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: Number of uses of OVERWEIGHT across articles from broadsheets and tabloids.</figcaption><p></p>
+</figure>
+</div>
+</div>
 </div>
 <p>It seems like there is more usage in tabloids than broadsheets. Let’s divide the numbers by the total number of articles in tabloids/broadsheets, respectively.</p>
-<div class="cell" data-hash="03_overweight_cache/html/overweightDistrNorm_b2b8c59235156e0ca60b65d6b99fd7d7">
+<div class="cell" data-hash="03_overweight_cache/html/fig-l294949_9b10d51f52326011b4e11c4301f5fe75">
 <details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">source_type</span>, <span class="va">no_hits_in_text</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
@@ -276,17 +386,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     fill <span class="op">=</span> <span class="st">"Source type"</span>
   <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="03_overweight_files/figure-html/overweightDistrNorm-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l294949" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03_overweight_files/figure-html/fig-l294949-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2: Number of uses of OVERWEIGHT across articles from broadsheets and tabloids, normalised to the number of articles in tabloids and broadsheets in which OVERWEIGHT is used.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>We can see that the trend of higher usage holds true for tabloids even if we consider that tabloids contribute more articles to the corpus than broadsheets.</p>
 <p>How is this usage distributed by year (number of articles in corpus)?</p>
-<div class="cell" data-hash="03_overweight_cache/html/yearNarticles_eb875ad715791a851c003371217a61f0">
+<div class="cell" data-hash="03_overweight_cache/html/tbl-l2_283935806678d37e7b9354efbc0298a4">
 <details><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span> <span class="op">&lt;-</span> <span class="va">overweight_annotated</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="op">(</span><span class="va">source</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"BrisTimes"</span>, <span class="st">"Telegraph"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="fu">assess_year_source</span><span class="op">(</span><span class="va">overweight_annotated</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
+<div id="tbl-l2">
 <table class="table table-sm table-striped">
+<caption>Table&nbsp;2: Number of articles that use OVERWEIGHT by year and source.</caption>
 <colgroup>
 <col style="width: 15%">
 <col style="width: 6%">
@@ -532,9 +648,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 </div>
-<p>We can see that apart from the Brisbane times and Daily Telegraph, there are articles using “overweight” every year and in every publication. We will filter out these two sources.</p>
-<p>How is the frequency (per thousand words) of the usage of overweight distributed by tabloids/broadsheets?</p>
-<div class="cell" data-hash="03_overweight_cache/html/tabloidBroadsheet_17f8f5599474c168051d7bf868d35a16">
+</div>
+<p>We can see that apart from the Brisbane times and Daily Telegraph, there are articles using OVERWEIGHT every year and in every publication. We will filter out these two sources.</p>
+<p>How is the frequency (per thousand words) of the usage of OVERWEIGHT distributed by tabloids/broadsheets?</p>
+<div class="cell" data-hash="03_overweight_cache/html/fig-l4_a148230c9b4d91a265b56caf68b46c7f">
 <details><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">source_type</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
@@ -543,12 +660,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     y <span class="op">=</span> <span class="st">"log(frequency per 1000 words)"</span>
   <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="03_overweight_files/figure-html/tabloidBroadsheet-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l4" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03_overweight_files/figure-html/fig-l4-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3: Frequency per 1000 words of usage of OVERWEIGHT in tabloids and broadsheets.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>We can see that the frequency is slightly higher in tabloids than in broadsheets.</p>
 <p>And let’s also use a histogram to look at the distribution:</p>
-<div class="cell" data-hash="03_overweight_cache/html/tabloidBroadsheetHist_f4e9a4c532a5a2669b4ab05104deecf7">
+<div class="cell" data-hash="03_overweight_cache/html/fig-l5_9d584f3030998549b0079f8549fd8adf">
 <details><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">source_type</span>,x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
@@ -558,11 +679,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     y <span class="op">=</span> <span class="st">"Number of articles"</span>
   <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="03_overweight_files/figure-html/tabloidBroadsheetHist-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l5" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03_overweight_files/figure-html/fig-l5-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4: Histogram of the distribution of usage of OVERWEIGHT in tabloids and broadsheets.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Note that broadsheets have somewhat longer texts than tabloids:</p>
-<div class="cell" data-hash="03_overweight_cache/html/tabBroadWC_1e984fed66981385cdbb573a511904a6">
+<div class="cell" data-hash="03_overweight_cache/html/fig-l6_e681c18c0e6dca1624ec6fdef0afcded">
 <details><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">source_type</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">wordcount_total</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
@@ -571,11 +696,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     y <span class="op">=</span> <span class="st">"log(Python word count)"</span>
   <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="03_overweight_files/figure-html/tabBroadWC-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l6" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03_overweight_files/figure-html/fig-l6-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5: Length of articles that use the lemma OVERWEIGHT in tabloids and broadsheets.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Let’s use a histogram to look at the distribution in more detail:</p>
-<div class="cell" data-hash="03_overweight_cache/html/tabBroadWC2_1f8bd50a059e3760e773900ea2ccfa23">
+<div class="cell" data-hash="03_overweight_cache/html/fig-l7_31e7e62ecda833e5b2ee812e93d34a8d">
 <details><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">source_type</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">wordcount_total</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">+</span> 
@@ -584,18 +713,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     x <span class="op">=</span> <span class="st">"log(Python word count)"</span>
   <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="03_overweight_files/figure-html/tabBroadWC2-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l7" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03_overweight_files/figure-html/fig-l7-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6: Histogram of article lengths in tabloids and broadsheets that use the lemma OVERWEIGHT.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The log-transformed word count data is approximately normally distributed.</p>
-<p>Let’s see if the difference in length of articles using the word “overweight” in tabloids and broadsheets is significant?</p>
+<p>Let’s see if the difference in length of articles using OVERWEIGHT in tabloids and broadsheets is significant?</p>
+<div class="cell" data-hash="03_overweight_cache/html/WCdiff_ce33d1e88cfc005d0da982cb9374db72">
 <details><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">wordcount_broadsheet</span> <span class="op">&lt;-</span> <span class="va">overweight_annotated_filtered</span><span class="op">[</span><span class="va">overweight_annotated_filtered</span><span class="op">$</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"broadsheet"</span>,<span class="st">"wordcount_total"</span><span class="op">]</span>
 <span class="va">wordcount_tabloid</span> <span class="op">&lt;-</span> <span class="va">overweight_annotated_filtered</span><span class="op">[</span><span class="va">overweight_annotated_filtered</span><span class="op">$</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"tabloid"</span>,<span class="st">"wordcount_total"</span><span class="op">]</span>
 <span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">wordcount_broadsheet</span>,<span class="va">wordcount_tabloid</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><p>The Welch Two Sample t-test testing the difference between wordcount_broadsheet and wordcount_tabloid (mean of x = 732.66, mean of y = 484.51) suggests that the effect is positive, statistically significant, and medium (difference = 248.15, 95% CI [226.60, 269.71], t(4626.50) = 22.57, p &lt; .001; Cohen’s d = 0.58, 95% CI [0.53, 0.63])</p>
+</div>
 <p>Yes, overall articles in tabloids are significantly shorter than in broadsheets.</p>
 <p>This is confirmed using an FP test:</p>
-<div class="cell" data-hash="03_overweight_cache/html/unnamed-chunk-1_1a7195857e9ce62f6db48d4c0ffed592">
+<div class="cell" data-hash="03_overweight_cache/html/unnamed-chunk-2_cf81e560dcebc9c0604334cfe535f7b0">
 <details><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">fp_test</span><span class="op">(</span>
   wc1 <span class="op">=</span> <span class="va">wordcount_broadsheet</span>,
     wc2 <span class="op">=</span> <span class="va">wordcount_tabloid</span>,
@@ -611,14 +746,16 @@ Z = 22.598, p-value &lt; 1e-04
 alternative hypothesis: true mu is not equal to 0</code></pre>
 </div>
 </div>
-<p>If we then test the difference between the frequency of the word “overweight” in tabloids and broadsheets, we can see that a higher frequency per 1000 words is detected for usage of the word “overweight” in tabloids than broadsheets.</p>
+<p>If we then test the difference between the frequency of OVERWEIGHT in tabloids and broadsheets, we can see that a higher frequency per 1000 words is detected for usage of OVERWEIGHT in tabloids than broadsheets.</p>
+<div class="cell" data-hash="03_overweight_cache/html/DiffFreq_ba2b6e060e627e993c1fa8b4b117c2b0">
 <details><summary>Code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">frequency_broadsheet</span> <span class="op">&lt;-</span> <span class="va">overweight_annotated_filtered</span><span class="op">[</span><span class="va">overweight_annotated_filtered</span><span class="op">$</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"broadsheet"</span>,<span class="st">"frequency"</span><span class="op">]</span>
 <span class="va">frequency_tabloid</span> <span class="op">&lt;-</span> <span class="va">overweight_annotated_filtered</span><span class="op">[</span><span class="va">overweight_annotated_filtered</span><span class="op">$</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"tabloid"</span>,<span class="st">"frequency"</span><span class="op">]</span>
 <span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">frequency_broadsheet</span>, <span class="va">frequency_tabloid</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><p>The Welch Two Sample t-test testing the difference between frequency_broadsheet and frequency_tabloid (mean of x = 3.55, mean of y = 5.73) suggests that the effect is negative, statistically significant, and small (difference = -2.18, 95% CI [-2.42, -1.95], t(6712.33) = -18.20, p &lt; .001; Cohen’s d = -0.43, 95% CI [-0.48, -0.38])</p>
-<p>So, yes, the frequency of use of the word “overweight” is lower in broadsheets than in tabloids.</p>
+</div>
+<p>So, yes, the frequency of use of OVERWEIGHT is lower in broadsheets than in tabloids.</p>
 <p>This is confirmed using an FP test:</p>
-<div class="cell" data-hash="03_overweight_cache/html/unnamed-chunk-2_6fc1a62378cdfa00be9b9973edcc99b8">
+<div class="cell" data-hash="03_overweight_cache/html/unnamed-chunk-3_4243086c0e606ec93c7b6d8686bdfb2c">
 <details><summary>Code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">fp_test</span><span class="op">(</span>
   wc1 <span class="op">=</span> <span class="va">frequency_broadsheet</span>,
     wc2 <span class="op">=</span> <span class="va">frequency_tabloid</span>,
@@ -634,8 +771,8 @@ Z = -15.923, p-value &lt; 1e-04
 alternative hypothesis: true mu is not equal to 0</code></pre>
 </div>
 </div>
-<p>Let’s use bootstrapping to see if the raw frequencies of usage of the word “overweight” are different?</p>
-<div class="cell" data-hash="03_overweight_cache/html/bootstrap_4b2784cb83822fde3658bc50d7730ce5">
+<p>Let’s use bootstrapping to see if the raw frequencies of usage of OVERWEIGHT are different?</p>
+<div class="cell" data-hash="03_overweight_cache/html/fig-l7kdkdkd_19900a89620399fe556eead96a82f0c7">
 <details><summary>Code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">broadsheet_counts</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
 <span class="va">tabloid_counts</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
 <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10000</span><span class="op">)</span> <span class="op">{</span>
@@ -657,19 +794,25 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">mean_sample</span>, fill <span class="op">=</span> <span class="va">source_type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="03_overweight_files/figure-html/bootstrap-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l7kdkdkd" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03_overweight_files/figure-html/fig-l7kdkdkd-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;7: Histogram of sampling of counts per article of the raw frequency of use of OVERWEIGHT in tabloids and broadsheets.</figcaption><p></p>
+</figure>
 </div>
 </div>
-<p>It is interesting that the distribution of usage of “overweight” is ~1.8 uses per article in tabloid publications (the results for “obese” were 1.6), while the distribution for broadsheets was bimodal.</p>
+</div>
+<p>It is interesting that the distribution of usage of OVERWEIGHT is ~1.8 uses per article in tabloid publications (the results for “OVERWEIGHT” were 1.6), while the distribution for broadsheets was bimodal.</p>
+<div class="cell" data-hash="03_overweight_cache/html/ttest_8d985dc0af5beb11f18f89a1b6a1f749">
 <details><summary>Code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span>
     <span class="va">broadsheet_counts</span>,
     <span class="va">tabloid_counts</span>
   <span class="op">)</span>
 <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><p>The Welch Two Sample t-test testing the difference between broadsheet_counts and tabloid_counts (mean of x = 1.95, mean of y = 1.80) suggests that the effect is positive, statistically significant, and large (difference = 0.15, 95% CI [0.15, 0.15], t(19957.65) = 244.80, p &lt; .001; Cohen’s d = 3.46, 95% CI [3.81, 3.81])</p>
+</details><p>The Welch Two Sample t-test testing the difference between broadsheet_counts and tabloid_counts (mean of x = 1.95, mean of y = 1.80) suggests that the effect is positive, statistically significant, and large (difference = 0.15, 95% CI [0.15, 0.15], t(19971.71) = 248.41, p &lt; .001; Cohen’s d = 3.51, 95% CI [3.86, 3.86])</p>
+</div>
 <p>This is confirmed using an FP test:</p>
-<div class="cell" data-hash="03_overweight_cache/html/unnamed-chunk-3_f3d99263e647b3da84b0d1aa9599d7e0">
+<div class="cell" data-hash="03_overweight_cache/html/unnamed-chunk-4_d7d5f24c412b0b4bf4986a60aee92315">
 <details><summary>Code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">fp_test</span><span class="op">(</span>
   wc1 <span class="op">=</span> <span class="va">broadsheet_counts</span>,
     wc2 <span class="op">=</span> <span class="va">tabloid_counts</span>,
@@ -681,12 +824,12 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 <pre><code>
     Approximative Two-Sample Fisher-Pitman Permutation Test
 data:  wc by label (broadsheet, tabloid)
-Z = 122.45, p-value &lt; 1e-04
+Z = 122.9, p-value &lt; 1e-04
 alternative hypothesis: true mu is not equal to 0</code></pre>
 </div>
 </div>
 <p>Let’s look at a jitter plot of the data:</p>
-<div class="cell" data-hash="03_overweight_cache/html/yearSourceTypeJitter_d3effd4e4881b4b19f3b5b04aeb507e7">
+<div class="cell" data-hash="03_overweight_cache/html/fig-l10_1b8fe1f6f2e407caac0e541bfc0e499b">
 <details><summary>Code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>, 
@@ -703,7 +846,11 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
     y <span class="op">=</span> <span class="st">"log(frequency per 1000 words)"</span>
   <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="03_overweight_files/figure-html/yearSourceTypeJitter-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l10" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03_overweight_files/figure-html/fig-l10-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;8: Raw and smoothed frequency of use of OVERWEIGHT in the corpus in tabloids and broadsheets, by year and publication type.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The jitter plot suggests that:</p>
@@ -711,8 +858,8 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 <li>Tabloids have a higher frequency of usage than broadsheets</li>
 <li>There may be a subtle decrease in frequency with time, especially in broadsheets</li>
 </ul>
-<section id="comparing-observed-to-normalised-to-subcorpus-size-data" class="level3"><h3 class="anchored" data-anchor-id="comparing-observed-to-normalised-to-subcorpus-size-data">Comparing observed to normalised to subcorpus size data</h3>
-<p>We can investigate the prevalence of the use of “overweight” using goodness of fit tests, comparing the distribution in:</p>
+<section id="comparing-observed-to-normalised-to-subcorpus-size-data" class="level3"><h3 data-anchor-id="comparing-observed-to-normalised-to-subcorpus-size-data">Comparing observed to normalised to subcorpus size data</h3>
+<p>We can investigate the prevalence of the use of OVERWEIGHT using goodness of fit tests, comparing the distribution in:</p>
 <ul>
 <li>tabloids vs broadsheets</li>
 <li>left and right leaning publications</li>
@@ -722,72 +869,208 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 <li>the total number of instances in each subcorpus, normalised to the total number of words in each subcorpus</li>
 <li>the number of articles that feature this language type, normalised to the total number of articles in each subcorpus</li>
 </ul>
-<section id="tabloids-vs-broadsheets" class="level4"><h4 class="anchored" data-anchor-id="tabloids-vs-broadsheets">Tabloids vs broadsheets</h4>
-<p>The total number of uses of “overweight” we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p &lt; 0.001).</p>
-<div class="cell" data-hash="03_overweight_cache/html/unnamed-chunk-4_82afa206d646336bcc5d3a7bf2fb7235">
-<details><summary>Code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_instances_wc_normalised</span><span class="op">(</span><span class="va">overweight_annotated_filtered</span>, <span class="va">metadata_full</span>, <span class="va">source_type</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>             variable                                    value
-1              method Chi-squared test for given probabilities
-2           parameter                                        1
-3           statistic                                 914.3487
-4             p.value                            7.457918e-201
-5 broadsheet_observed                                     4897
-6 broadsheet_expected                           6584.270411287
-7    tabloid_observed                                     7594
-8    tabloid_expected                           5906.729588713</code></pre>
+<section id="tabloids-vs-broadsheets" class="level4"><h4 data-anchor-id="tabloids-vs-broadsheets">Tabloids vs broadsheets</h4>
+<p>The total number of uses of OVERWEIGHT we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p &lt; 0.001).</p>
+<div class="cell" data-hash="03_overweight_cache/html/tbl-l11_2e1d990fa713362ce291da8510534c3a">
+<details><summary>Code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_instances_wc_normalised</span><span class="op">(</span><span class="va">overweight_annotated_filtered</span>, <span class="va">metadata_full</span>, <span class="va">source_type</span><span class="op">)</span> |&gt; <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="tbl-l11">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;3: Chi-Squared test for number of uses of OVERWEIGHT in tabloids and broadsheets vs what would be expected given word count across all articles in the publication types.</caption>
+<thead><tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">method</td>
+<td style="text-align: left;">Chi-squared test for given probabilities</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">parameter</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">statistic</td>
+<td style="text-align: left;">914.3487</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">p.value</td>
+<td style="text-align: left;">7.457918e-201</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">broadsheet_observed</td>
+<td style="text-align: left;">4897</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">broadsheet_expected</td>
+<td style="text-align: left;">6584.270411287</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tabloid_observed</td>
+<td style="text-align: left;">7594</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tabloid_expected</td>
+<td style="text-align: left;">5906.729588713</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-<p>The number of articles with use of “overweight” we observe is higher in tabloids and lower in broadsheets than we would expect based on the article count in these subcorpora (p &lt; 0.001).</p>
-<div class="cell" data-hash="03_overweight_cache/html/unnamed-chunk-5_4f031db77da6957eb20a997debb36ae3">
-<details><summary>Code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_articles_totalart_normalised</span><span class="op">(</span><span class="va">overweight_annotated_filtered</span>, <span class="va">metadata_full</span>, <span class="va">source_type</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>             variable                                    value
-1              method Chi-squared test for given probabilities
-2           parameter                                        1
-3           statistic                                 34.63231
-4             p.value                             3.982419e-09
-5 broadsheet_observed                                     2510
-6 broadsheet_expected                         2747.17631770057
-7    tabloid_observed                                     4211
-8    tabloid_expected                         3973.82368229943</code></pre>
+</div>
+<p>The number of articles with use of OVERWEIGHT we observe is higher in tabloids and lower in broadsheets than we would expect based on the article count in these subcorpora (p &lt; 0.001).</p>
+<div class="cell" data-hash="03_overweight_cache/html/tbl-l12_a98d4d99e71aa2c2e4fdf0188d6fbe6a">
+<details><summary>Code</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_articles_totalart_normalised</span><span class="op">(</span><span class="va">overweight_annotated_filtered</span>, <span class="va">metadata_full</span>, <span class="va">source_type</span><span class="op">)</span> |&gt; <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="tbl-l12">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;4: Chi-Squared test for number of articles that use OVERWEIGHT in tabloids and broadsheets vs what would be expected given total number of articles in the publication types.</caption>
+<thead><tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">method</td>
+<td style="text-align: left;">Chi-squared test for given probabilities</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">parameter</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">statistic</td>
+<td style="text-align: left;">34.63231</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">p.value</td>
+<td style="text-align: left;">3.982419e-09</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">broadsheet_observed</td>
+<td style="text-align: left;">2510</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">broadsheet_expected</td>
+<td style="text-align: left;">2747.17631770057</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tabloid_observed</td>
+<td style="text-align: left;">4211</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tabloid_expected</td>
+<td style="text-align: left;">3973.82368229943</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-</section><section id="left-vs-right-leaning-publications" class="level4"><h4 class="anchored" data-anchor-id="left-vs-right-leaning-publications">Left vs right-leaning publications</h4>
-<p>The total number of uses of “overweight” we observe is higher in right and lower in left-leaning publications than we would expect based on the word count in these subcorpora (p &lt; 0.001).</p>
-<div class="cell" data-hash="03_overweight_cache/html/unnamed-chunk-6_152bf5b3fbbc028b07612867b2f91783">
-<details><summary>Code</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_instances_wc_normalised</span><span class="op">(</span><span class="va">overweight_annotated_filtered</span>, <span class="va">metadata_full</span>, <span class="va">orientation</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>        variable                                    value
-1         method Chi-squared test for given probabilities
-2      parameter                                        1
-3      statistic                                 385.5095
-4        p.value                             7.861193e-86
-5  left_observed                                     4191
-6  left_expected                         5274.86941563361
-7 right_observed                                     8300
-8 right_expected                         7216.13058436639</code></pre>
+</div>
+</section><section id="left-vs-right-leaning-publications" class="level4"><h4 data-anchor-id="left-vs-right-leaning-publications">Left vs right-leaning publications</h4>
+<p>The total number of uses of OVERWEIGHT we observe is higher in right and lower in left-leaning publications than we would expect based on the word count in these subcorpora (p &lt; 0.001).</p>
+<div class="cell" data-hash="03_overweight_cache/html/tbl-l13_9837c7c9f5549ac650883446c31c2b02">
+<details><summary>Code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_instances_wc_normalised</span><span class="op">(</span><span class="va">overweight_annotated_filtered</span>, <span class="va">metadata_full</span>, <span class="va">orientation</span><span class="op">)</span> |&gt; <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="tbl-l13">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;5: Chi-Squared test for number of uses of OVERWEIGHT in left and right leaning publications vs what would be expected given word count across all articles in the publication types.</caption>
+<thead><tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">method</td>
+<td style="text-align: left;">Chi-squared test for given probabilities</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">parameter</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">statistic</td>
+<td style="text-align: left;">385.5095</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">p.value</td>
+<td style="text-align: left;">7.861193e-86</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">left_observed</td>
+<td style="text-align: left;">4191</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">left_expected</td>
+<td style="text-align: left;">5274.86941563361</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">right_observed</td>
+<td style="text-align: left;">8300</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">right_expected</td>
+<td style="text-align: left;">7216.13058436639</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-<p>The number of articles that use “overweight” we observe is somewhat higher in right and lower in left-leaning publications than we would expect based on total article count in these subcorpora (p &lt; 0.002).</p>
-<div class="cell" data-hash="03_overweight_cache/html/unnamed-chunk-7_fc779c185485bd5f79b5c8185c897bc8">
-<details><summary>Code</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_articles_totalart_normalised</span><span class="op">(</span><span class="va">overweight_annotated_filtered</span>, <span class="va">metadata_full</span>, <span class="va">orientation</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>        variable                                    value
-1         method Chi-squared test for given probabilities
-2      parameter                                        1
-3      statistic                                 10.56669
-4        p.value                               0.00115144
-5  left_observed                                     2118
-6  left_expected                         2243.67289683905
-7 right_observed                                     4603
-8 right_expected                         4477.32710316095</code></pre>
+</div>
+<p>The number of articles that use OVERWEIGHT we observe is somewhat higher in right and lower in left-leaning publications than we would expect based on total article count in these subcorpora (p &lt; 0.002).</p>
+<div class="cell" data-hash="03_overweight_cache/html/tbl-l14_ccb1594918b3fce3030927180b5ae2fb">
+<details><summary>Code</summary><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_articles_totalart_normalised</span><span class="op">(</span><span class="va">overweight_annotated_filtered</span>, <span class="va">metadata_full</span>, <span class="va">orientation</span><span class="op">)</span> |&gt; <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="tbl-l14">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;6: Chi-Squared test for number of articles that use OVERWEIGHT left and right leaning publications vs what would be expected given total number of articles in the publication types.</caption>
+<thead><tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">method</td>
+<td style="text-align: left;">Chi-squared test for given probabilities</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">parameter</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">statistic</td>
+<td style="text-align: left;">10.56669</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">p.value</td>
+<td style="text-align: left;">0.00115144</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">left_observed</td>
+<td style="text-align: left;">2118</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">left_expected</td>
+<td style="text-align: left;">2243.67289683905</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">right_observed</td>
+<td style="text-align: left;">4603</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">right_expected</td>
+<td style="text-align: left;">4477.32710316095</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-</section></section></section><section id="differences-in-usage-by-source" class="level2"><h2 class="anchored" data-anchor-id="differences-in-usage-by-source">Differences in usage by source</h2>
+</div>
+</section></section></section><section id="differences-in-usage-by-source" class="level2"><h2 data-anchor-id="differences-in-usage-by-source">Differences in usage by source</h2>
 <p>Is there a difference in the usage of overweight by source?</p>
-<div class="cell" data-hash="03_overweight_cache/html/sourceBoxplot_a537184a3a65258bd63da62dd4aa01b0">
-<details><summary>Code</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+<div class="cell" data-hash="03_overweight_cache/html/fig-l123_2ddd89656431c734e459cd683e1486e9">
+<details><summary>Code</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">source</span>,<span class="va">frequency</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>, 
              fill <span class="op">=</span> <span class="va">source_type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -796,13 +1079,17 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span>, vjust <span class="op">=</span> <span class="fl">0.5</span>, hjust<span class="op">=</span><span class="fl">1</span><span class="op">)</span>,
         legend.position <span class="op">=</span> <span class="st">"NA"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="03_overweight_files/figure-html/sourceBoxplot-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l123" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03_overweight_files/figure-html/fig-l123-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;9: Box plot of usage of OVERWEIGHT by source.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The visualisation suggests there are not - only the differences observed above for tabloids vs broadsheets.</p>
 <p>What are the means and standard deviations of the frequency by source?</p>
-<div class="cell" data-hash="03_overweight_cache/html/summariseBySource_811d9c6a5766034d4404769bcb837e3a">
-<details><summary>Code</summary><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
+<div class="cell" data-hash="03_overweight_cache/html/tbl-l15_08f384b6cee40879be6775de8f1176d2">
+<details><summary>Code</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">source</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>
     mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>,
@@ -814,7 +1101,9 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">mean</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
+<div id="tbl-l15">
 <table class="table table-sm table-striped">
+<caption>Table&nbsp;7: Mean, median and standard deviation of frequency of use of OVERWEIGHT by source.</caption>
 <thead><tr class="header">
 <th style="text-align: left;">source</th>
 <th style="text-align: right;">mean</th>
@@ -897,11 +1186,12 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 </table>
 </div>
 </div>
-<p>It seems that within the different sources among broadsheets there is not much difference among the frequency of use of the word “overweight”. Among tabloids, the Hobart Mercury and the Northern Territorian seem to have higher frequency of use of “overweight” than other tabloids.</p>
-</section><section id="differences-in-usage-by-year" class="level2"><h2 class="anchored" data-anchor-id="differences-in-usage-by-year">Differences in usage by year</h2>
-<p>Is there any year when “overweight” is used more frequently than others?</p>
-<div class="cell" data-hash="03_overweight_cache/html/yearBoxplot_ff819a994d6d8f7d47ff3655ce7ef585">
-<details><summary>Code</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+</div>
+<p>It seems that within the different sources among broadsheets there is not much difference among the frequency of use of OVERWEIGHT. Among tabloids, the Hobart Mercury and the Northern Territorian seem to have higher frequency of use of OVERWEIGHT than other tabloids.</p>
+</section><section id="differences-in-usage-by-year" class="level2"><h2 data-anchor-id="differences-in-usage-by-year">Differences in usage by year</h2>
+<p>Is there any year when OVERWEIGHT is used more frequently than others?</p>
+<div class="cell" data-hash="03_overweight_cache/html/fig-l12_fec2a82c0e97a830db8c3478498f0391">
+<details><summary>Code</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">year</span>,<span class="va">frequency</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>, 
              fill <span class="op">=</span> <span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -910,12 +1200,16 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span>, vjust <span class="op">=</span> <span class="fl">0.5</span>, hjust<span class="op">=</span><span class="fl">1</span><span class="op">)</span>,
         legend.position <span class="op">=</span> <span class="st">"NA"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="03_overweight_files/figure-html/yearBoxplot-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l12" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03_overweight_files/figure-html/fig-l12-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;10: Use of OVERWEIGHT by year, sorted by median use per year from least frequent to most frequent.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Based on the visualisation it seems not. If we separate out by source there also doesn’t seem to be much difference. If we use a jitter plot to visualise the data, then fit a smoothing line and compare with the line of “no change” (dashed red line), we can see that there really isn’t much of a difference by source and year:</p>
-<div class="cell" data-hash="03_overweight_cache/html/yearSourceJitter_236a81affa6464be9bae25663d37ebec">
-<details><summary>Code</summary><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+<div class="cell" data-hash="03_overweight_cache/html/fig-l13_ec3ece1c379d15f8cacaaaf1dba3e003">
+<details><summary>Code</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>, 
              fill <span class="op">=</span> <span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -931,13 +1225,17 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
     y <span class="op">=</span> <span class="st">"log(frequency per 1000 words)"</span>
   <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="03_overweight_files/figure-html/yearSourceJitter-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l13" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03_overweight_files/figure-html/fig-l13-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;11: Use of OVERWEIGHT by year and source, split by publication.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>There may be a subtle decrease over time in the Advertiser, Australian, Northern Territorian and Sydney Morning Herald, however, it is unclear whether this trend is very strong. There may be a slight increase over time in the Courier Mail.</p>
 <p>The distributions each year also look quite similar:</p>
-<div class="cell" data-hash="03_overweight_cache/html/distrib_855047d993ac08e7d4f4dd6bbb54870a">
-<details><summary>Code</summary><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+<div class="cell" data-hash="03_overweight_cache/html/fig-l14_fbcafa0f15bf81a034925cf6de029acf">
+<details><summary>Code</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">year</span>,<span class="va">frequency</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>, 
              fill <span class="op">=</span> <span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -946,11 +1244,15 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span>, vjust <span class="op">=</span> <span class="fl">0.5</span>, hjust<span class="op">=</span><span class="fl">1</span><span class="op">)</span>,
         legend.position <span class="op">=</span> <span class="st">"NA"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="03_overweight_files/figure-html/distrib-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l14" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03_overweight_files/figure-html/fig-l14-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;12: Violin plot of the distributions of use of OVERWEIGHT by year.</figcaption><p></p>
+</figure>
 </div>
 </div>
-<div class="cell" data-hash="03_overweight_cache/html/yearMeanSD_62ed9669c3ce7091cb026a44774a2731">
-<details><summary>Code</summary><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
+</div>
+<div class="cell" data-hash="03_overweight_cache/html/tbl-l168f8f_a76608cef643facfdb1ac40bdfc68b6b">
+<details><summary>Code</summary><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>
     mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>,
@@ -962,7 +1264,9 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">mean</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
+<div id="tbl-l168f8f">
 <table class="table table-sm table-striped">
+<caption>Table&nbsp;8: Descriptive statistics of the use of OVERWEIGHT by year across the dataset.</caption>
 <thead><tr class="header">
 <th style="text-align: right;">year</th>
 <th style="text-align: right;">mean</th>
@@ -1046,11 +1350,12 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 </table>
 </div>
 </div>
-</section><section id="differences-in-usage-by-source-type-source-and-year" class="level2"><h2 class="anchored" data-anchor-id="differences-in-usage-by-source-type-source-and-year">Differences in usage by source type, source and year</h2>
+</div>
+</section><section id="differences-in-usage-by-source-type-source-and-year" class="level2"><h2 data-anchor-id="differences-in-usage-by-source-type-source-and-year">Differences in usage by source type, source and year</h2>
 <p>We can also try to simultaneously model differences by source type, source and year.</p>
 <p>As expected, a model that includes the source type (tabloid vs broadsheet) gives a better fit than one that does not:</p>
-<div class="cell" data-hash="03_overweight_cache/html/unnamed-chunk-8_e33d0eff2b16865c69deabe519a592f5">
-<details><summary>Code</summary><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span><span class="op">$</span><span class="va">scaled_year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span>
+<div class="cell" data-hash="03_overweight_cache/html/tbl-l17_a99beb81619adcbc4c695870f3cfa591">
+<details><summary>Code</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span><span class="op">$</span><span class="va">scaled_year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span>
   <span class="va">overweight_annotated_filtered</span><span class="op">$</span><span class="va">year</span>, scale <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lme4/lme4/">lme4</a></span><span class="op">)</span>
 <span class="co"># base model</span>
@@ -1089,7 +1394,9 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">AIC</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
+<div id="tbl-l17">
 <table class="table table-sm table-striped">
+<caption>Table&nbsp;9: Comparison of model summary statistics for simple linear models that incorporate source, scaled year and/or source type.</caption>
 <colgroup>
 <col style="width: 12%">
 <col style="width: 10%">
@@ -1179,9 +1486,10 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 </table>
 </div>
 </div>
+</div>
 <p>We can see that the model incorporating source and scaled year provides the best fit for the data, explaining somewhat more variability than that which includes only source type.</p>
 <div class="cell" data-hash="03_overweight_cache/html/compareModels_4436d30586b33d4571565ac89860d26e">
-<details><summary>Code</summary><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">m_0_base</span>, <span class="va">m_0_sourceyear</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">m_0_base</span>, <span class="va">m_0_sourceyear</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 Model 1: log(frequency) ~ 1
@@ -1193,12 +1501,16 @@ Model 2: log(frequency) ~ source + scaled_year
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<div class="cell" data-hash="03_overweight_cache/html/unnamed-chunk-9_26b0460e09941ac3238e1e22758af693">
-<details><summary>Code</summary><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"400_analysis"</span>,<span class="st">"model_diagnostics.R"</span><span class="op">)</span><span class="op">)</span>
+<div class="cell" data-hash="03_overweight_cache/html/fig-l20_09fd5047590f9ce65c00f3aa45fcd324">
+<details><summary>Code</summary><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"400_analysis"</span>,<span class="st">"model_diagnostics.R"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">df_model_resid</span> <span class="op">&lt;-</span> <span class="fu">get_model_resid_df</span><span class="op">(</span><span class="va">m_0_sourceyear</span><span class="op">)</span>
 <span class="fu">diagnostic_lm_plot</span><span class="op">(</span><span class="va">df_model_resid</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="03_overweight_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l20" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03_overweight_files/figure-html/fig-l20-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;13: Plot of model residuals for the fixed effects model log(frequency) ~ source + scaled_year.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Proportion of data points with:</p>
@@ -1209,10 +1521,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </ul>
 <p>All of these indicate the model is performing reasonably well on the data.</p>
 <p>Let’s summarise the model (note that the intercept corresponds to the “first” source, i.e.&nbsp;the Advertiser):</p>
-<div class="cell" data-hash="03_overweight_cache/html/sjplot_50807c9c17eb21ebf1c634b446d38ca8">
-<details><summary>Code</summary><div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">sjPlot</span><span class="fu">::</span><span class="fu"><a href="https://strengejacke.github.io/sjPlot/reference/tab_model.html">tab_model</a></span><span class="op">(</span><span class="va">m_0_sourceyear</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="03_overweight_cache/html/tbl-l22jsjsjs_0fdb9bfaa2140c682aced83a94242e15">
+<details><summary>Code</summary><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">sjPlot</span><span class="fu">::</span><span class="fu"><a href="https://strengejacke.github.io/sjPlot/reference/tab_model.html">tab_model</a></span><span class="op">(</span><span class="va">m_0_sourceyear</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
+<div id="tbl-l22jsjsjs">
 <table style="border-collapse:collapse; border:none;">
+<caption>Table&nbsp;10:  Coefficients and confidence intervals for the fixed effects model log(frequency) ~ source + scaled_year. </caption>
 <tbody><tr>
 <th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
 <th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">log(frequency)</th>
@@ -1300,8 +1614,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </tbody></table>
 </div>
 </div>
-<p>This model is suggesting that relative to the Advertiser, the Age, Australian, Canberra Times and Sydney Morning Herald (so all broadsheets) have lower frequency of usage of “overweight”, while the Hobart Mercury and Northern Territorian have higher frequency of usage. The word “overweight” is used less frequently in later years in the corpus relative to earlier ones.</p>
-<details><summary>Code</summary><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="va">m_0_sourceyear</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This model is suggesting that relative to the Advertiser, the Age, Australian, Canberra Times and Sydney Morning Herald (so all broadsheets) have lower frequency of usage of OVERWEIGHT, while the Hobart Mercury and Northern Territorian have higher frequency of usage. OVERWEIGHT is used less frequently in later years in the corpus relative to earlier ones.</p>
+<div class="cell" data-warnings="false" data-hash="03_overweight_cache/html/unnamed-chunk-11_e9ed07be30ec5a3fe84fd91844eec14f">
+<details><summary>Code</summary><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="va">m_0_sourceyear</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><p>We fitted a linear model (estimated using OLS) to predict frequency with source and scaled_year (formula: log(frequency) ~ source + scaled_year). The model explains a statistically significant and weak proportion of variance (R2 = 0.08, F(10, 6710) = 58.73, p &lt; .001, adj. R2 = 0.08). The model’s intercept, corresponding to source = Advertiser and scaled_year = 0, is at 1.31 (95% CI [1.26, 1.37], t(6710) = 48.02, p &lt; .001). Within this model:</p>
 <ul>
 <li>The effect of source [Age] is statistically significant and negative (beta = -0.44, 95% CI [-0.53, -0.36], t(6710) = -10.23, p &lt; .001; Std. beta = -0.18, 95% CI [-0.22, -0.14])</li>
@@ -1316,10 +1632,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li>The effect of scaled year is statistically significant and negative (beta = -0.01, 95% CI [-0.02, -6.59e-03], t(6710) = -4.13, p &lt; .001; Std. beta = -0.02, 95% CI [-0.03, -0.01])</li>
 </ul>
 <p>Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using the Wald approximation.</p>
-<p>To summarise, a model was fit by source and year, which explains a very small amount of variance in the data. It showed that the Age, Australian, Canberra Times and Sydney Morning Herald had a lower frequency of use of the word “overweight” relative to the Advertiser, while in the Hobart Mercury, Northern Territorian the word “overweight” was used somewhat more frequently than in the Advertiser. The word “overweight” is used less frequently in later years in the corpus relative to earlier ones.</p>
+</div>
+<p>To summarise, a model was fit by source and year, which explains a very small amount of variance in the data. It showed that the Age, Australian, Canberra Times and Sydney Morning Herald had a lower frequency of use of OVERWEIGHT relative to the Advertiser, while in the Hobart Mercury, Northern Territorian OVERWEIGHT was used somewhat more frequently than in the Advertiser. OVERWEIGHT is used less frequently in later years in the corpus relative to earlier ones.</p>
 <p>Next, let’s compare if using a mixed model improves the fit of the model.</p>
-<div class="cell" data-hash="03_overweight_cache/html/lme_ff4f7eece6a7bffff48ee155fba176fe">
-<details><summary>Code</summary><div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">m_1_source</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span> <span class="op">~</span>  <span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">source</span><span class="op">)</span>, 
+<div class="cell" data-hash="03_overweight_cache/html/tbl-l18_3d8108593749b0e64c24f8ede61da8d1">
+<details><summary>Code</summary><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">m_1_source</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span> <span class="op">~</span>  <span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">source</span><span class="op">)</span>, 
                 data <span class="op">=</span> <span class="va">overweight_annotated_filtered</span>, REML <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 <span class="va">m_1_source_year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span> <span class="op">~</span>  <span class="va">scaled_year</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">source</span><span class="op">)</span>, 
                 data <span class="op">=</span> <span class="va">overweight_annotated_filtered</span>, REML <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
@@ -1352,7 +1669,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">BIC</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
+<div id="tbl-l18">
 <table class="table table-sm table-striped">
+<caption>Table&nbsp;11: Comparison of model summary statistics for linear mixed effects models that incorporate source, scaled year and/or source type.</caption>
 <colgroup>
 <col style="width: 11%">
 <col style="width: 11%">
@@ -1406,12 +1725,15 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </table>
 </div>
 </div>
+</div>
 <p>The AIC of the fixed effects model is lower than that of the mixed effects models. However, if we use the Bayesian Information Criteria as our metric for choosing a model, the random effects model for <code>scaled_year</code> by source with <code>source_type</code> as a fixed effect was identified as the best preforming model.</p>
-<div class="cell" data-hash="03_overweight_cache/html/sjplot2_2da805371245bca849fc4e24c6884603">
-<details><summary>Code</summary><div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># broom.mixed::tidy(as(m_1_source_year_type2,"merModLmerTest"), effects="fixed")</span>
+<div class="cell" data-hash="03_overweight_cache/html/tbl-l22_957c78171b9450470902f8ed29577ed6">
+<details><summary>Code</summary><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="co"># broom.mixed::tidy(as(m_1_source_year_type2,"merModLmerTest"), effects="fixed")</span>
 <span class="fu">sjPlot</span><span class="fu">::</span><span class="fu"><a href="https://strengejacke.github.io/sjPlot/reference/tab_model.html">tab_model</a></span><span class="op">(</span><span class="va">m_1_source_year_type2</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
+<div id="tbl-l22">
 <table style="border-collapse:collapse; border:none;">
+<caption>Table&nbsp;12:  Coefficients and confidence intervals for the mixed effects model log(frequency) ~ scaled_year + source_type + scaled_year/source. </caption>
 <tbody><tr>
 <th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
 <th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">log(frequency)</th>
@@ -1484,22 +1806,27 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </tbody></table>
 </div>
 </div>
+</div>
 <p>The model shows a difference between the sources, a strong positive effect for tabloids having higher frequency than broadsheets, and a small negative effect by year.</p>
 <p>Let’s summarise this model:</p>
-<details><summary>Code</summary><div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="va">m_1_source_year_type2</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-warnings="false" data-hash="03_overweight_cache/html/unnamed-chunk-12_912f9787deacb7628ca8fdbb9f368ec8">
+<details><summary>Code</summary><div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="va">m_1_source_year_type2</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><p>We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to predict frequency with scaled_year and source_type (formula: log(frequency) ~ scaled_year + source_type). The model included scaled_year and source as random effects (formula: ~scaled_year | source). The model’s total explanatory power is weak (conditional R2 = 0.11) and the part related to the fixed effects alone (marginal R2) is of 0.09. The model’s intercept, corresponding to scaled_year = 0 and source_type = broadsheet, is at 0.90 (95% CI [0.76, 1.03], t(6714) = 13.07, p &lt; .001). Within this model:</p>
 <ul>
 <li>The effect of scaled year is statistically significant and negative (beta = -0.01, 95% CI [-0.03, -2.66e-03], t(6714) = -2.39, p = 0.017; Std. beta = -0.02, 95% CI [-0.04, -5.21e-03])</li>
 <li>The effect of source type [tabloid] is statistically significant and positive (beta = 0.52, 95% CI [0.35, 0.70], t(6714) = 5.88, p &lt; .001; Std. beta = 0.21, 95% CI [0.14, 0.28])</li>
 </ul>
 <p>Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using</p>
+</div>
 <p>The intercepts for each of the sources were:</p>
-<div class="cell" data-hash="03_overweight_cache/html/unnamed-chunk-12_aafa9a9d8e1bad2e380e3c5d2ac87fae">
-<details><summary>Code</summary><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_1_source_year_type2</span><span class="op">)</span><span class="op">$</span><span class="va">source</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
+<div class="cell" data-hash="03_overweight_cache/html/tbl-l24_59e9ef88650f5141e3fc940721c861ab">
+<details><summary>Code</summary><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_1_source_year_type2</span><span class="op">)</span><span class="op">$</span><span class="va">source</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">`(Intercept)`</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
+<div id="tbl-l24">
 <table class="table table-sm table-striped">
+<caption>Table&nbsp;13: Intercepts and coefficients for the mixed effects model log(frequency) ~ scaled_year + source_type + scaled_year/source.</caption>
 <thead><tr class="header">
 <th style="text-align: left;"></th>
 <th style="text-align: right;">(Intercept)</th>
@@ -1571,10 +1898,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </table>
 </div>
 </div>
-<p>This random effects model for source and year included a fixed effect for source type, which explains a very small amount of variance in the data. The word “overweight” is used less frequently in later years in the corpus relative to earlier ones, and more frequently in tabloids than in broadsheets.</p>
-</section><section id="differences-in-usage-by-topic" class="level2"><h2 class="anchored" data-anchor-id="differences-in-usage-by-topic">Differences in usage by topic</h2>
-<div class="cell" data-hash="03_overweight_cache/html/topic_use_0b11d2003d1899361a8f2047bbdaad92">
-<details><summary>Code</summary><div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+</div>
+<p>This random effects model for source and year included a fixed effect for source type, which explains a very small amount of variance in the data. OVERWEIGHT is used less frequently in later years in the corpus relative to earlier ones, and more frequently in tabloids than in broadsheets.</p>
+</section><section id="differences-in-usage-by-topic" class="level2"><h2 data-anchor-id="differences-in-usage-by-topic">Differences in usage by topic</h2>
+<div class="cell" data-hash="03_overweight_cache/html/fig-l25_dd229b883c34a815686bba9901bdd32a">
+<details><summary>Code</summary><div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span>
     <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">topic_label</span>,<span class="va">frequency</span><span class="op">)</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>, 
@@ -1586,13 +1914,17 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Topic label"</span>,
        y <span class="op">=</span> <span class="st">"log(frequency per 1000 words)"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="03_overweight_files/figure-html/topic_use-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l25" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="03_overweight_files/figure-html/fig-l25-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;14: Frequency of use of OVERWEIGHT per 1000 words in articles annotated with specific topic lables.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>It seems there are some topics that use overweight more than others.</p>
 <p>We use a simple linear model with post-hoc comparisons and Bonferroni multiple testing correction:</p>
-<div class="cell" data-hash="03_overweight_cache/html/topicDiffs_d095071550fdbf86a9d08457f408a9e0">
-<details><summary>Code</summary><div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_by_topic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>
+<div class="cell" data-hash="03_overweight_cache/html/tbl-l25_cfd961dff72dd1c5a6a7abd96c4c130d">
+<details><summary>Code</summary><div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">overweight_by_topic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>
   <span class="va">frequency</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">topic_label</span><span class="op">)</span>, 
   data <span class="op">=</span> <span class="va">overweight_annotated_filtered</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rvlenth/emmeans">emmeans</a></span><span class="op">)</span>
@@ -1602,7 +1934,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">p.value</span> <span class="op">&lt;</span> <span class="fl">0.01</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
+<div id="tbl-l25">
 <table class="table table-sm table-striped">
+<caption>Table&nbsp;14: Differences in use of OVERWEIGHT in articles annoated with specific topics, with topics compared pairwise with each other.</caption>
 <colgroup>
 <col style="width: 37%">
 <col style="width: 9%">
@@ -2128,7 +2462,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </table>
 </div>
 </div>
-<p>We can see that there are differences in the frequency of use of the word “overweight” by topic, with articles annotated as “Bio-medical Research”, “Children and Parents” using more instances per 1000 words than articles discussing politics, schooling, transport and commuting.</p>
+</div>
+<p>We can see that there are differences in the frequency of use of OVERWEIGHT by topic, with articles annotated as “Bio-medical Research”, “Children and Parents” using more instances per 1000 words than articles discussing politics, schooling, transport and commuting.</p>
 
 
 </section></main></div>
@@ -2137,6 +2472,24 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
   const disableStylesheet = (stylesheets) => {
     for (let i=0; i < stylesheets.length; i++) {
       const stylesheet = stylesheets[i];
@@ -2166,8 +2519,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     manageTransitions('#quarto-margin-sidebar .nav-link', false);
     if (alternate) {
       enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
     } else {
       disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
     }
     manageTransitions('#quarto-margin-sidebar .nav-link', true);
     // Switch the toggles
@@ -2181,6 +2540,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
           toggle.classList.remove("alternate");
         }
       }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
     }
   }
   const isFileUrl = () => { 
@@ -2234,13 +2603,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (hasAlternateSentinel()) {
     toggleColorMode(true);
   } 
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const clipboard = new window.ClipboardJS('.code-copy-button', {
     target: function(trigger) {
       return trigger.previousElementSibling;
@@ -2283,7 +2645,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);

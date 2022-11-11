@@ -2,16 +2,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.345">
+<meta name="generator" content="quarto-1.1.251">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Obesity phase 2 – fat</title>
+<meta name="author" content="Darya Vanichkina">
+<title>Obesity phase 2 - Exploring usage of FAT with a negative connotation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -50,7 +56,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -63,7 +69,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -76,14 +82,24 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script><script src="../site_libs/quarto-nav/headroom.min.js"></script><script src="../site_libs/clipboard/clipboard.min.js"></script><meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script><script src="../site_libs/quarto-search/fuse.min.js"></script><script src="../site_libs/quarto-search/quarto-search.js"></script><script src="../site_libs/quarto-html/quarto.js"></script><script src="../site_libs/quarto-html/popper.min.js"></script><script src="../site_libs/quarto-html/tippy.umd.min.js"></script><script src="../site_libs/quarto-html/anchor.min.js"></script><link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link class="quarto-color-scheme" id="quarto-text-highlighting-styles" href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
-<link class="quarto-color-scheme quarto-color-alternate" rel="prefetch" id="quarto-text-highlighting-styles" href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script><link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link class="quarto-color-scheme" href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
-<link class="quarto-color-scheme quarto-color-alternate" rel="prefetch" href="../site_libs/bootstrap/bootstrap-dark.min.css">
-<script id="quarto-search-options" type="application/json">{
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -107,9 +123,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
-      <a class="navbar-brand" href="../index.html">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Obesity phase 2</span>
-  </a>
+    </a>
+  </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -119,8 +137,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="nav-link" href="../index.html">Home</a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data-cleaning--eda" role="button" data-bs-toggle="dropdown" aria-expanded="false">Data Cleaning &amp; EDA</a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-data-cleaning--eda">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-data-cleaning--exploratory-data-analysis" role="button" data-bs-toggle="dropdown" aria-expanded="false">Data Cleaning &amp; Exploratory Data Analysis</a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-data-cleaning--exploratory-data-analysis">
 <li>
     <a class="dropdown-item" href="../100_data_cleaning_scripts_EDA/01_ExploreCQPwebData.html">
  <span class="dropdown-text">Exploring the CQPWeb data</span></a>
@@ -179,7 +197,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="quarto-about-solana column-body">
   <div class="about-entity">
     <div class="entity-contents">
-      <div class="about-contents"><main class="content" id="quarto-document-content"><section id="exploring-usage-of-the-word-fat" class="level2"><h2 class="anchored" data-anchor-id="exploring-usage-of-the-word-fat">Exploring usage of the word “fat”</h2>
+      <header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">Exploring usage of FAT with a negative connotation</h1>
+</div>
+<div class="quarto-title-meta">
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Darya Vanichkina </p>
+          </div>
+  </div>
+  </div>
+</header> 
+      <div class="about-contents"><main class="content" id="quarto-document-content"><section id="exploring-usage-of-the-lemma-fat" class="level2"><h2 data-anchor-id="exploring-usage-of-the-lemma-fat">Exploring usage of the lemma FAT</h2>
 <p>There is interest in exploring statistics around the use of the word “fat” with a negative connotation around the following research questions:</p>
 <ul>
 <li>Do tabloids use “fat” with a negative connotation more than broadsheets?</li>
@@ -193,22 +223,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Is there a difference of use by primary topic?</li>
 </ul>
-<section id="executive-summary" class="level3"><h3 class="anchored" data-anchor-id="executive-summary">Executive summary</h3>
-<ol type="1">
-<li>Tabloids use the word “fat” in a negative context more frequently than broadsheets.</li>
-</ol>
-<p>More specifically, a Welch Two Sample t-test testing the difference between the frequency in broadsheets per 1000 words and frequency in tabloids (mean of broadsheets = 2.62, mean of tabloids = 4.49) suggests that the effect is negative, statistically significant, and small (difference = -1.87, 95% CI [-2.18, -1.56], t(2251.24) = -11.73, p &lt; .001; Cohen’s d = -0.47, 95% CI [-0.55, -0.39])</p>
+<section id="executive-summary" class="level3"><h3 data-anchor-id="executive-summary">Executive summary</h3>
+<p><strong>1. Tabloids use the word “fat” in a negative context more frequently than broadsheets.</strong></p>
 <ul>
+<li><p>More specifically, a Welch Two Sample t-test testing the difference between the frequency in broadsheets per 1000 words and frequency in tabloids (mean of broadsheets = 2.62, mean of tabloids = 4.49) suggests that the effect is negative, statistically significant, and small (difference = -1.87, 95% CI [-2.18, -1.56], t(2251.24) = -11.73, p &lt; .001; Cohen’s d = -0.47, 95% CI [-0.55, -0.39])</p></li>
 <li><p>The total number of uses of “fat” we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p &lt; 0.001).</p></li>
 <li><p>The number of articles with use of “fat” we observe is not different between tabloids and broadsheets.</p></li>
 </ul>
-<ol start="2" type="1">
-<li><p>Tabloids have shorter article lengths than broadsheets, as demonstrated in the <a href="%22./03_obese.html%22">analysis of obese</a>.</p></li>
-<li><p>In this case (but not that of obese or overweight), bootstrap re-sampling of the counts of use of the word “fat” in a negative connotation revealed that raw counts were <em>higher</em> in broadsheets than in tabloids (so the opposite of the above result), in part due to more articles in broadsheets having 7+ uses vs only tabloids (23 vs 10 articles, respectively). So the result described above is in part attributable to the longer length of articles in broadsheets vs tabloids.</p></li>
-<li><p>Investigating the data by source and year revealed that these variables explained a small amount of variance in the data, with the word fat being used less frequently in the Age, Australian, Canberra Times and Sydney Morning Herald had a lower frequency of use of the word “fat” relative to the Advertiser, while in the Northern Territorian the word “fat” was used somewhat more frequently than in the Advertiser. The word “fat” was not used differently in the corpus across the time period.</p></li>
-<li><p>Significant differences in the use of “fat” were observed in articles on different topics, with articles annotated as “Awards”, “Women and Pregnancy” and “Bio-medical Research” using more instances per 1000 words than articles discussing “Students and teachers”, “Politics” and “Food”.</p></li>
-<li><p>Significant differences in article topics were also observed between tabloids and broadsheets, as discussed in the <a href="%22./03_obese.html%22">analysis of obese</a>.</p></li>
-</ol></section><section id="data-source" class="level3"><h3 class="anchored" data-anchor-id="data-source">Data source</h3>
+<p><strong>2. Tabloids have shorter article lengths than broadsheets, as demonstrated in the <a href="./03_obese.html">analysis of obese</a>.</strong></p>
+<p><strong>3. In this case (but not that of obese or overweight), bootstrap re-sampling of the counts of use of the word “fat” in a negative connotation revealed that raw counts were <em>higher</em> in broadsheets than in tabloids (so the opposite of the above result), in part due to more articles in broadsheets having 7+ uses vs only tabloids (23 vs 10 articles, respectively). So the result described above is in part attributable to the longer length of articles in broadsheets vs tabloids.</strong></p>
+<p><strong>4. Investigating the data by source and year revealed that these variables explained a small amount of variance in the data, with the word fat being used less frequently in the Age, Australian, Canberra Times and Sydney Morning Herald had a lower frequency of use of the word “fat” relative to the Advertiser, while in the Northern Territorian the word “fat” was used somewhat more frequently than in the Advertiser. The word “fat” was not used differently in the corpus across the time period.</strong></p>
+<p><strong>4. Significant differences in the use of “fat” were observed in articles on different topics, with articles annotated as “Awards”, “Women and Pregnancy” and “Bio-medical Research” using more instances per 1000 words than articles discussing “Students and teachers”, “Politics” and “Food”.</strong></p>
+<p><strong>5. Significant differences in article topics were also observed between tabloids and broadsheets, as discussed in the <a href="./03_obese.html">analysis of obese</a>.</strong></p>
+</section><section id="data-source" class="level3"><h3 data-anchor-id="data-source">Data source</h3>
 <p>CQPweb data was provided. To calculate normalised frequency, we divide the number of observations from CQPweb by the word count as calculated in Python, and multiple by 1000.</p>
 <div class="cell" data-hash="04_fat_cache/html/loadLibs_256885123ecbdeae3fba6aa392cf2083">
 <details><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span>
@@ -240,28 +267,112 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
                             <span class="va">additional_source_metadata</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section></section><section id="tabloid-vs-broadsheet" class="level2"><h2 class="anchored" data-anchor-id="tabloid-vs-broadsheet">Tabloid vs broadsheet</h2>
+<p>We group articles into tabloids and broadsheets, and by orientation, in the following manner:</p>
+<div class="cell" data-hash="04_fat_cache/html/tbl-l1_de847e7ccf9cdf9fbe1feb4d5131fd7a">
+<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">metadata_full</span> |&gt;
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">source</span>, <span class="va">source_type</span>, <span class="va">orientation</span><span class="op">)</span> |&gt;
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="op">)</span> |&gt;
+  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="tbl-l1">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;1: Classification of sources into types and by orientation.</caption>
+<thead><tr class="header">
+<th style="text-align: left;">source</th>
+<th style="text-align: left;">source_type</th>
+<th style="text-align: left;">orientation</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Advertiser</td>
+<td style="text-align: left;">tabloid</td>
+<td style="text-align: left;">right</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Australian</td>
+<td style="text-align: left;">broadsheet</td>
+<td style="text-align: left;">right</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NorthernT</td>
+<td style="text-align: left;">tabloid</td>
+<td style="text-align: left;">right</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CourierMail</td>
+<td style="text-align: left;">tabloid</td>
+<td style="text-align: left;">right</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Age</td>
+<td style="text-align: left;">broadsheet</td>
+<td style="text-align: left;">left</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SydHerald</td>
+<td style="text-align: left;">broadsheet</td>
+<td style="text-align: left;">left</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Telegraph</td>
+<td style="text-align: left;">tabloid</td>
+<td style="text-align: left;">right</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">WestAus</td>
+<td style="text-align: left;">tabloid</td>
+<td style="text-align: left;">right</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CanTimes</td>
+<td style="text-align: left;">broadsheet</td>
+<td style="text-align: left;">left</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HeraldSun</td>
+<td style="text-align: left;">tabloid</td>
+<td style="text-align: left;">right</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">HobMercury</td>
+<td style="text-align: left;">tabloid</td>
+<td style="text-align: left;">right</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BrisTimes</td>
+<td style="text-align: left;">broadsheet</td>
+<td style="text-align: left;">left</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section></section><section id="tabloid-vs-broadsheet" class="level2"><h2 data-anchor-id="tabloid-vs-broadsheet">Tabloid vs broadsheet</h2>
 <p>What is the distribution of “fat” used with a negative connotation in articles?</p>
-<div class="cell" data-hash="04_fat_cache/html/fatDistr_0acadfda9f7d74c9bf17cbe5e96e6a92">
-<details><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+<div class="cell" data-hash="04_fat_cache/html/fig-l2_49c125ec6ebe41c1f4d4b25a58e93b35">
+<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">no_hits_in_text</span>, fill <span class="op">=</span> <span class="va">source_type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"dodge2"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>
     x <span class="op">=</span> <span class="st">"Number of hits in article, CQPWeb"</span>,
     y <span class="op">=</span> <span class="st">"Number of articles in corpus"</span>,
     fill <span class="op">=</span> <span class="st">"Source type"</span>
-  <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<p><img src="04_fat_files/figure-html/fatDistr-1.png" class="img-fluid" width="672"></p>
-</div>
-<details><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">no_articles_broadsheet</span> <span class="op">&lt;-</span> <span class="va">metadata_full</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
+  <span class="op">)</span>
+<span class="va">no_articles_broadsheet</span> <span class="op">&lt;-</span> <span class="va">metadata_full</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"broadsheet"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">no_articles_tabloid</span> <span class="op">&lt;-</span> <span class="va">metadata_full</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"tabloid"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+</details><div class="cell-output-display">
+<div id="fig-l2" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="04_fat_files/figure-html/fig-l2-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: Number of uses of FAT across articles from broadsheets and tabloids.</figcaption><p></p>
+</figure>
+</div>
+</div>
 </div>
 <p>It seems like there is more usage in tabloids than broadsheets. Let’s divide the numbers by the total number of articles in tabloids/broadsheets, respectively.</p>
-<div class="cell" data-hash="04_fat_cache/html/fatDistrNorm_91798308ff7a3b640da34663b1c2b09a">
+<div class="cell" data-hash="04_fat_cache/html/fig-l294949_ad7f744fbc6d78a237f4fd2db798e676">
 <details><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">source_type</span>, <span class="va">no_hits_in_text</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
@@ -277,12 +388,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     fill <span class="op">=</span> <span class="st">"Source type"</span>
   <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="04_fat_files/figure-html/fatDistrNorm-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l294949" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="04_fat_files/figure-html/fig-l294949-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;2: Number of uses of FAT across articles from broadsheets and tabloids, normalised to the number of articles in tabloids and broadsheets in which FAT is used.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>We can see that the trend of higher usage holds true for tabloids even if we consider that tabloids contribute more articles to the corpus than broadsheets.</p>
 <p>How is this usage distributed by year (number of articles in corpus)?</p>
-<div class="cell" data-hash="04_fat_cache/html/yearNarticles_2973b18f18aad2be09038cbe3c0293fa">
+<div class="cell" data-hash="04_fat_cache/html/tbl-l2_cd253bcec156ba2e45ad1caff0be2b95">
 <details><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op">&lt;-</span> <span class="va">fat_annotated</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="co"># these sources are already not present in the data, but we will</span>
   <span class="co"># retain this code chunk as it keeps consistency of variable names with</span>
@@ -290,7 +405,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="op">(</span><span class="va">source</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"BrisTimes"</span>, <span class="st">"Telegraph"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="fu">assess_year_source</span><span class="op">(</span><span class="va">fat_annotated</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
+<div id="tbl-l2">
 <table class="table table-sm table-striped">
+<caption>Table&nbsp;2: Number of articles that use FAT by year and source.</caption>
 <colgroup>
 <col style="width: 15%">
 <col style="width: 6%">
@@ -504,8 +621,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 </div>
 </div>
+</div>
 <p>How is the frequency (per thousand words) of the usage of fat distributed by tabloids/broadsheets?</p>
-<div class="cell" data-hash="04_fat_cache/html/tabloidBroadsheet_5170c98fad26c45f3e1343d1808a2f17">
+<div class="cell" data-hash="04_fat_cache/html/fig-l4_fd7c15ce0547aa20f61319db968f4224">
 <details><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">source_type</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
@@ -514,12 +632,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     y <span class="op">=</span> <span class="st">"log(frequency per 1000 words)"</span>
   <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="04_fat_files/figure-html/tabloidBroadsheet-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l4" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="04_fat_files/figure-html/fig-l4-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3: Frequency per 1000 words of usage of FAT in tabloids and broadsheets.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>We can see that the frequency is slightly higher in tabloids than in broadsheets.</p>
 <p>And let’s also use a histogram to look at the distribution:</p>
-<div class="cell" data-hash="04_fat_cache/html/tabloidBroadsheetHist_8a951000be2e1a6b87c30a1b823268b4">
+<div class="cell" data-hash="04_fat_cache/html/fig-l5_739042bda97b90ac48c6915cc1b7d004">
 <details><summary>Code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">source_type</span>,x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
@@ -529,11 +651,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     y <span class="op">=</span> <span class="st">"Number of articles"</span>
   <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="04_fat_files/figure-html/tabloidBroadsheetHist-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l5" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="04_fat_files/figure-html/fig-l5-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4: Histogram of the distribution of usage of FAT in tabloids and broadsheets.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Note that broadsheets have somewhat longer texts than tabloids:</p>
-<div class="cell" data-hash="04_fat_cache/html/unnamed-chunk-1_3db33053715d6c6de43d7d8ae0439021">
+<div class="cell" data-hash="04_fat_cache/html/fig-l5kskks_a904775fab15c256b11ed2e024bde60d">
 <details><summary>Code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">source_type</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">wordcount_total</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
@@ -542,11 +668,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     y <span class="op">=</span> <span class="st">"log(Python word count)"</span>
   <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="04_fat_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l5kskks" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="04_fat_files/figure-html/fig-l5kskks-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5: Boxplot length of articles in tabloids and broadsheets that use FAT.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Let’s use a histogram to look at the distribution in more detail:</p>
-<div class="cell" data-hash="04_fat_cache/html/tabBroadWC2_b71cec6484b1aee07006e46d673be239">
+<div class="cell" data-hash="04_fat_cache/html/fig-l7_769b1e252aeece47baf86d3b4d5d175c">
 <details><summary>Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">source_type</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">wordcount_total</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">+</span> 
@@ -555,18 +685,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     x <span class="op">=</span> <span class="st">"log(Python word count)"</span>
   <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="04_fat_files/figure-html/tabBroadWC2-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l7" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="04_fat_files/figure-html/fig-l7-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;6: Histogram of article lengths in tabloids and broadsheets that use the lemma FAT.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The log-transformed word count data is approximately normally distributed.</p>
 <p>Let’s see if the difference in length of articles using the word “fat” in tabloids and broadsheets is significant?</p>
 <p>A higher frequency per 1000 words is detected for usage of the word “fat” in tabloids than broadsheets.</p>
+<div class="cell" data-hash="04_fat_cache/html/DiffFreq_8917d2cd2da9623d77631ac1c86c6b1f">
 <details><summary>Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">frequency_broadsheet</span> <span class="op">&lt;-</span> <span class="va">fat_annotated_filtered</span><span class="op">[</span><span class="va">fat_annotated_filtered</span><span class="op">$</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"broadsheet"</span>,<span class="st">"frequency"</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="op">)</span>
 <span class="va">frequency_tabloid</span> <span class="op">&lt;-</span> <span class="va">fat_annotated_filtered</span><span class="op">[</span><span class="va">fat_annotated_filtered</span><span class="op">$</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"tabloid"</span>,<span class="st">"frequency"</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">frequency_broadsheet</span>, <span class="va">frequency_tabloid</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><p>The Welch Two Sample t-test testing the difference between frequency_broadsheet and frequency_tabloid (mean of x = 2.62, mean of y = 4.49) suggests that the effect is negative, statistically significant, and small (difference = -1.87, 95% CI [-2.18, -1.56], t(2251.24) = -11.73, p &lt; .001; Cohen’s d = -0.47, 95% CI [-0.55, -0.39])</p>
+</div>
 <p>The non-parametric FP test supports this observation:</p>
-<div class="cell" data-hash="04_fat_cache/html/unnamed-chunk-2_6d471cf9de506455ace7fd6dfbaabccd">
+<div class="cell" data-hash="04_fat_cache/html/unnamed-chunk-3_5c526c1edbc407ec8b3ae391886e861c">
 <details><summary>Code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">fp_test</span><span class="op">(</span>
   wc1 <span class="op">=</span> <span class="va">frequency_broadsheet</span>,
     wc2 <span class="op">=</span> <span class="va">frequency_tabloid</span>,
@@ -582,41 +718,18 @@ Z = -10.336, p-value &lt; 1e-04
 alternative hypothesis: true mu is not equal to 0</code></pre>
 </div>
 </div>
-<p>So, yes, the frequency of use of the word “fat” is lower in broadsheets than in tabloids. Are articles that use the word “fat” longer in broadsheets than tabloids?</p>
-<div class="cell" data-hash="04_fat_cache/html/unnamed-chunk-3_18f4c211ff91ec98d8775bb4b296b65b">
-<details><summary>Code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">source_type</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">wordcount_total</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>
-    x <span class="op">=</span> <span class="st">"Source type"</span>,
-    y <span class="op">=</span> <span class="st">"log(Python word count)"</span>
-  <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<p><img src="04_fat_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>Let’s use a histogram to look at the distribution in more detail:</p>
-<div class="cell" data-hash="04_fat_cache/html/unnamed-chunk-4_6be9d1f86997f0f38e3b57e6ec82fb14">
-<details><summary>Code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">source_type</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">wordcount_total</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span><span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>
-    y <span class="op">=</span> <span class="st">"Number of articles"</span>,
-    x <span class="op">=</span> <span class="st">"log(Python word count)"</span>
-  <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output-display">
-<p><img src="04_fat_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
+<p>So, yes, the frequency of use of the word “fat” is lower in broadsheets than in tabloids.</p>
 <p>Let’s see if the difference in length of articles using the word “fat” in tabloids and broadsheets is significant?</p>
-<details><summary>Code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">wordcount_broadsheet</span> <span class="op">&lt;-</span> <span class="va">fat_annotated_filtered</span><span class="op">[</span><span class="va">fat_annotated_filtered</span><span class="op">$</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"broadsheet"</span>,<span class="st">"wordcount_total"</span>, drop <span class="op">=</span> <span class="cn">T</span><span class="op">]</span>
+<div class="cell" data-hash="04_fat_cache/html/WCdiff_271d0c7ba6bb85d1610674414a59fd1b">
+<details><summary>Code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">wordcount_broadsheet</span> <span class="op">&lt;-</span> <span class="va">fat_annotated_filtered</span><span class="op">[</span><span class="va">fat_annotated_filtered</span><span class="op">$</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"broadsheet"</span>,<span class="st">"wordcount_total"</span>, drop <span class="op">=</span> <span class="cn">T</span><span class="op">]</span>
 <span class="va">wordcount_tabloid</span> <span class="op">&lt;-</span> <span class="va">fat_annotated_filtered</span><span class="op">[</span><span class="va">fat_annotated_filtered</span><span class="op">$</span><span class="va">source_type</span> <span class="op">==</span> <span class="st">"tabloid"</span>,<span class="st">"wordcount_total"</span>, drop <span class="op">=</span> <span class="cn">T</span><span class="op">]</span>
 <span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">wordcount_broadsheet</span>,<span class="va">wordcount_tabloid</span><span class="op">)</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><p>The Welch Two Sample t-test testing the difference between wordcount_broadsheet and wordcount_tabloid (mean of x = 922.40, mean of y = 573.96) suggests that the effect is positive, statistically significant, and medium (difference = 348.45, 95% CI [301.88, 395.01], t(1740.32) = 14.68, p &lt; .001; Cohen’s d = 0.64, 95% CI [0.55, 0.72])</p>
+</div>
 <p>Yes, overall articles that use the word “fat” in tabloids are significantly shorter than in broadsheets.</p>
 <p>The non-parametric FP test supports this observation:</p>
-<div class="cell" data-hash="04_fat_cache/html/unnamed-chunk-5_aebae8aaa2798f81bfdecb459c7b92dd">
-<details><summary>Code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">fp_test</span><span class="op">(</span>
+<div class="cell" data-hash="04_fat_cache/html/unnamed-chunk-4_83b864a4ee33d012fb6a0e1195140dcb">
+<details><summary>Code</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">fp_test</span><span class="op">(</span>
   wc1 <span class="op">=</span> <span class="va">wordcount_broadsheet</span>,
     wc2 <span class="op">=</span> <span class="va">wordcount_tabloid</span>,
     label1 <span class="op">=</span> <span class="st">"broadsheet"</span>,
@@ -632,8 +745,8 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 </div>
 </div>
 <p>Let’s use bootstrapping to see if the raw frequencies of usage of the word “fat” are different?</p>
-<div class="cell" data-hash="04_fat_cache/html/bootstrap_79a8be9bf8bb3e8a2410a87c40034cc4">
-<details><summary>Code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">broadsheet_counts</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
+<div class="cell" data-hash="04_fat_cache/html/fig-l7kdkdkd_89b14e01ebcc85e7d0f9f058a2dac626">
+<details><summary>Code</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">broadsheet_counts</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
 <span class="va">tabloid_counts</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
 <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10000</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="op">{</span><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
@@ -655,20 +768,26 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">mean_sample</span>, fill <span class="op">=</span> <span class="va">source_type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="04_fat_files/figure-html/bootstrap-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l7kdkdkd" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="04_fat_files/figure-html/fig-l7kdkdkd-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;7: Histogram of sampling of counts per article of the raw frequency of use of FAT in tabloids and broadsheets.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>It is interesting how these two distributions do not overlap, and the raw frequencies of the use of the words “fat” in a negative connotation are higher in broadsheets than tabloids. However, the longer length of the articles from broadsheets most likely results in a lower frequency per 1000 words of counts from broadsheets than tabloids.</p>
-<details><summary>Code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span>
+<div class="cell" data-hash="04_fat_cache/html/ttest_eb3a87d0d19391d51b6f132d2356777c">
+<details><summary>Code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span>
     <span class="va">broadsheet_counts</span>,
     <span class="va">tabloid_counts</span>
   <span class="op">)</span>
 <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><p>The Welch Two Sample t-test testing the difference between broadsheet_counts and tabloid_counts (mean of x = 1.85, mean of y = 1.48) suggests that the effect is positive, statistically significant, and large (difference = 0.37, 95% CI [0.37, 0.37], t(17919.61) = 491.79, p &lt; .001; Cohen’s d = 6.95, 95% CI [7.65, 7.65])</p>
+</details><p>The Welch Two Sample t-test testing the difference between broadsheet_counts and tabloid_counts (mean of x = 1.85, mean of y = 1.48) suggests that the effect is positive, statistically significant, and large (difference = 0.37, 95% CI [0.37, 0.37], t(17591.34) = 493.31, p &lt; .001; Cohen’s d = 6.98, 95% CI [7.67, 7.67])</p>
+</div>
 <p>The non-parametric FP test supports this observation:</p>
-<div class="cell" data-hash="04_fat_cache/html/unnamed-chunk-6_1f9497bbf40c01ab926a44605453c412">
-<details><summary>Code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">fp_test</span><span class="op">(</span>
+<div class="cell" data-hash="04_fat_cache/html/unnamed-chunk-5_3cb05152938ff8ceaf34e5f83f56ff03">
+<details><summary>Code</summary><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">fp_test</span><span class="op">(</span>
   wc1 <span class="op">=</span> <span class="va">broadsheet_counts</span>,
     wc2 <span class="op">=</span> <span class="va">tabloid_counts</span>,
     label1 <span class="op">=</span> <span class="st">"broadsheet"</span>,
@@ -679,13 +798,15 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 <pre><code>
     Approximative Two-Sample Fisher-Pitman Permutation Test
 data:  wc by label (broadsheet, tabloid)
-Z = 135.91, p-value &lt; 1e-04
+Z = 135.94, p-value &lt; 1e-04
 alternative hypothesis: true mu is not equal to 0</code></pre>
 </div>
 </div>
 <p>Let’s look at the jittered plot to explore this as well:</p>
-<div class="cell" data-hash="04_fat_cache/html/yearSourceTypeJitter_19d2634ee9941970572cedd98b2f0f98">
-<details><summary>Code</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+<div class="cell" data-hash="04_fat_cache/html/yearSourceTypeJitter_4f1cff0d42472b55e575c7a61311a32e">
+<details><summary>Code</summary><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+<span class="co">#| fig-cap: Raw and smoothed frequency of use of FAT in the corpus in tabloids and broadsheets, by year and publication type.</span>
+<span class="co">#| label: fig-l10</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>, 
              fill <span class="op">=</span> <span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -709,7 +830,7 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 <li>Broadsheets do have a lower frequency per 1000 words than tabloids.</li>
 <li>There may be an effect of year for broadsheets but not tabloids with time, with relative frequency decreasing by year.</li>
 </ul>
-<section id="comparing-observed-to-normalised-to-subcorpus-size-data" class="level3"><h3 class="anchored" data-anchor-id="comparing-observed-to-normalised-to-subcorpus-size-data">Comparing observed to normalised to subcorpus size data</h3>
+<section id="comparing-observed-to-normalised-to-subcorpus-size-data" class="level3"><h3 data-anchor-id="comparing-observed-to-normalised-to-subcorpus-size-data">Comparing observed to normalised to subcorpus size data</h3>
 <p>We can investigate the prevalence of the use of “fat” using goodness of fit tests, comparing the distribution in:</p>
 <ul>
 <li>tabloids vs broadsheets</li>
@@ -720,72 +841,208 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 <li>the total number of instances in each subcorpus, normalised to the total number of words in each subcorpus</li>
 <li>the number of articles that feature this language type, normalised to the total number of articles in each subcorpus</li>
 </ul>
-<section id="tabloids-vs-broadsheets" class="level4"><h4 class="anchored" data-anchor-id="tabloids-vs-broadsheets">Tabloids vs broadsheets</h4>
+<section id="tabloids-vs-broadsheets" class="level4"><h4 data-anchor-id="tabloids-vs-broadsheets">Tabloids vs broadsheets</h4>
 <p>The total number of uses of “fat” we observe is higher in tabloids and lower in broadsheets than we would expect based on the word count in these subcorpora (p &lt; 0.001).</p>
-<div class="cell" data-hash="04_fat_cache/html/unnamed-chunk-7_8139ee5e326fcb46f3363d3ef32c49b4">
-<details><summary>Code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_instances_wc_normalised</span><span class="op">(</span><span class="va">fat_annotated_filtered</span>, <span class="va">metadata_full</span>, <span class="va">source_type</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>             variable                                    value
-1              method Chi-squared test for given probabilities
-2           parameter                                        1
-3           statistic                                 80.19926
-4             p.value                             3.384939e-19
-5 broadsheet_observed                                     1698
-6 broadsheet_expected                         1971.43313891709
-7    tabloid_observed                                     2042
-8    tabloid_expected                         1768.56686108291</code></pre>
+<div class="cell" data-hash="04_fat_cache/html/tbl-l11_6a62ecc4843b44d69885ff443845eba5">
+<details><summary>Code</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_instances_wc_normalised</span><span class="op">(</span><span class="va">fat_annotated_filtered</span>, <span class="va">metadata_full</span>, <span class="va">source_type</span><span class="op">)</span>|&gt; <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="tbl-l11">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;3: Chi-Squared test for number of uses of FAT in tabloids and broadsheets vs what would be expected given word count across all articles in the publication types.</caption>
+<thead><tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">method</td>
+<td style="text-align: left;">Chi-squared test for given probabilities</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">parameter</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">statistic</td>
+<td style="text-align: left;">80.19926</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">p.value</td>
+<td style="text-align: left;">3.384939e-19</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">broadsheet_observed</td>
+<td style="text-align: left;">1698</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">broadsheet_expected</td>
+<td style="text-align: left;">1971.43313891709</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tabloid_observed</td>
+<td style="text-align: left;">2042</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tabloid_expected</td>
+<td style="text-align: left;">1768.56686108291</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 <p>The number of articles with use of “fat” we observe is not different between tabloids and broadsheets.</p>
-<div class="cell" data-hash="04_fat_cache/html/unnamed-chunk-8_c2ace07071f6b8b618561f58edb45c72">
-<details><summary>Code</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_articles_totalart_normalised</span><span class="op">(</span><span class="va">fat_annotated_filtered</span>, <span class="va">metadata_full</span>, <span class="va">source_type</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>             variable                                    value
-1              method Chi-squared test for given probabilities
-2           parameter                                        1
-3           statistic                                 0.879783
-4             p.value                                0.3482611
-5 broadsheet_observed                                      918
-6 broadsheet_expected                         940.113901311012
-7    tabloid_observed                                     1382
-8    tabloid_expected                         1359.88609868899</code></pre>
+<div class="cell" data-hash="04_fat_cache/html/tbl-l12_acf23f5ac967836ef731f90938263f88">
+<details><summary>Code</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_articles_totalart_normalised</span><span class="op">(</span><span class="va">fat_annotated_filtered</span>, <span class="va">metadata_full</span>, <span class="va">source_type</span><span class="op">)</span>|&gt; <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="tbl-l12">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;4: Chi-Squared test for number of articles that use FAT in tabloids and broadsheets vs what would be expected given total number of articles in the publication types.</caption>
+<thead><tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">method</td>
+<td style="text-align: left;">Chi-squared test for given probabilities</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">parameter</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">statistic</td>
+<td style="text-align: left;">0.879783</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">p.value</td>
+<td style="text-align: left;">0.3482611</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">broadsheet_observed</td>
+<td style="text-align: left;">918</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">broadsheet_expected</td>
+<td style="text-align: left;">940.113901311012</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tabloid_observed</td>
+<td style="text-align: left;">1382</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">tabloid_expected</td>
+<td style="text-align: left;">1359.88609868899</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-</section><section id="left-vs-right-leaning-publications" class="level4"><h4 class="anchored" data-anchor-id="left-vs-right-leaning-publications">Left vs right-leaning publications</h4>
+</div>
+</section><section id="left-vs-right-leaning-publications" class="level4"><h4 data-anchor-id="left-vs-right-leaning-publications">Left vs right-leaning publications</h4>
 <p>The total number of uses of “fat” we observe is higher in right and lower in left-leaning publications than we would expect based on the word count in these subcorpora (p &lt; 0.001).</p>
-<div class="cell" data-hash="04_fat_cache/html/unnamed-chunk-9_f538e261713bf4dd4af3296989956ae1">
-<details><summary>Code</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_instances_wc_normalised</span><span class="op">(</span><span class="va">fat_annotated_filtered</span>, <span class="va">metadata_full</span>, <span class="va">orientation</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>        variable                                    value
-1         method Chi-squared test for given probabilities
-2      parameter                                        1
-3      statistic                                 29.25461
-4        p.value                             6.346508e-08
-5  left_observed                                     1416
-6  left_expected                         1579.37808137617
-7 right_observed                                     2324
-8 right_expected                         2160.62191862383</code></pre>
+<div class="cell" data-hash="04_fat_cache/html/tbl-l13_f72e20db476490ecc2297313d9086779">
+<details><summary>Code</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_instances_wc_normalised</span><span class="op">(</span><span class="va">fat_annotated_filtered</span>, <span class="va">metadata_full</span>, <span class="va">orientation</span><span class="op">)</span>|&gt; <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="tbl-l13">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;5: Chi-Squared test for number of uses of FAT in left and right leaning publications vs what would be expected given word count across all articles in the publication types.</caption>
+<thead><tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">method</td>
+<td style="text-align: left;">Chi-squared test for given probabilities</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">parameter</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">statistic</td>
+<td style="text-align: left;">29.25461</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">p.value</td>
+<td style="text-align: left;">6.346508e-08</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">left_observed</td>
+<td style="text-align: left;">1416</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">left_expected</td>
+<td style="text-align: left;">1579.37808137617</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">right_observed</td>
+<td style="text-align: left;">2324</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">right_expected</td>
+<td style="text-align: left;">2160.62191862383</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 <p>The number of articles that use “fat” we observe is not different between left and right leaning publications.</p>
-<div class="cell" data-hash="04_fat_cache/html/unnamed-chunk-10_b0c762d79cbd9a8b5d2edd90d583fe82">
-<details><summary>Code</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_articles_totalart_normalised</span><span class="op">(</span><span class="va">fat_annotated_filtered</span>, <span class="va">metadata_full</span>, <span class="va">orientation</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details><div class="cell-output cell-output-stdout">
-<pre><code>        variable                                    value
-1         method Chi-squared test for given probabilities
-2      parameter                                        1
-3      statistic                                0.9299361
-4        p.value                                0.3348795
-5  left_observed                                      746
-6  left_expected                         767.809501968429
-7 right_observed                                     1554
-8 right_expected                         1532.19049803157</code></pre>
+<div class="cell" data-hash="04_fat_cache/html/tbl-l14_733a4faaff5dfaa01e2538840757bf8e">
+<details><summary>Code</summary><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">chisq_articles_totalart_normalised</span><span class="op">(</span><span class="va">fat_annotated_filtered</span>, <span class="va">metadata_full</span>, <span class="va">orientation</span><span class="op">)</span>|&gt; <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div id="tbl-l14">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;6: Chi-Squared test for number of articles that use FAT left and right leaning publications vs what would be expected given total number of articles in the publication types.</caption>
+<thead><tr class="header">
+<th style="text-align: left;">variable</th>
+<th style="text-align: left;">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">method</td>
+<td style="text-align: left;">Chi-squared test for given probabilities</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">parameter</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">statistic</td>
+<td style="text-align: left;">0.9299361</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">p.value</td>
+<td style="text-align: left;">0.3348795</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">left_observed</td>
+<td style="text-align: left;">746</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">left_expected</td>
+<td style="text-align: left;">767.809501968429</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">right_observed</td>
+<td style="text-align: left;">1554</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">right_expected</td>
+<td style="text-align: left;">1532.19049803157</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-</section></section></section><section id="differences-in-usage-by-source" class="level2"><h2 class="anchored" data-anchor-id="differences-in-usage-by-source">Differences in usage by source</h2>
+</div>
+</section></section></section><section id="differences-in-usage-by-source" class="level2"><h2 data-anchor-id="differences-in-usage-by-source">Differences in usage by source</h2>
 <p>Is there a difference in the usage of fat by source?</p>
-<div class="cell" data-hash="04_fat_cache/html/sourceBoxplot_cfd5215d1b33d005bfa41e3eb8b0179a">
-<details><summary>Code</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+<div class="cell" data-hash="04_fat_cache/html/fig-l123_ffe162dae7fbaf71f8c64f2bf087884f">
+<details><summary>Code</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">source</span>,<span class="va">frequency</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>, 
              fill <span class="op">=</span> <span class="va">source_type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -794,13 +1051,17 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span>, vjust <span class="op">=</span> <span class="fl">0.5</span>, hjust<span class="op">=</span><span class="fl">1</span><span class="op">)</span>,
         legend.position <span class="op">=</span> <span class="st">"NA"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="04_fat_files/figure-html/sourceBoxplot-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l123" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="04_fat_files/figure-html/fig-l123-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;8: Box plot of usage of FAT by source.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>The visualisation suggests there may be some differences, and definitely between tabloids vs broadsheets.</p>
 <p>What are the means and standard deviations of the frequency by source?</p>
-<div class="cell" data-hash="04_fat_cache/html/summariseBySource_f83c05121ea166a9488ff475a1a10b4a">
-<details><summary>Code</summary><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
+<div class="cell" data-hash="04_fat_cache/html/tbl-l15_ab8a437d193a224788687b0a29df96a9">
+<details><summary>Code</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">source</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>
     mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>,
@@ -812,7 +1073,9 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">mean</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
+<div id="tbl-l15">
 <table class="table table-sm table-striped">
+<caption>Table&nbsp;7: Mean, median and standard deviation of frequency of use of FAT by source.</caption>
 <thead><tr class="header">
 <th style="text-align: left;">source</th>
 <th style="text-align: right;">mean</th>
@@ -895,11 +1158,12 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 </table>
 </div>
 </div>
+</div>
 <p>It seems that within the different sources among broadsheets there is not much difference among the frequency of use of the word “fat”. Among tabloids, the Northern Territorian seems to have higher frequency of use of “fat” with a negative connotation than other tabloids.</p>
-</section><section id="differences-in-usage-by-year" class="level2"><h2 class="anchored" data-anchor-id="differences-in-usage-by-year">Differences in usage by year</h2>
+</section><section id="differences-in-usage-by-year" class="level2"><h2 data-anchor-id="differences-in-usage-by-year">Differences in usage by year</h2>
 <p>Is there any year when “fat” is used more frequently than others?</p>
-<div class="cell" data-hash="04_fat_cache/html/yearBoxplot_afa89d9ce282a4d050d22eff66d268fe">
-<details><summary>Code</summary><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+<div class="cell" data-hash="04_fat_cache/html/fig-l12_d53db557fde96a726bfda11ec871e2a9">
+<details><summary>Code</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">year</span>,<span class="va">frequency</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>, 
              fill <span class="op">=</span> <span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -908,12 +1172,16 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span>, vjust <span class="op">=</span> <span class="fl">0.5</span>, hjust<span class="op">=</span><span class="fl">1</span><span class="op">)</span>,
         legend.position <span class="op">=</span> <span class="st">"NA"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="04_fat_files/figure-html/yearBoxplot-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l12" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="04_fat_files/figure-html/fig-l12-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;9: Use of FAT by year, sorted by median use per year from least frequent to most frequent.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Based on the visualisation it seems not. If we separate out by source there also doesn’t seem to be much difference. If we use a jitter plot to visualise the data, then fit a smoothing line and compare with the line of “no change” (dashed red line), we can see that there really isn’t much of a difference by source and year:</p>
-<div class="cell" data-hash="04_fat_cache/html/yearSourceJitter_2a335ffaf45c6fdd60628cb73f4762db">
-<details><summary>Code</summary><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+<div class="cell" data-hash="04_fat_cache/html/fig-l13_0b62bc831edfd8fc15d92df8ac98bfaa">
+<details><summary>Code</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>, 
              fill <span class="op">=</span> <span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -929,13 +1197,17 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
     y <span class="op">=</span> <span class="st">"log(frequency per 1000 words)"</span>
   <span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="04_fat_files/figure-html/yearSourceJitter-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l13" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="04_fat_files/figure-html/fig-l13-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;10: Use of FAT by year and source, split by publication.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>There may be a subtle decrease over time in the Advertiser, Age, Canberra Times and Sydney Morning Herald, however, it is unclear whether this trend is very strong.</p>
 <p>The distributions each year also look quite similar:</p>
-<div class="cell" data-hash="04_fat_cache/html/distrib_fe9d8e6526a12c719497e41afc7d488c">
-<details><summary>Code</summary><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+<div class="cell" data-hash="04_fat_cache/html/fig-l14_3be67afb6206411ef7d18a5ef5273a5b">
+<details><summary>Code</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">year</span>,<span class="va">frequency</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>, 
              fill <span class="op">=</span> <span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
@@ -944,11 +1216,15 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">90</span>, vjust <span class="op">=</span> <span class="fl">0.5</span>, hjust<span class="op">=</span><span class="fl">1</span><span class="op">)</span>,
         legend.position <span class="op">=</span> <span class="st">"NA"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="04_fat_files/figure-html/distrib-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l14" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="04_fat_files/figure-html/fig-l14-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;11: Violin plot of the distributions of use of FAT by year.</figcaption><p></p>
+</figure>
 </div>
 </div>
-<div class="cell" data-hash="04_fat_cache/html/yearMeanSD_3e07c65c71f9d4f5cc14ae0cc91ce03b">
-<details><summary>Code</summary><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
+</div>
+<div class="cell" data-hash="04_fat_cache/html/tbl-l168f8f_5327059f9982609ea64ee140ce58cf2a">
+<details><summary>Code</summary><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>
     mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>,
@@ -960,7 +1236,9 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">mean</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
+<div id="tbl-l168f8f">
 <table class="table table-sm table-striped">
+<caption>Table&nbsp;8: Descriptive statistics of the use of FAT by year across the dataset.</caption>
 <thead><tr class="header">
 <th style="text-align: right;">year</th>
 <th style="text-align: right;">mean</th>
@@ -1044,11 +1322,12 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 </table>
 </div>
 </div>
-</section><section id="differences-in-usage-by-source-type-source-and-year" class="level2"><h2 class="anchored" data-anchor-id="differences-in-usage-by-source-type-source-and-year">Differences in usage by source type, source and year</h2>
+</div>
+</section><section id="differences-in-usage-by-source-type-source-and-year" class="level2"><h2 data-anchor-id="differences-in-usage-by-source-type-source-and-year">Differences in usage by source type, source and year</h2>
 <p>We can also try to simultaneously model differences by source type, source and year.</p>
 <p>As expected, a model that includes the source type (tabloid vs broadsheet) gives a better fit than one that does not:</p>
-<div class="cell" data-hash="04_fat_cache/html/unnamed-chunk-11_2529182c9432cb121a38b90316f7650f">
-<details><summary>Code</summary><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span><span class="op">$</span><span class="va">scaled_year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span>
+<div class="cell" data-hash="04_fat_cache/html/tbl-l17_4152ba3c8a4e92983f4f7d97ab6d6b60">
+<details><summary>Code</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span><span class="op">$</span><span class="va">scaled_year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span>
   <span class="va">fat_annotated_filtered</span><span class="op">$</span><span class="va">year</span>, scale <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/lme4/lme4/">lme4</a></span><span class="op">)</span>
 <span class="co"># base model</span>
@@ -1087,7 +1366,9 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">AIC</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
+<div id="tbl-l17">
 <table class="table table-sm table-striped">
+<caption>Table&nbsp;9: Comparison of model summary statistics for simple linear models that incorporate source, scaled year and/or source type.</caption>
 <colgroup>
 <col style="width: 12%">
 <col style="width: 10%">
@@ -1177,9 +1458,10 @@ alternative hypothesis: true mu is not equal to 0</code></pre>
 </table>
 </div>
 </div>
+</div>
 <p>We can see that the model incorporating source and scaled year provides the best fit for the data, explaining somewhat more variability than that which includes only source or source type.</p>
 <div class="cell" data-hash="04_fat_cache/html/compareModels_c7ff4a950ee19a57087f97e933f7d1e7">
-<details><summary>Code</summary><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">m_0_base</span>, <span class="va">m_0_sourceyear</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details><summary>Code</summary><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">m_0_base</span>, <span class="va">m_0_sourceyear</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 Model 1: log(frequency) ~ 1
@@ -1191,12 +1473,16 @@ Model 2: log(frequency) ~ source + scaled_year
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<div class="cell" data-hash="04_fat_cache/html/unnamed-chunk-12_e5477d5b6fcc4417d4b083a8af9f1226">
-<details><summary>Code</summary><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"400_analysis"</span>,<span class="st">"model_diagnostics.R"</span><span class="op">)</span><span class="op">)</span>
+<div class="cell" data-hash="04_fat_cache/html/fig-l20_d81b13bf4afea41d1e0420ce8fe1bfb4">
+<details><summary>Code</summary><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"400_analysis"</span>,<span class="st">"model_diagnostics.R"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">df_model_resid</span> <span class="op">&lt;-</span> <span class="fu">get_model_resid_df</span><span class="op">(</span><span class="va">m_0_sourceyear</span><span class="op">)</span>
 <span class="fu">diagnostic_lm_plot</span><span class="op">(</span><span class="va">df_model_resid</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="04_fat_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l20" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="04_fat_files/figure-html/fig-l20-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;12: Plot of model residuals for the fixed effects model log(frequency) ~ source + scaled_year.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Proportion of data points with:</p>
@@ -1207,10 +1493,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </ul>
 <p>All of these indicate the model is performing reasonably well on the data.</p>
 <p>Let’s summarise the model (note that the intercept corresponds to the “first” source, i.e.&nbsp;the Advertiser):</p>
-<div class="cell" data-hash="04_fat_cache/html/sjplot2_5a7c338924e42d029bf092e92496634b">
-<details><summary>Code</summary><div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">sjPlot</span><span class="fu">::</span><span class="fu"><a href="https://strengejacke.github.io/sjPlot/reference/tab_model.html">tab_model</a></span><span class="op">(</span><span class="va">m_0_sourceyear</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="04_fat_cache/html/tbl-l22jsjsjs_2336b5e4ab96e0e0b14f44caab59feff">
+<details><summary>Code</summary><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">sjPlot</span><span class="fu">::</span><span class="fu"><a href="https://strengejacke.github.io/sjPlot/reference/tab_model.html">tab_model</a></span><span class="op">(</span><span class="va">m_0_sourceyear</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
+<div id="tbl-l22jsjsjs">
 <table style="border-collapse:collapse; border:none;">
+<caption>Table&nbsp;10:  Coefficients and confidence intervals for the fixed effects model log(frequency) ~ source + scaled_year. </caption>
 <tbody><tr>
 <th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
 <th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">log(frequency)</th>
@@ -1298,8 +1586,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </tbody></table>
 </div>
 </div>
+</div>
 <p>This model indicates that the Age, Australian, Canberra Times and Sydney Morning Herald (all broadsheets in the dataset) have lower frequency of usage of the word “fat” with a negative connotation than the Advertiser, whereas the Northern Territorian has a higher usage of the language type.</p>
-<details><summary>Code</summary><div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="va">m_0_sourceyear</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-warnings="false" data-hash="04_fat_cache/html/unnamed-chunk-12_bf2a63378c33d089825ecabe499d7aaa">
+<details><summary>Code</summary><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="va">m_0_sourceyear</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><p>We fitted a linear model (estimated using OLS) to predict frequency with source and scaled_year (formula: log(frequency) ~ source + scaled_year). The model explains a statistically significant and weak proportion of variance (R2 = 0.10, F(10, 2289) = 24.23, p &lt; .001, adj. R2 = 0.09). The model’s intercept, corresponding to source = Advertiser and scaled_year = 0, is at 1.02 (95% CI [0.92, 1.11], t(2289) = 21.55, p &lt; .001). Within this model:</p>
 <ul>
 <li>The effect of source [Age] is statistically significant and negative (beta = -0.39, 95% CI [-0.53, -0.26], t(2289) = -5.62, p &lt; .001; Std. beta = -0.18, 95% CI [-0.24, -0.12])</li>
@@ -1314,9 +1604,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li>The effect of scaled year is statistically non-significant and negative (beta = -9.25e-03, 95% CI [-0.02, 1.24e-03], t(2289) = -1.73, p = 0.084; Std. beta = -0.02, 95% CI [-0.03, -9.21e-04])</li>
 </ul>
 <p>Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using the Wald approximation.</p>
+</div>
 <p>Next, let’s compare if using a mixed model results in improved fit.</p>
-<div class="cell" data-hash="04_fat_cache/html/unnamed-chunk-14_dbc799a54888003f8a1bbadc309bd82f">
-<details><summary>Code</summary><div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">m_1_source</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span> <span class="op">~</span>  <span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">source</span><span class="op">)</span>, 
+<div class="cell" data-hash="04_fat_cache/html/tbl-l18_cac408cd660d40ef7d4c18184b678c26">
+<details><summary>Code</summary><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">m_1_source</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span> <span class="op">~</span>  <span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">source</span><span class="op">)</span>, 
                 data <span class="op">=</span> <span class="va">fat_annotated_filtered</span>, REML <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 <span class="va">m_1_source_type</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html">lmer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span> <span class="op">~</span>  <span class="va">source_type</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">|</span><span class="va">source</span><span class="op">)</span>, 
                 data <span class="op">=</span> <span class="va">fat_annotated_filtered</span>, REML <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
@@ -1359,7 +1650,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">BIC</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
+<div id="tbl-l18">
 <table class="table table-sm table-striped">
+<caption>Table&nbsp;11: Comparison of model summary statistics for linear mixed effects models that incorporate source, scaled year and/or source type.</caption>
 <thead><tr class="header">
 <th style="text-align: right;">AIC</th>
 <th style="text-align: right;">BIC</th>
@@ -1419,11 +1712,14 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </table>
 </div>
 </div>
+</div>
 <p>The model that includes a random intercept for each of the sources and considers source type as a fixed effect provides the best fit based on the Bayesian Information Criterion. Tabloids have a higher usage of the language type.</p>
-<div class="cell" data-hash="04_fat_cache/html/sjplot_c93ae5544a6fadd4fc6f954a44a45c5d">
-<details><summary>Code</summary><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">sjPlot</span><span class="fu">::</span><span class="fu"><a href="https://strengejacke.github.io/sjPlot/reference/tab_model.html">tab_model</a></span><span class="op">(</span><span class="va">m_1_source_type</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="04_fat_cache/html/tbl-l22_f2ee9f1acdc02b3c226b72e3af5218d5">
+<details><summary>Code</summary><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">sjPlot</span><span class="fu">::</span><span class="fu"><a href="https://strengejacke.github.io/sjPlot/reference/tab_model.html">tab_model</a></span><span class="op">(</span><span class="va">m_1_source_type</span><span class="op">)</span> </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
+<div id="tbl-l22">
 <table style="border-collapse:collapse; border:none;">
+<caption>Table&nbsp;12:  Coefficients and confidence intervals for the mixed effects model log(frequency) ~ source_type + 1/source </caption>
 <tbody><tr>
 <th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
 <th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">log(frequency)</th>
@@ -1480,20 +1776,25 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </tbody></table>
 </div>
 </div>
+</div>
 <p>Let’s summarise this model:</p>
-<details><summary>Code</summary><div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="va">m_1_source_type</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-warnings="false" data-hash="04_fat_cache/html/unnamed-chunk-14_9baf2428afbb02c59bdc00d04de80d8f">
+<details><summary>Code</summary><div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu">report</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/report/reference/report.html">report</a></span><span class="op">(</span><span class="va">m_1_source_type</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><p>We fitted a linear mixed model (estimated using REML and nloptwrap optimizer) to predict frequency with source_type (formula: log(frequency) ~ source_type). The model included source as random effect (formula: ~1 | source). The model’s total explanatory power is weak (conditional R2 = 0.12) and the part related to the fixed effects alone (marginal R2) is of 0.09. The model’s intercept, corresponding to source_type = broadsheet, is at 0.63 (95% CI [0.47, 0.80], t(2296) = 7.41, p &lt; .001). Within this model:</p>
 <ul>
 <li>The effect of source type [tabloid] is statistically significant and positive (beta = 0.54, 95% CI [0.32, 0.76], t(2296) = 4.84, p &lt; .001; Std. beta = 0.22, 95% CI [0.14, 0.31])</li>
 </ul>
 <p>Standardized parameters were obtained by fitting the model on a standardized version of the dataset. 95% Confidence Intervals (CIs) and p-values were computed using</p>
+</div>
 <p>The intercepts for for each of the sources were:</p>
-<div class="cell" data-hash="04_fat_cache/html/unnamed-chunk-16_63edd490294035524648fa15a34bf261">
-<details><summary>Code</summary><div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_1_source_type</span><span class="op">)</span><span class="op">$</span><span class="va">source</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
+<div class="cell" data-hash="04_fat_cache/html/tbl-l24_697aae52f6863625781877b39d38998c">
+<details><summary>Code</summary><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_1_source_type</span><span class="op">)</span><span class="op">$</span><span class="va">source</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">`(Intercept)`</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
+<div id="tbl-l24">
 <table class="table table-sm table-striped">
+<caption>Table&nbsp;13: Intercepts and coefficients for the model log(frequency) ~ source_type + 1/source.</caption>
 <thead><tr class="header">
 <th style="text-align: left;"></th>
 <th style="text-align: right;">(Intercept)</th>
@@ -1554,9 +1855,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </table>
 </div>
 </div>
-</section><section id="differences-in-usage-by-topic" class="level2"><h2 class="anchored" data-anchor-id="differences-in-usage-by-topic">Differences in usage by topic</h2>
-<div class="cell" data-hash="04_fat_cache/html/topic_use_962975108950e6aa66c96cd6fa7b4f03">
-<details><summary>Code</summary><div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
+</div>
+</section><section id="differences-in-usage-by-topic" class="level2"><h2 data-anchor-id="differences-in-usage-by-topic">Differences in usage by topic</h2>
+<div class="cell" data-hash="04_fat_cache/html/fig-l25_ed3b50ea4965248c2ad768b6e0916b65">
+<details><summary>Code</summary><div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_annotated_filtered</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span>
     <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">topic_label</span>,<span class="va">frequency</span><span class="op">)</span><span class="op">)</span>, 
              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">frequency</span><span class="op">)</span>, 
@@ -1568,13 +1870,17 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Topic label"</span>,
        y <span class="op">=</span> <span class="st">"log(frequency per 1000 words)"</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
-<p><img src="04_fat_files/figure-html/topic_use-1.png" class="img-fluid" width="672"></p>
+<div id="fig-l25" class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="04_fat_files/figure-html/fig-l25-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;13: Frequency of use of FAT per 1000 words in articles annotated with specific topic lables.</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 <p>It seems there are some topics that use fat more than others.</p>
 <p>We use a simple linear model with post-hoc comparisons and Bonferroni multiple testing correction:</p>
-<div class="cell" data-hash="04_fat_cache/html/topicDiffs_e4ef344238eab3b9572ea31e9e5e79af">
-<details><summary>Code</summary><div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_by_topic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>
+<div class="cell" data-hash="04_fat_cache/html/tbl-l25_33ddcef3152b0a0b8f227e8f1c4b1c7d">
+<details><summary>Code</summary><div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span class="va">fat_by_topic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span>
   <span class="va">frequency</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">topic_label</span><span class="op">)</span>, 
   data <span class="op">=</span> <span class="va">fat_annotated_filtered</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rvlenth/emmeans">emmeans</a></span><span class="op">)</span>
@@ -1584,7 +1890,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">p.value</span> <span class="op">&lt;</span> <span class="fl">0.01</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/janitor/man/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
+<div id="tbl-l25">
 <table class="table table-sm table-striped">
+<caption>Table&nbsp;14: Differences in use of FAT in articles annoated with specific topics, with topics compared pairwise with each other.</caption>
 <colgroup>
 <col style="width: 35%">
 <col style="width: 9%">
@@ -1960,6 +2268,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </table>
 </div>
 </div>
+</div>
 <p>We can see that there are differences in the frequency of use of the word “fat” by topic, with articles annotated as “Awards”, “Women and Pregnancy” and “Bio-medical Research” using more instances per 1000 words than articles discussing “Students and teachers”, “Politics” and “Food”.</p>
 
 
@@ -1969,6 +2278,24 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
   const disableStylesheet = (stylesheets) => {
     for (let i=0; i < stylesheets.length; i++) {
       const stylesheet = stylesheets[i];
@@ -1998,8 +2325,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     manageTransitions('#quarto-margin-sidebar .nav-link', false);
     if (alternate) {
       enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
     } else {
       disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
     }
     manageTransitions('#quarto-margin-sidebar .nav-link', true);
     // Switch the toggles
@@ -2013,6 +2346,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
           toggle.classList.remove("alternate");
         }
       }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
     }
   }
   const isFileUrl = () => { 
@@ -2066,13 +2409,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (hasAlternateSentinel()) {
     toggleColorMode(true);
   } 
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const clipboard = new window.ClipboardJS('.code-copy-button', {
     target: function(trigger) {
       return trigger.previousElementSibling;
@@ -2115,7 +2451,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
